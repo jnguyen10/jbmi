@@ -1,0 +1,160 @@
+<div class='row' ng-controller='EditController'>
+	<div class='col-md-2'>
+		<p>Edit Product</p>
+		<form id='dashboard_form' name='products_form'>
+			<label>Product Type:</label><br>
+			<select name='product_type' ng-model='new_product.product_type' required>
+				<option value='nba'>NBA</option>
+				<option value='nfl'>NFL</option>
+				<option value='mlb'>MLB</option>
+				<option value='nhl'>NHL</option>
+				<option value='star_wars'>Star Wars</option>
+				<option value='doctor_who'>Doctor Who</option>
+			</select><br>
+			<label>Year:</label><br>
+			<select name='year' ng-model='new_product.year' required>
+				<option ng-repeat='n in range(1981,2016)'>{{ n-1 }}-{{ n }}</option>
+			</select><br>
+			<label>Name/Player:</label><br>
+			<input type='text' name='name' ng-model='new_product.name' placeholder='Enter name' required><br>
+			<span style="color:red" ng-show="products_form.name.$dirty && products_form.name.$invalid">
+			<span ng-show="products_form.name.$error.required">Player name is required.</span>
+			</span>
+			<br>
+			<label>Manufacture:</label><br>
+			<input type='text' name='mfr' ng-model='new_product.mfr' placeholder='Enter manufacture' required><br>
+			<span style="color:red" ng-show="products_form.mfr.$dirty && products_form.mfr.$invalid">
+			<span ng-show="products_form.mfr.$error.required">Manufacture is required.</span>
+			</span>
+			<br>
+			<label>Brand:</label><br>
+			<input type='text' name='brand' ng-model='new_product.brand' placeholder='Enter brand name' required><br>
+			<span style="color:red" ng-show="products_form.brand.$dirty && products_form.brand.$invalid">
+			<span ng-show="products_form.brand.$error.required">Brand name is required.</span>
+			</span>
+			<br>
+			<label>Card Number:</label><br>
+			<input type='text' name='card_num' ng-model='new_product.card_num' placeholder='Enter card number or N/A' required><br>
+			<span style="color:red" ng-show="products_form.card_num.$dirty && products_form.card_num.$invalid">
+			<span ng-show="products_form.card_num.$error.required">Please enter a card number.  Enter N/A if no card number available</span>
+			</span>
+			<br>
+			<label>Card Type:</label><br>
+			<select name='card_type' ng-model='new_product.card_type' required>
+				<option>Base Card</option>
+				<option>Inserts/Parallels</option>
+				<option>Jersey</option>
+				<option>Autograph</option>
+				<option>Auto/Jersey</option>
+				<option>Other Materials</option>
+				<option>Non-Card/Other</option>
+			</select><br>
+			<label>Image URL (Front):</label><br>
+			<input type='url' name='img_url_front' ng-model='new_product.img_url_front' placeholder='Enter URL to image' required><br>
+			<span style="color:red" ng-show="products_form.img_url_front.$dirty && products_form.img_url_front.$invalid">
+			<span class="error" ng-show="products_form.img_url_front.$error.url">Not valid url!</span>
+			</span>
+			<br>
+			<label>Image URL (Back):</label><br>
+			<input type='url' name='img_url_back' ng-model='new_product.img_url_back' placeholder='Enter URL to image' required><br>
+			<span style="color:red" ng-show="products_form.img_url_back.$dirty && products_form.img_url_back.$invalid">
+			<span class="error" ng-show="products_form.img_url_back.$error.url">Not valid url!</span>
+			</span>
+			<br>
+			<label>Price:</label><br>
+			<input type='text' name='price' ng-model='new_product.price' placeholder='Enter in this format: ##.##' required><br>
+			<span style="color:red" ng-show="products_form.price.$dirty && products_form.price.$invalid">
+			<span ng-show="products_form.price.$error.required">Please enter a value.  If no value, enter 0.00</span>
+			</span>
+			<br>
+			<label>Beckett Value:</label><br>
+			<input type='text' name='beckett_value' ng-model='new_product.beckett_value' placeholder='Enter in this format: ##.##' required><br>
+			<span style="color:red" ng-show="products_form.beckett_value.$dirty && products_form.beckett_value.$invalid">
+			<span ng-show="products_form.beckett_value.$error.required">Please enter a value.  If no value, enter 0.00</span>
+			</span>
+			<br>
+			<label>Available?:</label><br>
+			<input type='text' name='available' ng-model='new_product.available' placeholder="Mark as 'Y' or 'N'" required><br>
+			<span style="color:red" ng-show="products_form.available.$dirty && products_form.available.$invalid">
+			<span ng-show="products_form.available.$error.required">Please enter 'Y'es or 'N'o</span>
+			</span>
+			<br>
+			<label>Description:</label><br>
+			<textarea rows='5' cols='20' name='description' ng-model='new_product.description' placeholder='Enter description, including rookie cards, special parallels, additional players on multi-player cards, serial numbered limited print cards, etc.' required></textarea><br>
+			<span style="color:red" ng-show="products_form.description.$dirty && products_form.description.$invalid">
+			<span ng-show="products_form.description.$error.required">Description is required.</span>
+			</span>
+			<br>
+<!-- 			<label>Initial Quantity:</label><br>
+			<select name='qty' ng-model='new_product.qty' required>
+				<option ng-repeat='n in range(1,200)'>{{ n }}</option>
+			</select><br>
+			<br> -->
+			<input type='submit' value='Edit'class='btn btn-warning' ng-click='updateProduct()' >
+		</form>
+	</div>
+	<div class='col-md-10'>
+		<h3>EDIT PRODUCTS PAGE</h3>
+		<table class='table table-condensed'>
+			<tr>
+				<th>Categories:</th>
+				<th>Current Info:</td>
+			</tr>
+			<tr>
+				<td>Product Type:</td>
+				<td>{{item.product_type}}</td>
+			</tr>
+			<tr>
+				<td>Year:</td>
+				<td>{{item.year}}</td>
+			</tr>
+			<tr>
+				<td>Name/Player:</td>
+				<td>{{item.name}}</td>
+			</tr>
+			<tr>
+				<td>Manufacture:</td>
+				<td>{{item.mfr}}</td>
+			</tr>
+			<tr>
+				<td>Brand:</td>
+				<td>{{item.brand}}</td>
+			</tr>
+			<tr>
+				<td>Card No.:</td>
+				<td>{{item.card_num}}</td>
+			</tr>
+			<tr>
+				<td>Card Type:</td>
+				<td>{{item.card_type}}</td>
+			</tr>
+			<tr>
+				<td>Image URL (Front):</td>
+				<td>{{item.img_url_front}}</td>
+			</tr>
+			<tr>
+				<td>Image URL (Back):</td>
+				<td>{{item.img_url_back}}</td>
+			</tr>
+			<tr>
+				<td>Price:</td>
+				<td>{{item.price}}</td>
+			</tr>
+			<tr>
+				<td>Beckett Value:</td>
+				<td>{{item.beckett_value}}</td>
+			</tr>
+			<tr>
+				<td>Available?:</td>
+				<td>{{item.available}}</td>
+			</tr>
+			<tr>
+				<td>Description:</td>
+				<td>{{item.description}}</td>
+			</tr>
+		</table>
+		<img src="{{ item.img_url_front }}" alt='{{item.name}}_front' width='360' height='450'>
+		<img src="{{ item.img_url_back }}" alt='{{item.name}}_back' width='360' height='450'>
+		<hr>
+	</div>
+</div>

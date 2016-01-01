@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app='jbmi_app'>
+	<head>
+		<meta charset='utf-8'>
+		<title>JB Modern Inserts - Sports and Entertainment Collections, Card Breaks and More!</title>
+		<meta name='description' content='Home of sports and entertainment collections, along with frequent card breaks and personal blog posts.'>
+		<!-- ##### GOOGLE FONT API ##### -->
+		<link href='https://fonts.googleapis.com/css?family=Orbitron:700' rel='stylesheet' type='text/css'>
+		<!-- ##### YOUTUBE API ##### -->
+		<script src="https://apis.google.com/js/platform.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Custom CSS File -->
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		<!-- FOR PARTIALS, INCLUDE SOURCE FOR THE ANGULAR-ROUTE  -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+
+		<!-- Angular MOMENT for Custom Time Mods -->
+		<!-- load momentJS (required for angular-moment) -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+		<!-- load angular-moment -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+		<!-- Custom Bootstrap for Angular -->
+		<script src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+
+		<!-- CREATE NEW ANGULAR MODULE AND ROUTE ANY PARTIALS -->
+		<script src='js/angular_js/app.js'></script>
+		<!-- ####### FACTORIES ######### -->
+		<script src='js/angular_js/ProductFactory.js'></script>
+
+		<!-- ####### CONTROLLERS ######### -->
+		<script src='js/angular_js/MainController.js'></script>
+		<script src='js/angular_js/DashboardController.js'></script>
+		<script src='js/angular_js/EditController.js'></script>
+		<script src='js/angular_js/NBAController.js'></script>
+		<script src='js/angular_js/NFLController.js'></script>
+		<script src='js/angular_js/ModalInstanceController.js'></script>
+
+		<!-- ###### CUSTOM ANGULAR ####### -->
+		<script>
+			
+		</script>
+	</head>
+	<body>
+		<div id='wrapper'>
+			<hr>
+			<div id='header'>
+				<nav class="navbar">
+					<div class='container-fluid'>
+						<div class='navbar-header'>
+							<img id='header_logo' src="img/jbmi.jpg" alt='jbmi_logo'>
+							<a class='navbar-brand' href="#/">JB Modern Inserts</a>
+						</div>
+						<h4 class="nav navbar-nav navbar-right social_title">Social Connect</h4>
+						<ul class="nav navbar-nav navbar-right social">
+							<li>
+								<a href='' class='youtube-btn'><div class="g-ytsubscribe" data-channelid="UCYAXdoijV2VUP-rmB-M9cnw" data-layout="default" data-count="default"></div></a>
+							</li>
+							<li>
+								<a href="https://twitter.com/jbmoderninserts" class="twitter-follow-btn" data-show-count="false"><i></i> Follow @jbmoderninserts</a>
+							</li>
+							<li><a href="https://www.instagram.com/jb_moderninserts/?ref=badge" class="ig-b- ig-b-24 ig-btn"><img src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /></a></li>
+							<!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
+						</ul>
+
+					</div>
+				</nav>
+			</div>
+			<hr>
+			<div id='body-content' class='row'>
+				<div class='col-lg-2 sidebar-nav'>
+					<div class='list-group sidebar-nav'>
+						<uib-accordion class='sidebar-menu'>
+							<uib-accordion-group heading='Home'><a href="#/">&#8226; Home</a>
+							</uib-accordion-group>
+							<uib-accordion-group heading='Collections'>
+								<a href="#/nba">&#8226; NBA</a><br>
+								<a href="#/nfl">&#8226; NFL</a>
+							</uib-accordion-group>
+							<uib-accordion-group heading='Breaks'>
+								<a href="#/nba/breaks">&#8226; NBA</a><br>
+								<a href="#/nfl/breaks">&#8226; NFL</a>
+							</uib-accordion-group>
+							<uib-accordion-group heading='Contact Us'>
+								<a href="mailto:jbmoderninserts@gmail.com">&#8226; Email Us!</a>
+							</uib-accordion-group>
+						</uib-accordion>
+					</div>
+				</div>
+				<div id='main-content' class='col-lg-10'>
+					<div ng-view=''></div>
+				</div>
+			</div>
+			<footer class='footer'>
+				<div class='ft_container nav navbar-nav navbar-right'>
+					<a href='#/'>Home</a> | <a href='#/about_us'>About Us</a> | <a href='mailto:jbmoderninserts@gmail.com'>Contact</a> | 
+					<p class='text-muted'>Copyright &copy; 2015 - JB Modern Inserts</p>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

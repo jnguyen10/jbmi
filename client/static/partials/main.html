@@ -1,0 +1,30 @@
+<div class='row' ng-controller='MainController'>
+	<div class='col-md-12'>
+		<div class='featured_divs'>
+			<uib-carousel interval='myInterval' no-wrap='noWrapSlides'>
+				<uib-slide ng-repeat='slide in slides' active='slide.active'>
+					<img src='{{slide.image}}' style='margin:auto;'>
+					<div class='carousel-caption'>
+						<h4>{{slide.name}}</h4>
+					</div>
+				</uib-slide>
+			</uib-carousel>
+		</div>
+		<br>
+		<div class='row subcontent_div'>
+			<div class='col-md-4'>
+				<div class='subcontent'>Upcoming Breaks</div>
+			</div>
+			<div class='col-md-4'>
+				<div class='subcontent'>Latest Breaks</div>
+			</div>
+			<div class='col-md-4'>
+				<div class='subcontent'>Recently Added Items</div>
+			</div>
+		</div>
+		<hr>
+		<div class='featured_divs' ng-repeat='i in [1,2,3,4,5]'>
+			<h1>Weekly Featurettes Section/Blog Posts - {{ i }}</h1>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,117 @@
+<div ng-controller='NBAController'>
+	<!-- Script that contains html template of the MODAL -->
+	<script type="text/ng-template" id='expandedPhoto.html'>
+		<div class='modal-header'>
+			<h3 class='modal-title'>{{ item.name }}</h3>
+		</div>
+		<div class='modal-body'>
+			<img src='{{item.img_url_front}}' alt='front' width='360' height='450'>
+			<img src='{{item.img_url_back}}' alt='back' width='360' height='450'>
+		</div>
+		<div class='modal-footer'>
+		</div>
+	</script>
+
+
+	<h1>NBA Collection</h1>
+	<hr>
+	<div class='search_bar'>
+		<form>
+			<label style='color: white'>Search By:</label>
+			<select ng-model='nba_search.field'>
+				<option value='name'>Player Name</option>
+				<option value='mfr'>Manufacture</option>
+				<option value='brand'>Brand</option>
+				<option value='card_type'>Card Type</option>
+				<option value='year'>Year</option>
+			</select>
+			<input type='text' ng-model='nba_search.text'>
+			<input class='btn btn-primary' type='submit' value='Search' ng-click='searchNBAProducts()'> 
+			<button class='btn btn-alert' ng-click='getNBAProducts()'>Reset</button>
+		</form>
+		
+	</div>
+	<hr>
+	<table class='table table-striped collection_table'>
+		<tr>
+			<th>
+				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR 
+					<span ng-show="orderByField == 'year'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='mfr'; reverseSort = !reverseSort">MANUFACTURE 
+					<span ng-show="orderByField == 'mfr'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='brand'; reverseSort = !reverseSort">BRAND 
+					<span ng-show="orderByField == 'brand'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='card_num'; reverseSort = !reverseSort">CARD NO. 
+					<span ng-show="orderByField == 'card_num'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='name'; reverseSort = !reverseSort">PLAYER NAME 
+					<span ng-show="orderByField == 'name'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='description'; reverseSort = !reverseSort">DESCRIPTION 
+					<span ng-show="orderByField == 'description'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='card_type'; reverseSort = !reverseSort">CARD TYPE 
+					<span ng-show="orderByField == 'card_type'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th style='color: #337AB7'>PHOTO</th>
+			<th>
+				<a href ng-click="orderByField='price'; reverseSort = !reverseSort">PRICE
+					<span ng-show="orderByField == 'price'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th style='color: #337AB7'>ACTION</th>
+		</tr>
+		<tr ng-repeat='product in nba_products | orderBy: orderByField:reverseSort'>
+			<td>{{ product.year }}</td>
+			<td>{{ product.mfr }}</td>
+			<td>{{ product.brand }}</td>
+			<td>{{ product.card_num }}</td>
+			<td>{{ product.name }}</td>
+			<td>{{ product.description }}</td>
+			<td>{{ product.card_type }}</td>
+			<td><a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a></td>
+			<td>${{ product.price }}</td>
+			<td><a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.mfr}} {{product.brand}} {{product.name}} (Card No. {{product.card_num}}) - ${{product.price}}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a></td>
+		</tr>
+	</table>
+</div>
