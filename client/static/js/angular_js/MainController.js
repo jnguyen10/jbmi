@@ -31,12 +31,12 @@ jbmi_app.controller('MainController', function($scope, ProductFactory){
 	// 	})
 	// };
 
-	// $scope.getProducts = function(){
-	// 	ProductFactory.getProducts(function(data){
-	// 		console.log("Getting All Products", data);
-	// 		$scope.products = data;
-	// 	})
-	// };
+	$scope.getProducts = function(){
+		ProductFactory.getProducts(function(data){
+			console.log("Getting All Products", data);
+			$scope.products = data;
+		})
+	};
 
 	// $scope.getOrders = function(){
 	// 	OrderFactory.getOrders(function(data){
@@ -50,7 +50,7 @@ jbmi_app.controller('MainController', function($scope, ProductFactory){
 	// };
 
 	// $scope.getCustomers();
-	// $scope.getProducts();
+	$scope.getProducts();
 	// $scope.getOrders();
 
 });

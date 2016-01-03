@@ -20,18 +20,19 @@ body{
 #header_logo{
 	width: 75px;
 }
+.social_div{
+	width: 410px;
+	margin-right: 0;
+}
 .social_title{
-	position: relative;
-	right: 140px;
+	width: 275px;
+	margin: 0 auto;
 	font-family: Orbitron, sans-serif;
 	padding: 5px;
 }
 .social{
 	border: 2px solid black;
 	border-radius: 3px;
-	position: relative;
-	top: 25px;
-	left: 140px
 }
 .social li a{
 /*	position: relative;
@@ -114,7 +115,28 @@ i{
 
 }
 .subcontent{
-	font-size: 20pt;
+
+}
+.subcontent_title{
+	margin: 0;
+	padding-bottom: 10px;
+	text-decoration: underline;
+}
+.subcontent_img{
+	display: inline-block;
+}
+.subcontent_body{
+	font-size: 10pt;
+}
+.subcontent_description{
+	font-style: italic;
+	padding-left: 15px;
+}
+.subcontent_footer{
+	font-size: 8pt;
+	font-style: italic;
+	width: auto;
+	text-align: right;
 }
 .featured_divs, .subcontent{
 	border: 5px solid #23527C;
