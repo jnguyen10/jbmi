@@ -1,0 +1,241 @@
+<div class='row' ng-controller='ProductController'>
+	<div class='col-md-12'>
+		<p>Add a New Product</p>
+		<form class='dashboard_form' name='products_form'>
+			<div class='col-md-4'>
+				<label>Product Type:</label><br>
+				<select name='product_type' ng-model='new_product.product_type' required>
+					<option value='nba'>NBA</option>
+					<option value='nfl'>NFL</option>
+					<option value='mlb'>MLB</option>
+					<option value='nhl'>NHL</option>
+					<option value='star_wars'>Star Wars</option>
+					<option value='doctor_who'>Doctor Who</option>
+				</select>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Year:</label><br>
+				<select name='year' ng-model='new_product.year' required>
+					<option ng-repeat='n in range(1981,2016)'>{{ n-1 }}-{{ n }}</option>
+				</select>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Name/Player:</label><br>
+				<input type='text' name='name' ng-model='new_product.name' placeholder='Enter name' required><br>
+				<span style="color:red" ng-show="products_form.name.$dirty && products_form.name.$invalid">
+					<span ng-show="products_form.name.$error.required">Player name is required.</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Image URL (Front):</label><br>
+				<input type='url' name='img_url_front' ng-model='new_product.img_url_front' placeholder='Enter URL to image' required><br>
+				<span style="color:red" ng-show="products_form.img_url_front.$dirty && products_form.img_url_front.$invalid">
+					<span class="error" ng-show="products_form.img_url_front.$error.url">Not valid url!</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Card Number:</label><br>
+				<input type='text' name='card_num' ng-model='new_product.card_num' placeholder='Enter card number or N/A' required><br>
+				<span style="color:red" ng-show="products_form.card_num.$dirty && products_form.card_num.$invalid">
+					<span ng-show="products_form.card_num.$error.required">Please enter a card number.  Enter N/A if no card number available</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Price:</label><br>
+				<input type='text' name='price' ng-model='new_product.price' placeholder='Enter in this format: ##.##' required><br>
+				<span style="color:red" ng-show="products_form.price.$dirty && products_form.price.$invalid">
+				<span ng-show="products_form.price.$error.required">Please enter a value.  If no value, enter 0.00</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Image URL (Back):</label><br>
+				<input type='url' name='img_url_back' ng-model='new_product.img_url_back' placeholder='Enter URL to image' required><br>
+				<span style="color:red" ng-show="products_form.img_url_back.$dirty && products_form.img_url_back.$invalid">
+				<span class="error" ng-show="products_form.img_url_back.$error.url">Not valid url!</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Brand:</label><br>
+				<input type='text' name='brand' ng-model='new_product.brand' placeholder='Enter brand name' required><br>
+				<span style="color:red" ng-show="products_form.brand.$dirty && products_form.brand.$invalid">
+					<span ng-show="products_form.brand.$error.required">Brand name is required.</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Beckett Value:</label><br>
+				<input type='text' name='beckett_value' ng-model='new_product.beckett_value' placeholder='Enter in this format: ##.##'required><br>
+				<span style="color:red" ng-show="products_form.beckett_value.$dirty && products_form.beckett_value.$invalid">
+					<span ng-show="products_form.beckett_value.$error.required">Please enter a value.  If no value, enter 0.00</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Card Type:</label><br>
+				<select name='card_type' ng-model='new_product.card_type' required>
+					<option>Base Card</option>
+					<option>Inserts/Parallels</option>
+					<option>Jersey</option>
+					<option>Autograph</option>
+					<option>Auto/Jersey</option>
+					<option>Other Materials</option>
+					<option>Non-Card/Other</option>
+				</select>
+			</div>
+			<div class='col-md-4'>
+				<label>Description:</label><br>
+				<textarea rows='8' cols='20' name='description' ng-model='new_product.description' placeholder='Enter description, including rookie cards, special parallels, additional players on multi-player cards, serial numbered limited print cards, etc.' required></textarea><br>
+				<span style="color:red" ng-show="products_form.description.$dirty && products_form.description.$invalid">
+					<span ng-show="products_form.description.$error.required">Description is required.</span>
+				</span>
+			</div>
+<!-- 			<label>Initial Quantity:</label><br>
+			<select name='qty' ng-model='new_product.qty' required>
+				<option ng-repeat='n in range(1,200)'>{{ n }}</option>
+			</select><br>
+			<br> -->
+			<div class='col-md-4'>
+				<input type='submit' value='Create'class='btn btn-primary' ng-click='addProduct()' ng-disabled="products_form.name.$invalid || products_form.img_url_front.$invalid || products_form.img_url_back.$invalid ||  products_form.price.$invalid || products_form.brand.$invalid" >
+			</div>
+		</form>
+	</div>
+	<div class='col-md-12'>
+		<h1>JBMI Products Inventory</h1>
+		<label>Search:</label>
+	<div class='search_bar'>
+		<form>
+			<select ng-model='all_search.field'>
+				<option value='product_type'>Product Type</option>
+				<option value='name'>Player Name</option>
+				<option value='brand'>Brand</option>
+				<option value='card_type'>Card Type</option>
+				<option value='year'>Year</option>
+			</select>
+			<input type='text' ng-model='all_search.text'>
+			<input class='btn btn-alert' type='submit' value='Search' ng-click='searchProducts()'> 
+			<button class='btn btn-alert' ng-click='getProducts()'>Reset</button>
+		</form>
+	</div>
+	<hr>
+	<table class='table table-striped collection_table'>
+		<tr>
+			<th>
+				<a href ng-click="orderByField='product_type'; reverseSort = !reverseSort">PRODUCT TYPE 
+					<span ng-show="orderByField == 'product_type'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR 
+					<span ng-show="orderByField == 'year'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='brand'; reverseSort = !reverseSort">BRAND 
+					<span ng-show="orderByField == 'brand'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='card_num'; reverseSort = !reverseSort">CARD NO. 
+					<span ng-show="orderByField == 'card_num'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='name'; reverseSort = !reverseSort">PLAYER NAME 
+					<span ng-show="orderByField == 'name'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='description'; reverseSort = !reverseSort">DESCRIPTION 
+					<span ng-show="orderByField == 'description'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='card_type'; reverseSort = !reverseSort">CARD TYPE 
+					<span ng-show="orderByField == 'card_type'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='price'; reverseSort = !reverseSort">PRICE
+					<span ng-show="orderByField == 'price'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='beckett_value'; reverseSort = !reverseSort">BECKETT VALUE
+					<span ng-show="orderByField == 'beckett_value'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='available'; reverseSort = !reverseSort">AVAILABLE
+					<span ng-show="orderByField == 'available'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='created_at'; reverseSort = !reverseSort">DATE ADDED
+					<span ng-show="orderByField == 'created_at'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th style='color: #337AB7'>ACTION</th>
+		</tr>
+		<tr ng-repeat='product in products | orderBy: orderByField:reverseSort'>
+			<td>{{ product.product_type }}</td>
+			<td>{{ product.year }}</td>
+			<td>{{ product.brand }}</td>
+			<td>{{ product.card_num }}</td>
+			<td>{{ product.name }}</td>
+			<td>{{ product.description }}</td>
+			<td>{{ product.card_type }}</td>
+			<td>${{ product.price }}</td>
+			<td>${{ product.beckett_value }}</td>
+			<td>{{ product.available }}</td>
+			<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
+			<td><button ng-click='editProductPage(product._id)'>Edit</button><br><button ng-click='removeProduct(product._id)'>Remove</button></td>
+		</tr>
+	</table>
+<!-- 		<div class='products_list' ng-repeat='product in products | filter: filter_name | limitTo: product_count'>
+			<img height='150' width='150' src="{{ product.img_url }}"><br>
+			<a ng-href='#/{{ product.product_type}}/{{ product._id }}'>{{ product.name }}</a>
+			<p>({{ product.description }})</p>
+		</div>
+		<a href ng-model='show_more' ng-click='more_products()'>show more...</a> -->
+	</div>
+</div>

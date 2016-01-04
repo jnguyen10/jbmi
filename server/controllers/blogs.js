@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Order = mongoose.model('Order');
+var Blog = mongoose.model('Blog');
 
 module.exports = (function(){
 	return {

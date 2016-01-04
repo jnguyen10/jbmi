@@ -5,7 +5,7 @@
 				<uib-slide ng-repeat='slide in slides' active='slide.active'>
 					<img src='{{slide.image}}' style='margin:auto;'>
 					<div class='carousel-caption'>
-						<h4>{{slide.name}}</h4>
+						<a href="#/{{slide.product_type}}"><h4 class='carousel_link'>{{slide.name}}</h4></a>
 					</div>
 				</uib-slide>
 			</uib-carousel>
@@ -34,19 +34,20 @@
 			<div class='col-md-4'>
 				<div class='subcontent'>
 					<h3 class='subcontent_title'>Latest Breaks</h3>
-					<div ng-repeat="product in products | orderBy: '-created_at' | limitTo: 3" class='row subcontent_body'>
+					<p class='subcontent_body'>Stay Tuned!</p>
+					<!-- <div ng-repeat="product in products | orderBy: '-created_at' | limitTo: 3" class='row subcontent_body'>
 						<div class='col-sm-2'>
 							<img class='subcontent_img' src="{{product.img_url_front}}" alt='{{product.name}}' width='40' height='60'>
 						</div>
 						<div class='col-sm-10'>
-							<p class='subcontent_text'>{{product.year}} {{product.mfr}} {{product.brand}} - {{product.name}}</p>
+							<p class='subcontent_text'>{{product.year}} {{product.brand}} - {{product.name}}</p>
 							<p class='subcontent_description'>{{product.description}}</p>
 							<div class='subcontent_footer'>
 								<time am-time-ago="product.created_at"></time><br>
 								<a href="#/{{product.product_type}}">See More <span style='text-transform: uppercase'>{{product.product_type}}</span></a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class='col-md-4'>
@@ -57,7 +58,7 @@
 							<img class='subcontent_img' src="{{product.img_url_front}}" alt='{{product.name}}' width='40' height='60'>
 						</div>
 						<div class='col-sm-10'>
-							<p class='subcontent_text'>{{product.year}} {{product.mfr}} {{product.brand}} - {{product.name}}</p>
+							<p class='subcontent_text'>{{product.year}} {{product.brand}} - {{product.name}}</p>
 							<p class='subcontent_description'>{{product.description}}</p>
 							<div class='subcontent_footer'>
 								<time am-time-ago="product.created_at"></time><br>
@@ -69,8 +70,32 @@
 			</div>
 		</div>
 		<hr>
-		<div class='featured_divs' ng-repeat='i in [1,2,3,4,5]'>
-			<h1>Weekly Featurettes Section/Blog Posts - {{ i }}</h1>
+		<!-- <div class='featured_divs' ng-repeat='i in [1,2,3,4,5]'> -->
+		<div class='featured_divs'>
+			<div class='blog_header'>
+				<h2>JBMI meets the World</h2>
+				<h4 style='font-style: italic'>Brian Nguyen</h4>
+				<p style='font-style: italic'>Date: 01/03/16</p>
+			</div>
+			<p class='blog_body'>Happy New Year, fellow card collecting enthusiasts! With the inaugural JBMI blog post, we wanted to share our vision for the site and what to expect in the upcoming months. Our main goal for putting together this website was to share our card collecting obsession with other collectors. Just like any another trading card collector out there, we love the anticipation that comes with the breaking of each box and the unwrapping of each pack. In short, we just love buying and opening boxes and packs looking for that next big hit.
+			<br>
+			<br>
+			<b>The Dream</b>
+			<br>
+			<br>
+			We wanted to put together a site that allows other collectors to participate in the most affordable group breaks for the newest and hottest hobby boxes and cases. We offer a steadily growing collection that will house the most recent trading cards and collectables that collectors can peruse and purchase to complete their own collections.
+			<br>
+			In the next few months, we will be doing group breaks for hobby boxes from sports (e.g., basketball and football) to entertainment (e.g., Dr. Who) and possibly even gaming (e.g., Pokémon). We want to offer a wide array of breaks and a selection for every collector. Everything will be streamed live for all active participants. We believe in an interactive experience that will allow us to learn from other collectors and ultimately help us enhance the site. If there’s something you want to see us break, let us know!
+			<br>
+			<br>
+			<b>The Team</b>
+			<br>
+			<br>
+			This is a simple two-man operation. Jimmy and I (Brian) have been collecting sports cards since we were kids. The problem with buying and collecting cards as little kids was that we just had no money. Now that we’ve sorta grown up and saved some extra cash, we can actually afford to buy boxes and packs and not feel too guilty about it.
+			<br>
+			We will be posting our breaks on Youtube, and announcements and hits on Twitter and Instagram. We’re excited to get this site and blog up and running, so subscribe and follow to let us know your thoughts!
+			<br>
+			With that said, let’s #break and #collect.</p>
 		</div>
 	</div>
 </div>

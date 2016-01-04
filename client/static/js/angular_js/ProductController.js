@@ -1,4 +1,4 @@
-jbmi_app.controller('DashboardController', function($scope, $location, ProductFactory){
+jbmi_app.controller('ProductController', function($scope, $location, ProductFactory){
 
 	$scope.products = [];
 	$scope.orders = [];
@@ -10,6 +10,23 @@ jbmi_app.controller('DashboardController', function($scope, $location, ProductFa
 			$scope.products = data;
 		})
 
+	};
+
+	$scope.searchProducts = function(){
+		// Pass in raw key and value as two separate key-value pairs
+		ProductFactory.searchProducts($scope.all_search, function(data){
+			$scope.products = data;
+		})
+	};
+
+
+	$scope.addProduct = function(){
+		console.log("Updating New Product (Client-Side Controller)", $scope.new_product)
+
+		ProductFactory.addProduct($scope.new_product, function(data){
+			$scope.products = data;
+			$scope.new_product = {};
+		})
 	};
 
 	$scope.editProductPage = function(product_id){

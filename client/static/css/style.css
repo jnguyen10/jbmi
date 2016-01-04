@@ -150,16 +150,27 @@ i{
   width: 100%;
   margin: auto;
 }
+.carousel_link{
+	color: white;
+	font-weight: bold;
+}
 
-/* #################################
-######### Dashboard Form  ##########
-################################# */
-#dashboard_form{
+/* #######################################
+######### Admin/Dashboard Form  ##########
+####################################### */
+.dashboard_form{
 	color: black;
 	margin-bottom: 30px;
 }
-#dashboard_form label{
+.dashboard_form label{
 	color: white;
+}
+.admin_links{
+	color: white;
+}
+.center_title{
+	width: 350px;
+	margin: 0 auto;
 }
 
 /* #############################
@@ -176,5 +187,27 @@ i{
 .table-striped > tbody > tr:nth-of-type(2n){
 	background-color: beige;
 }
+
+/* ########################
+######### BREAKS ##########
+######################## */
+.center_yt{
+	margin: 0 auto;
+	width: 640px;
+	padding-bottom: 20px;
+}
+
+
+/* #######################
+######### BLOGS ##########
+####################### */
+.blog_header{
+	font-family: Orbitron, sans-serif;
+	padding: 0 20px;
+}
+.blog_body{
+	padding: 0 40px;
+}
+
 
 

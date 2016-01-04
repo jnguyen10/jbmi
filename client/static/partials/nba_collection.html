@@ -3,6 +3,7 @@
 	<script type="text/ng-template" id='expandedPhoto.html'>
 		<div class='modal-header'>
 			<h3 class='modal-title'>{{ item.name }}</h3>
+			<p>{{ item.brand }} - {{ item.description }} - #{{ item.card_num }}</p>
 		</div>
 		<div class='modal-body'>
 			<img src='{{item.img_url_front}}' alt='front' width='360' height='450'>
@@ -20,7 +21,6 @@
 			<label style='color: white'>Search By:</label>
 			<select ng-model='nba_search.field'>
 				<option value='name'>Player Name</option>
-				<option value='mfr'>Manufacture</option>
 				<option value='brand'>Brand</option>
 				<option value='card_type'>Card Type</option>
 				<option value='year'>Year</option>
@@ -37,14 +37,6 @@
 			<th>
 				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR 
 					<span ng-show="orderByField == 'year'">
-						<span ng-show="!reverseSort">&#9650;</span>
-						<span ng-show='reverseSort'>&#9660;</span>
-					</span>
-				</a>
-			</th>
-			<th>
-				<a href ng-click="orderByField='mfr'; reverseSort = !reverseSort">MANUFACTURE 
-					<span ng-show="orderByField == 'mfr'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
 					</span>
@@ -90,6 +82,14 @@
 					</span>
 				</a>
 			</th>
+			<th>
+				<a href ng-click="orderByField='created_at'; reverseSort = !reverseSort">DATE ADDED
+					<span ng-show="orderByField == 'created_at'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
 			<th style='color: #337AB7'>PHOTO</th>
 			<th>
 				<a href ng-click="orderByField='price'; reverseSort = !reverseSort">PRICE
@@ -103,12 +103,12 @@
 		</tr>
 		<tr ng-repeat='product in nba_products | orderBy: orderByField:reverseSort'>
 			<td>{{ product.year }}</td>
-			<td>{{ product.mfr }}</td>
 			<td>{{ product.brand }}</td>
 			<td>{{ product.card_num }}</td>
 			<td>{{ product.name }}</td>
 			<td>{{ product.description }}</td>
 			<td>{{ product.card_type }}</td>
+			<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
 			<td><a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a></td>
 			<td>${{ product.price }}</td>
 			<td><a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.mfr}} {{product.brand}} {{product.name}} (Card No. {{product.card_num}}) - ${{product.price}}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a></td>

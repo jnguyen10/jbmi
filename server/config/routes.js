@@ -1,5 +1,5 @@
 module.exports = function(app){
-	var orders = require('./../controllers/orders.js');
+	var blogs = require('./../controllers/blogs.js');
 	// var customers = require('./../controllers/customers.js');
 	var products = require('./../controllers/products.js');
 

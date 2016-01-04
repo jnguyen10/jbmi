@@ -21,12 +21,6 @@
 			<span ng-show="products_form.name.$error.required">Player name is required.</span>
 			</span>
 			<br>
-			<label>Manufacture:</label><br>
-			<input type='text' name='mfr' ng-model='new_product.mfr' placeholder='Enter manufacture' required><br>
-			<span style="color:red" ng-show="products_form.mfr.$dirty && products_form.mfr.$invalid">
-			<span ng-show="products_form.mfr.$error.required">Manufacture is required.</span>
-			</span>
-			<br>
 			<label>Brand:</label><br>
 			<input type='text' name='brand' ng-model='new_product.brand' placeholder='Enter brand name' required><br>
 			<span style="color:red" ng-show="products_form.brand.$dirty && products_form.brand.$invalid">
@@ -111,10 +105,6 @@
 			<tr>
 				<td>Name/Player:</td>
 				<td>{{item.name}}</td>
-			</tr>
-			<tr>
-				<td>Manufacture:</td>
-				<td>{{item.mfr}}</td>
 			</tr>
 			<tr>
 				<td>Brand:</td>

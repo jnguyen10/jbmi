@@ -7,19 +7,21 @@ jbmi_app.controller('MainController', function($scope, ProductFactory){
 
 	$scope.myInterval = 5000;
 	$scope.noWrapSlides = false;
-	var players = ['curry', 'davis', 'garnett', 'towns'];
-	var names = ['Stephen Curry', 'Anthony Davis', 'Kevin Garnett', 'Karl-Anthony Towns'];
+	var players = ['curry', 'cooper', 'posey', 'pavelski', 'media'];
+	var product_type = ['nba', 'nfl', 'mlb', 'nhl', 'media']
+	var names = ['Stephen Curry - NBA', 'Amari Cooper - NFL', 'Buster Posey - MLB', 'Joe Pavelski - NHL', 'Entertainment/Non-Sports Collectibles'];
 
 	var slides = $scope.slides = [];
 
 	$scope.addSlide = function(index){
 		slides.push({
 			image: 'img/'+players[index]+'.jpg',
-			name: names[index]
+			name: names[index],
+			product_type: product_type[index]
 		});
 	}
 
-	for (var i=0; i<4; i++){
+	for (var i=0; i<5; i++){
 		$scope.addSlide(i);
 
 	}

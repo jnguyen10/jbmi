@@ -7,7 +7,6 @@ var ProductSchema = new mongoose.Schema({
 	product_type: String,
 	year: String,
 	name: String,
-	mfr: String,
 	brand: String,
 	card_num: String,
 	card_type: String,
