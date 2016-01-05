@@ -41,7 +41,7 @@
 				<label>Card Number:</label><br>
 				<input type='text' name='card_num' ng-model='new_product.card_num' placeholder='Enter card number or N/A' required><br>
 				<span style="color:red" ng-show="products_form.card_num.$dirty && products_form.card_num.$invalid">
-					<span ng-show="products_form.card_num.$error.required">Please enter a card number.  Enter N/A if no card number available</span>
+					<span ng-show="products_form.card_num.$error.required">Please enter a card number.<br>Enter N/A if no card number available</span>
 				</span>
 				<br>
 			</div>
@@ -49,7 +49,7 @@
 				<label>Price:</label><br>
 				<input type='text' name='price' ng-model='new_product.price' placeholder='Enter in this format: ##.##' required><br>
 				<span style="color:red" ng-show="products_form.price.$dirty && products_form.price.$invalid">
-				<span ng-show="products_form.price.$error.required">Please enter a value.  If no value, enter 0.00</span>
+				<span ng-show="products_form.price.$error.required">Please enter a value.<br>If no value, enter 0.00</span>
 				</span>
 				<br>
 			</div>
@@ -73,7 +73,7 @@
 				<label>Beckett Value:</label><br>
 				<input type='text' name='beckett_value' ng-model='new_product.beckett_value' placeholder='Enter in this format: ##.##'required><br>
 				<span style="color:red" ng-show="products_form.beckett_value.$dirty && products_form.beckett_value.$invalid">
-					<span ng-show="products_form.beckett_value.$error.required">Please enter a value.  If no value, enter 0.00</span>
+					<span ng-show="products_form.beckett_value.$error.required">Please enter a value.<br>If no value, enter 0.00</span>
 				</span>
 				<br>
 			</div>
@@ -224,8 +224,8 @@
 			<td>{{ product.name }}</td>
 			<td>{{ product.description }}</td>
 			<td>{{ product.card_type }}</td>
-			<td>${{ product.price }}</td>
-			<td>${{ product.beckett_value }}</td>
+			<td>{{ product.price | currency }}</td>
+			<td>{{ product.beckett_value | currency }}</td>
 			<td>{{ product.available }}</td>
 			<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
 			<td><button ng-click='editProductPage(product._id)'>Edit</button><br><button ng-click='removeProduct(product._id)'>Remove</button></td>

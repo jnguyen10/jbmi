@@ -12,7 +12,7 @@ jbmi_app.controller('EditController', function($scope, $routeParams, $location, 
 		console.log($scope.new_product);
 
 		ProductFactory.updateProduct($routeParams, $scope.new_product, function(){
-			$location.path('/dashboard');
+			$location.path('/admin/dashboard/add_products');
 			// $scope.new_product = {};
 		})
 

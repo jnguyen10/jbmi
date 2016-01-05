@@ -1,7 +1,7 @@
 <div class='row' ng-controller='EditController'>
 	<div class='col-md-2'>
 		<p>Edit Product</p>
-		<form id='dashboard_form' name='products_form'>
+		<form class='dashboard_form' name='products_form'>
 			<label>Product Type:</label><br>
 			<select name='product_type' ng-model='new_product.product_type' required>
 				<option value='nba'>NBA</option>
@@ -128,7 +128,7 @@
 			</tr>
 			<tr>
 				<td>Price:</td>
-				<td>{{item.price}}</td>
+				<td>{{item.price | currency}}</td>
 			</tr>
 			<tr>
 				<td>Beckett Value:</td>

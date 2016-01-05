@@ -3,13 +3,15 @@
 	<script type="text/ng-template" id='expandedPhoto.html'>
 		<div class='modal-header'>
 			<h3 class='modal-title'>{{ item.name }}</h3>
-			<p>{{ item.brand }} - {{ item.description }} - #{{ item.card_num }}</p>
+			<p>{{ item.brand }} - {{ item.description }} - #{{ item.card_num }} - {{ item.price | currency }}</p>
 		</div>
 		<div class='modal-body'>
 			<img src='{{item.img_url_front}}' alt='front' width='360' height='450'>
 			<img src='{{item.img_url_back}}' alt='back' width='360' height='450'>
 		</div>
 		<div class='modal-footer'>
+		<a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a>
+		</div>
 		</div>
 	</script>
 
@@ -110,8 +112,8 @@
 			<td>{{ product.card_type }}</td>
 			<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
 			<td><a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a></td>
-			<td>${{ product.price }}</td>
-			<td><a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.mfr}} {{product.brand}} {{product.name}} (Card No. {{product.card_num}}) - ${{product.price}}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a></td>
+			<td>{{ product.price | currency }}</td>
+			<td><a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a></td>
 		</tr>
 	</table>
 </div>

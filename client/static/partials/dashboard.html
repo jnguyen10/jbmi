@@ -30,8 +30,8 @@
 				<td>{{ product.name }}</td>
 				<td>{{ product.description }}</td>
 				<td>{{ product.card_type }}</td>
-				<td>${{ product.price }}</td>
-				<td>${{ product.beckett_value }}</td>
+				<td>{{ product.price | currency }}</td>
+				<td>{{ product.beckett_value | currency}}</td>
 				<td>{{ product.available }}</td>
 				<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
 				<td><button ng-click='editProductPage(product._id)'>Edit</button><br><button ng-click='removeProduct(product._id)'>Remove</button></td>

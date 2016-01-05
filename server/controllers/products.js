@@ -87,7 +87,7 @@ module.exports = (function(){
 				if (err){
 					console.log(err);
 				} else{
-					console.log("Successfully retrieved single entry:", single_entry);
+					// console.log("Successfully retrieved single entry:", single_entry);
 					res.json(single_entry);
 				}
 			})

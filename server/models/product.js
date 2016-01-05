@@ -12,8 +12,8 @@ var ProductSchema = new mongoose.Schema({
 	card_type: String,
 	img_url_front: String,
 	img_url_back: String,
-	price: String,
-	beckett_value: String,
+	price: Number,
+	beckett_value: Number,
 	description: String,
 	available: { type: String, default: 'Y'},
 	created_at: { type: Date, default: Date.now }
