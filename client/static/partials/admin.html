@@ -1,0 +1,14 @@
+<div class='row' ng-controller='UserController'>
+	<div class="col-sm-4" style='padding-bottom: 30px;'>
+		<h1 style='text-align: center'>Dashboard Login</h1>
+		<hr>
+		<form class='form-signin'>
+			<input type='text' class='form-control' ng-model='new_user.username' placeholder='User Name' required autofocus><br>
+			<input type='password' class='form-control' ng-model='new_user.password' placeholder='Password' required><br>
+			<input type='submit' value='Sign In' class="btn btn-lg btn-primary btn-block" ng-click='loginUser()' style='width: 100px; margin: 0 auto;'>
+		</form>
+		<hr>
+		<h1>Welcome {{ users.username }}</h1>
+	</div>
+
+</div>

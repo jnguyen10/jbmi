@@ -32,7 +32,7 @@ jbmi_app.factory('ProductFactory', function($http){
 		$http.get('/products/get_nfl').success(function(nfl_output){
 			callback(nfl_output);
 		})
-	}
+	};
 
 
 	factory.addProduct = function(info, callback){

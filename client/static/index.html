@@ -3,6 +3,10 @@
 	<head>
 		<meta charset='utf-8'>
 		<title>JB Modern Inserts - Sports and Entertainment Collections, Card Breaks and More!</title>
+		
+		<!-- ADD THIS TO REMOVE HASH FROM URL -->
+		<base href='/'>
+
 		<meta name='description' content='Home of sports and entertainment collections, along with frequent card breaks and personal blog posts.'>
 		<!-- ##### GOOGLE FONT API ##### -->
 		<link href='https://fonts.googleapis.com/css?family=Orbitron:700' rel='stylesheet' type='text/css'>
@@ -12,6 +16,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<!-- Custom CSS File -->
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		<!-- jQuery for certain directives -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<!-- FOR PARTIALS, INCLUDE SOURCE FOR THE ANGULAR-ROUTE  -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
@@ -24,15 +30,30 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
 		<!-- Custom Bootstrap for Angular -->
 		<script src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+		<!-- load nginfinitescroll -->
+		<script type='text/javascript' src='js/ng-infinite-scroll.min.js'></script>
+		<!-- load ngCart for shopping cart -->
+		<script type="text/javascript" src='ngCart/dist/ngCart.js'></script>
+		
 
 		<!-- CREATE NEW ANGULAR MODULE AND ROUTE ANY PARTIALS -->
 		<script src='js/angular_js/app.js'></script>
 		<!-- ####### FACTORIES ######### -->
 		<script src='js/angular_js/ProductFactory.js'></script>
+		<script src='js/angular_js/BreakFactory.js'></script>
 		<script src='js/angular_js/BlogFactory.js'></script>
+		<script src='js/angular_js/UserFactory.js'></script>
+		<!-- Authentication Services - Passport -->
+		<script type="text/javascript" src='services.js'></script>
+
 
 		<!-- ####### CONTROLLERS ######### -->
 		<script src='js/angular_js/MainController.js'></script>
+		<script src='js/angular_js/UserController.js'></script>
+		<script src='js/angular_js/LoginController.js'></script>
+		<script src='js/angular_js/LogoutController.js'></script>
+		<script src='js/angular_js/RegisterController.js'></script>
+		<script src='js/angular_js/NewCartController.js'></script>
 		<script src='js/angular_js/DashboardController.js'></script>
 		<script src='js/angular_js/ProductController.js'></script>
 		<script src='js/angular_js/BlogController.js'></script>
@@ -43,7 +64,7 @@
 
 		<!-- ###### CUSTOM ANGULAR ####### -->
 		<script>
-			
+		
 		</script>
 	</head>
 	<body>
@@ -56,26 +77,21 @@
 							<img id='header_logo' src="img/jbmi.jpg" alt='jbmi_logo'>
 							<a class='navbar-brand' href="#/">JB Modern Inserts</a>
 						</div>
-						<div class='nab navbar-nav navbar-right social_div'>
-							<h4 class="nav navbar-nav navbar-right social_title">Social Connect</h4>
-							<ul class="nav navbar-nav navbar-right social">
-								<li>
-									<a href='' class='youtube-btn'><div class="g-ytsubscribe" data-channelid="UCYAXdoijV2VUP-rmB-M9cnw" data-layout="default" data-count="default"></div></a>
-								</li>
-								<li>
-									<a href="https://twitter.com/jbmoderninserts" class="twitter-follow-btn" data-show-count="false"><i></i> Follow @jbmoderninserts</a>
-								</li>
-								<li><a href="https://www.instagram.com/jb_moderninserts/?ref=badge" class="ig-b- ig-b-24 ig-btn"><img src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /></a></li>
-								<!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
+						<div class='nav navbar-nav navbar-right right_header_div'>
+							<ul ng-controller='LoginController' class="nav navbar-nav navbar-right">
+								<!-- USE NG-CLASS to add a "disabled" class to disable anchor tags -->
+								<li><a ng-class="{disabled: isUserLoggedIn}" href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+								<li><a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+								<li><a ng-show="isUserLoggedIn" ng-click='logout()' href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 							</ul>
+							<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a>
 						</div>
 					</div>
 				</nav>
 			</div>
 			<hr>
 			<div id='body-content' class='row'>
-				<div class='col-lg-2 sidebar-nav'>
+				<div class='col-lg-2 sidebar-nav' role="complementary">
 					<div class='list-group sidebar-nav'>
 						<uib-accordion class='sidebar-menu'>
 							<uib-accordion-group heading='Home'><a href="#/">&#8226; Home</a>
@@ -90,13 +106,16 @@
 							<uib-accordion-group heading='Breaks'>
 								<a href="#/nba/breaks">&#8226; NBA</a><br><a href="#/nfl/breaks">&#8226; NFL</a><br><a href="#/mlb/breaks">&#8226; MLB</a><br><a href="#/nhl/breaks">&#8226; NHL</a><br><a href="#/media/breaks">&#8226; Non-Sports Collectibles</a><br>
 							</uib-accordion-group>
-							<uib-accordion-group heading='Contact Us'>
-								<a href="mailto:jbmoderninserts@gmail.com">&#8226; Email Us!</a>
+							<uib-accordion-group heading='Connect'>
+								<a href="mailto:jbmoderninserts@gmail.com">Email Us!</a><br>
+								<a href='' class='youtube-btn'><div class="g-ytsubscribe" data-channelid="UCYAXdoijV2VUP-rmB-M9cnw" data-layout="default" data-count="default"></div></a><br>
+								<a href="https://twitter.com/jbmoderninserts" class="twitter-follow-btn" data-show-count="false"><i></i> Follow </a><br>
+								<a href="https://www.instagram.com/jb_moderninserts/?ref=badge" class="ig-b- ig-b-24 ig-btn"><img src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /></a><br><br>
 							</uib-accordion-group>
 						</uib-accordion>
 					</div>
 				</div>
-				<div id='main-content' class='col-lg-10'>
+				<div id='main-content' class='col-lg-10' role="main">
 					<div ng-view=''></div>
 				</div>
 			</div>

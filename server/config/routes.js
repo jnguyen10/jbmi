@@ -1,7 +1,29 @@
 module.exports = function(app){
+	var users = require('./../controllers/users.js');
 	var blogs = require('./../controllers/blogs.js');
-	// var customers = require('./../controllers/customers.js');
+	var breaks = require('./../controllers/breaks.js');
 	var products = require('./../controllers/products.js');
+	// ########### USERS #############
+
+	// ADD A NEW USER
+	app.post('/users/register', function(req, res){
+		users.register(req, res);
+	})
+
+	// LOGIN USER
+	app.post('/users/login', function(req, res){
+		users.login(req, res);
+	})
+
+	// LOGOUT USER
+	app.get('/users/logout', function(req, res){
+		users.logout(req, res);
+	})
+
+	// GET USER LOGIN STATUS
+	app.get('/users/auth/status', function(req, res){
+		users.getStatus(req, res);
+	})
 
 	// // GET ALL CUSTOMER NAMES
 	// app.get('/customers', function(req, res){
@@ -28,6 +50,8 @@ module.exports = function(app){
 	// 	orders.add(req, res);
 	// });
 
+
+	// ########## PRODUCTS ##############
 	// GET ALL PRODUCTS
 	app.get('/products', function(req, res){
 		products.show(req, res);

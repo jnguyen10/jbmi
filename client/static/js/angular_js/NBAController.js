@@ -1,22 +1,30 @@
 jbmi_app.controller('NBAController', function($scope, $uibModal, ProductFactory){
 
-	// $scope.search_options = ['Player', 'Manufacture', 'Brand', 'Card Type', 'Year'];
 	$scope.nba_products = [];
 	$scope.orderByField = 'year';
 	$scope.reverseSort = true;
 
-	// $scope.product_count = -3;
+	// ###### For pagination ############
+
+	// $scope.setPage = function (pageNo) {
+	// 	$scope.currentPage = pageNo;
+	// };
+	// $scope.maxSize = 5;
+	// $scope.totalItems = 0;
+	// $scope.currentPage = 1;
+
+	$scope.product_count = 3;
 
 	$scope.getNBAProducts = function(){
 		ProductFactory.getNBAProducts(function(data){
 			console.log("Getting All Products", data);
 			$scope.nba_products = data;
+
 		})
 	};
 
 	$scope.searchNBAProducts = function(){
 		// Pass in raw key and value as two separate key-value pairs
-
 		ProductFactory.searchNBAProducts($scope.nba_search, function(data){
 			$scope.nba_products = data;
 		})
@@ -56,9 +64,9 @@ jbmi_app.controller('NBAController', function($scope, $uibModal, ProductFactory)
 	// 	})
 	// };
 
-	// $scope.more_products = function(product_id){
-	// 	$scope.product_count -= 3;
-	// };
+	$scope.more_products = function(product_id){
+		$scope.product_count += 3;
+	};
 
 	// $scope.getCustomers();
 	$scope.getNBAProducts();

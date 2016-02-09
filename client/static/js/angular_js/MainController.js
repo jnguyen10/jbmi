@@ -1,4 +1,4 @@
-jbmi_app.controller('MainController', function($scope, ProductFactory){
+jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactory){
 
 	$scope.customers = [];
 	$scope.products = [];

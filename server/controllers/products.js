@@ -47,6 +47,7 @@ module.exports = (function(){
 			var text = new RegExp(req.body.text,'i');
 			var new_filter = {};
 			new_filter[field] = text;
+			new_filter["product_type"] = "nba";
 			console.log(new_filter)
 
 			Product.find(new_filter,function (err, results){
@@ -59,6 +60,25 @@ module.exports = (function(){
 		},
 		get_nfl: function (req, res){
 			Product.find({product_type: 'nfl', available: 'Y'}, function (err, results){
+				if(err){
+					console.log(err);
+				} else {
+					res.json(results);
+				}
+			})
+		},
+		search_nfl: function (req, res){
+			console.log(req.body)
+
+			// create an object with field key and regex search text
+			var field = req.body.field;
+			var text = new RegExp(req.body.text,'i');
+			var new_filter = {};
+			new_filter[field] = text;
+			new_filter["product_type"] = "nfl";
+			console.log(new_filter)
+
+			Product.find(new_filter,function (err, results){
 				if(err){
 					console.log(err);
 				} else {

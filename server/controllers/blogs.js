@@ -4,7 +4,7 @@ var Blog = mongoose.model('Blog');
 module.exports = (function(){
 	return {
 		show: function (req, res){
-			Order.find({}, function (err, results){
+			Blog.find({}, function (err, results){
 				if(err){
 					console.log(err);
 				} else {
@@ -13,11 +13,11 @@ module.exports = (function(){
 			})
 		},
 		add: function (req, res){
-			var order = new Order(req.body);
+			var blog = new Blog(req.body);
 
-			console.log("Order to be added to DB", order)
+			console.log("Order to be added to DB", blog)
 
-			order.save(function(err, result){
+			blog.save(function(err, result){
 				if(err){
 					console.log(err);
 				} else {
