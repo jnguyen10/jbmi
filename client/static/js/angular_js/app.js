@@ -47,11 +47,10 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	})
 	.when('/nba', {
 		templateUrl: 'partials/nba_collection.html',
-		// access: {
-		// 	requiresLogin: true,
-		// 	requirePermissions: ['test@test.com']
-		// }
-		access: {restricted: true}
+		access: {
+			requiresLogin: true,
+			requirePermissions: ['test@test.com']
+		}
 	})
 	.when('/nba/breaks', {
 		templateUrl: 'partials/nba_breaks.html'

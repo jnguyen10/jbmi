@@ -6,7 +6,12 @@ module.exports = (function(){
 	return {
 		getStatus: function (req, res){
 			console.log("get status OK")
-			console.log("req", req.session.passport.user)
+			// console.log("########## REQ ###########", req, "############ END ################")
+			console.log("SESSIONID", req.sessionID)
+			console.log("req.user", req.user)
+			console.log("USER", req.session.passport.user)
+			console.log("req.session:", req.session)
+			console.log("req.session.passport:", req.session.passport)
 		},
 		register: function (req, res){
 			var user_name = new User({username: req.body.username});
@@ -39,7 +44,7 @@ module.exports = (function(){
 			})(req, res, next);
 		},
 		logout: function(req, res){
-			console.log("logout", req.body)
+			console.log("###### logout ########", req.body)
 			req.logout();
 			res.status(200).json({status: 'Bye!'})
 		}

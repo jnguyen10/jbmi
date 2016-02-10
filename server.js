@@ -42,6 +42,16 @@ var User = mongoose.model('User')
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+// ALTERNATE SERIALIZE/DESERIALIZE FUNCTIONS
+// passport.serializeUser(function(user, done){
+//     done(null, user.id)
+// });
+// passport.deserializeUser(function(id, done){
+//     User.findById(id, function(err, user){
+//         done(err, user)
+//     })
+// });
+
 
 // this line requires and runs the code frokm our routes.js file
 // and passes it 'app' so that we can attach our routing rules

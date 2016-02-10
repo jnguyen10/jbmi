@@ -1,2 +1,2 @@
-# JBMI readme file
-# To add more info when time permits
+# JBMI - Website
+# Showcasing card collection, box/case breaks, and personal blogs

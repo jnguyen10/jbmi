@@ -1,82 +1,54 @@
-<header class="hero-unit" id="banner" ng-init="confirm.confirmDetail()">
-  <navbar></navbar>
-</header>
-
-<div class="container container-checkout container-content" ng-show="confirm.orderDetail"> 
-<div class="row" ng-show="confirm.orderDetail">
-<div class="col-xs-12">
-	<div class="alert alert-success" role="alert">
-		<p class="lead">Thank you for your order! Your order number: <b>{{confirm.orderParam}}</b>. You can always check <a href="/account/orders/{{confirm.orderParam}}">order details here</a> and e-mail us at <a href="mailto:info@waywardmercantile.com">info@waywardmercantile.com</a> with any inquiries.</p> 
+<!-- <div class="container container-checkout container-content" ng-show="confirm.orderDetail">  -->
+<!-- <div class="row" ng-show="confirm.orderDetail"> -->
+<div class="row" ng-controller="CheckoutConfirmationController">
+	<div class="col-xs-12">
+		<div class="alert alert-success" role="alert">
+			<p class="lead">Thank you for your order! Your order number: <b>{{ orderNumber }}</b>. You can e-mail us at <a href="mailto:jbmoderninserts@gmail.com">jbmoderninserts@gmail.com</a> with any inquiries.</p> 
+		</div>
 	</div>
-</div>
-<div class="col-xs-12">
-	<div class="panel panel-default wayward-panel">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">Order Details</h3>
-	  </div>
-	  <div class="panel-body">
-		  	<div class="table-responsive">
-			  <table class="table">
-			    <thead> 
-			    	<tr> 
-			    		<th>Product</th> 
-			    		<th>Total</th> 
-			    	</tr> 
-			    </thead>
-			    <tbody> 
-			    	<tr ng-repeat="products in confirm.orderDetail.line_items"> 
-			    		<td>{{products.name}} x {{products.quantity}}
-			    			<p><small ng-repeat="meta in products.meta">{{meta.label}}: {{meta.value}}{{$last ? '' : ' | '}}</small></p>
-			    		</td> 
-			    		<td>{{products.subtotal | currency}}</td> 
-			    	</tr> 
-			    	<tr> 
-			    		<td>Cart Subtotal:</td> 
-			    		<td>{{confirm.orderDetail.subtotal | currency}}</td> 
-			    	</tr> 
-			    	<tr class="text-danger" ng-show="confirm.orderDetail.coupon_lines.length>0"> 
-			    		<td>Discount:</td> 
-			    		<td>-{{confirm.orderDetail.total_discount | currency}}</td> 
-			    	</tr> 
-			    	<tr> 
-			    		<td>Shipping:</td> 
-			    		<td>{{confirm.orderDetail.total_shipping | currency}}</td> 
-			    	</tr> 
-			    	<tr> 
-			    		<td>Tax:</td> 
-			    		<td>{{confirm.orderDetail.total_tax | currency}}</td> 
-			    	</tr> 
-			    	<tr style="font-weight:bold"> 
-			    		<td>Order Total:</td> 
-			    		<td>{{confirm.orderDetail.total | currency}}</td> 
-			    	</tr> 
-			    </tbody>
-			  </table>
+	<div class="col-xs-12">
+		<div class="panel panel-default wayward-panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">Order Summary</h3>
 			</div>
-
-			<div class="row">
-				<div class="col-sm-6">
-					<h4>Billing Address</h4>
-					<address>
-					  {{confirm.orderDetail.billing_address.first_name + ' ' + confirm.orderDetail.billing_address.last_name}}<br>
-					  {{confirm.orderDetail.billing_address.address_1}}{{confirm.orderDetail.billing_address.address_2 ? ', '+confirm.orderDetail.billing_address.address_2 : ''}}<br>
-					  {{confirm.orderDetail.billing_address.city + ', ' + confirm.orderDetail.billing_address.state + ' ' +confirm.orderDetail.billing_address.postcode}}<br>
-					</address>
-				</div>
-				<div class="col-sm-6">
-					<h4>Shipping Address</h4>
-					<address>
-					  {{confirm.orderDetail.shipping_address.first_name + ' ' + confirm.orderDetail.shipping_address.last_name}}<br>
-					  {{confirm.orderDetail.shipping_address.address_1}}{{confirm.orderDetail.shipping_address.address_2 ? ', '+confirm.orderDetail.shipping_address.address_2 : ''}}<br>
-					  {{confirm.orderDetail.shipping_address.city + ', ' + confirm.orderDetail.shipping_address.state + ' ' +confirm.orderDetail.shipping_address.postcode}}<br>
-					</address>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead> 
+							<tr> 
+								<th>Product</th> 
+								<th>Total</th> 
+							</tr> 
+						</thead>
+						<tbody> 
+							<tr ng-repeat="products in orderItems"> 
+								<td>{{products._name}}</td> 
+								<td>{{products._price | currency}}</td> 
+							</tr> 
+							<!-- 			    	<tr> 
+							<td>Cart Subtotal:</td> 
+							<td>{{confirm.orderDetail.subtotal | currency}}</td> 
+							</tr> 
+							<tr class="text-danger" ng-show="confirm.orderDetail.coupon_lines.length>0"> 
+							<td>Discount:</td> 
+							<td>-{{confirm.orderDetail.total_discount | currency}}</td> 
+							</tr> 
+							<tr> 
+							<td>Shipping:</td> 
+							<td>{{confirm.orderDetail.total_shipping | currency}}</td> 
+							</tr> 
+							<tr> 
+							<td>Tax:</td> 
+							<td>{{confirm.orderDetail.total_tax | currency}}</td> 
+							</tr>  -->
+							<tr style="font-weight:bold"> 
+								<td>Order Total:</td> 
+								<td>{{total | currency}}</td> 
+							</tr> 
+						</tbody>
+					</table>
 				</div>
 			</div>
-		  	</div>
 		</div>		
 	</div>
 </div>
-
-</div>
-
-<footer></footer>
