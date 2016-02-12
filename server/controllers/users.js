@@ -12,12 +12,13 @@ module.exports = (function(){
 			console.log("USER", req.session.passport.user)
 			console.log("req.session:", req.session)
 			console.log("req.session.passport:", req.session.passport)
+			return res.json(req.user)
 		},
 		register: function (req, res){
-			var user_name = new User({username: req.body.username});
+			var user_name = new User({username: req.body.username, name: req.body.name});
 			var user_pw = req.body.password
 
-			console.log("User to be added/updated to DB", req.body)
+			// console.log("User to be added/updated to DB", req.body)
 
 			User.register(user_name, user_pw, function(err, result){
 				if(err){

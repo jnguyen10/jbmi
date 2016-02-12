@@ -12,7 +12,7 @@ jbmi_app.controller('RegisterController', function($scope, $rootScope, $location
 
 		if ($scope.registerForm.password == $scope.registerForm.confirm_pw) {
 			// call login from service
-			AuthService.register($scope.registerForm.username, $scope.registerForm.password)
+			AuthService.register($scope.registerForm.name, $scope.registerForm.username, $scope.registerForm.password)
 			// handle success
 			.then(function() {
 				$rootScope.isUserLoggedIn = AuthService.getUserStatus()

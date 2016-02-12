@@ -1,7 +1,8 @@
 angular.module('jbmi_app').factory('AuthService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
 
-	// create user variable
+	// create user and data object variable
 	var user = null
+	var userDataObject = null
 
 	// return available functions for use in controllers
 	return ({
@@ -21,7 +22,7 @@ angular.module('jbmi_app').factory('AuthService', ['$q', '$timeout', '$http', fu
 		}
 	};
 
-	function getUserStatus() {
+	function getUserStatus(callback) {
 		// // create a new instance of deferred
 		// var deferred = $q.defer();
 		// // send a get request to the server
@@ -32,6 +33,9 @@ angular.module('jbmi_app').factory('AuthService', ['$q', '$timeout', '$http', fu
 		// 	console.log("success data", data)
 		// 	user = true;
 		// 	deferred.resolve();
+		// 	deferred.promise.value = data
+		// 	console.log("deferred.promise in success", deferred.promise)
+
 		// })
 		// // handle error
 		// .error(function (data) {
@@ -39,9 +43,43 @@ angular.module('jbmi_app').factory('AuthService', ['$q', '$timeout', '$http', fu
 		// 	user = false;
 		// 	deferred.reject();
 		// });
+		// console.log("deferred.promise", deferred.promise)
 		// // return promise object
 		// return deferred.promise;
-		return user
+
+		// return user
+
+		// create a new instance of deferred
+		var deferred = $q.defer();
+
+		// send a get request to the server
+		$http.get('/users/auth/status')
+		// handle success
+		.success(function (data) {
+			console.log("SUCCESS")
+			// console.log("success data", data)
+			user = true;
+			deferred.resolve();
+			userDataObject = data;
+			// console.log("deferred.promise in success", deferred.promise)
+			// return promise object
+			// return deferred.promise;
+			console.log("inside success", userDataObject)
+
+		})
+		// handle error
+		.error(function (data) {
+			console.log("FAILED")
+			user = false;
+			deferred.reject();
+		});
+
+		deferred.promise.$$state.user_data = userDataObject
+		console.log("deferred.promise", deferred.promise)
+
+		// return promise object
+		return deferred.promise;
+
 	};
 
 	function login(username, password) {
@@ -95,13 +133,13 @@ angular.module('jbmi_app').factory('AuthService', ['$q', '$timeout', '$http', fu
 
 	}
 
-	function register(username, password) {
+	function register(name, username, password) {
 
 		// create a new instance of deferred
 		var deferred = $q.defer();
 
 		// send a post request to the server
-		$http.post('/users/register', {username: username, password: password})
+		$http.post('/users/register', {name: name, username: username, password: password})
 		// handle success
 		.success(function (data, status) {
 			if(status === 200 && data.status){

@@ -10,7 +10,7 @@ jbmi_app.controller('LoginController', function($scope, $rootScope, $location, A
 		// handle success
 		.then(function() {
 			$rootScope.isUserLoggedIn = AuthService.getUserStatus()
-			console.log("login getUserStatus", AuthService.getUserStatus());
+			console.log("login isUserLoggedIn", $rootScope.isUserLoggedIn);
 			$location.path('/');
 			$scope.disabled = false;
 			$scope.loginForm = {};
@@ -30,6 +30,7 @@ jbmi_app.controller('LoginController', function($scope, $rootScope, $location, A
 		AuthService.logout()
 		.then(function() {
 			$rootScope.isUserLoggedIn = false
+			console.log("logout isUserLoggedIn", $rootScope.isUserLoggedIn)
 
 			$location.path('/login');
 		})

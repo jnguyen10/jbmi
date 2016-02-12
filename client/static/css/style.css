@@ -232,16 +232,22 @@ i{
 
 
 
-/* ############################
-######### 404 ERRORS ##########
-############################ */
-.bkg{
+/* #######################################
+######### 404 ERRORS & RESTRICT ##########
+####################################### */
+.404_bkg{
 	background-image: url("../img/curry_404.jpg");
 	width: 1000px;
 	height: 744px;
 	margin-bottom: 40px;
 }
-.error404_text{
+.restricted_bkg{
+	background-image: url("../img/mutombo_block.jpg");
+	width: 1000px;
+	height: 562px;
+	margin-bottom: 40px;
+}
+.error_text{
 	width: 550px;
 	padding-top: 300px;
 	padding-left: 30px;

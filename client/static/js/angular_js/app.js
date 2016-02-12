@@ -6,8 +6,7 @@ var jbmi_app = angular.module('jbmi_app', ['ngRoute','angularMoment', 'ui.bootst
 jbmi_app.config(function($routeProvider, $locationProvider){
 	$routeProvider
 	.when('/', {
-		templateUrl: 'partials/main.html',
-		access: {restricted: false}
+		templateUrl: 'partials/main.html'
 	})
 	.when('/login', {
 		templateUrl: 'partials/login.html',
@@ -28,28 +27,55 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 		templateUrl: 'partials/checkout_confirmation.html'
 	})
 	.when('/admin', {
-		templateUrl: 'partials/admin.html'
+		templateUrl: 'partials/admin.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
 	})
 	.when('/admin/dashboard', {
-		templateUrl: 'partials/dashboard.html'
+		templateUrl: 'partials/dashboard.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
 	})
 	.when('/admin/dashboard/add_products', {
-		templateUrl: 'partials/add_products.html'
+		templateUrl: 'partials/add_products.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
 	})
 	.when('/admin/dashboard/add_breaks', {
-		templateUrl: 'partials/add_breaks.html'
+		templateUrl: 'partials/add_breaks.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
 	})
 	.when('/admin/dashboard/add_blogs', {
-		templateUrl: 'partials/add_blogs.html'
+		templateUrl: 'partials/add_blogs.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
 	})
 	.when('/product/edit/:product_id', {
-		templateUrl: 'partials/edit_product.html'
+		templateUrl: 'partials/edit_product.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
+	})
+	.when('/break_rules', {
+		templateUrl: 'partials/break_rules.html'
 	})
 	.when('/nba', {
 		templateUrl: 'partials/nba_collection.html',
 		access: {
-			requiresLogin: true,
-			requirePermissions: ['test@test.com']
+			restricted: true,
+			requirePermissions: 'test@test.com'
 		}
 	})
 	.when('/nba/breaks', {
@@ -58,8 +84,8 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	.when('/nfl', {
 		templateUrl: 'partials/nfl_collection.html',
 		access: {
-			requiresLogin: true,
-			requirePermissions: ['test3@test.com']
+			restricted: true,
+			requirePermissions: 'test3@test.com'
 		}
 	})
 	.when('/nfl/breaks', {
@@ -83,6 +109,9 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	.when('/media/breaks', {
 		templateUrl: 'partials/non-sports_breaks.html'
 	})
+	.when('/restricted', {
+		templateUrl: 'partials/restricted.html'
+	})
 	.otherwise({
 		templateUrl: 'partials/404.html'
 	});
@@ -96,14 +125,25 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 // Route Changes - check status
 jbmi_app.run(function ($rootScope, $location, $route, AuthService) {
 	$rootScope.$on('$routeChangeStart', function (event, next, current) {
-		console.log("get user status", AuthService.getUserStatus())
-		// if (next.access.restricted && !AuthService.getUserStatus()) {
-		// 	$location.path('/');
-		// } else 
 
-		if (next.access.restricted && AuthService.isLoggedIn() === false) {
-			$location.path('/login');
-			$route.reload();
+		// if (next.access !== undefined) {
+		// 	console.log("$routeChangeStart data from AuthService.getUserStatus()", AuthService.getUserStatus())
+		// }
+
+		
+
+		var user_session = AuthService.getUserStatus()
+		if (user_session.$$state.user_data.username !== next.access.requirePermissions){
+			$location.path('/restricted');
 		}
+
+
+		if (next.access !== undefined) {
+			if (next.access.restricted && AuthService.isLoggedIn() === false) {
+				$location.path('/login');
+				$route.reload();
+			}
+		}
+
 	});
 });
