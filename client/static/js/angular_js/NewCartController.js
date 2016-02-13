@@ -18,11 +18,11 @@ jbmi_app.controller('NewCartController', function($scope, $rootScope, $http, ngC
             currency_code: 'USD'
         }
     };
-
+    // console.log("new cart cartID", ngCart.generateCartID())
     console.log(ngCart.getItems())
 
 
     ngCart.setTaxRate(0.0);
-    ngCart.setShipping(0.00);
+    ngCart.setShipping(4.00);
 
 });

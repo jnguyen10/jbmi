@@ -48,6 +48,7 @@ module.exports = (function(){
 			var new_filter = {};
 			new_filter[field] = text;
 			new_filter["product_type"] = "nba";
+			new_filter["available"] = "Y";
 			console.log(new_filter)
 
 			Product.find(new_filter,function (err, results){
@@ -76,6 +77,7 @@ module.exports = (function(){
 			var new_filter = {};
 			new_filter[field] = text;
 			new_filter["product_type"] = "nfl";
+			new_filter["available"] = "Y";
 			console.log(new_filter)
 
 			Product.find(new_filter,function (err, results){

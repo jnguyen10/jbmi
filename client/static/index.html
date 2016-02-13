@@ -79,12 +79,14 @@
 							<a class='navbar-brand' href="#/">JB Modern Inserts</a>
 						</div>
 						<div class='nav navbar-nav navbar-right right_header_div'>
-							<ul ng-controller='LoginController' class="nav navbar-nav navbar-right">
-								<!-- USE NG-CLASS to add a "disabled" class to disable anchor tags -->
+							<!-- <ul ng-controller='LoginController' class="nav navbar-nav navbar-right">
+								#####################
+								USE NG-CLASS to add a "disabled" class to disable anchor tags
+								#####################
 								<li><a ng-class="{disabled: isUserLoggedIn}" href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 								<li><a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 								<li><a ng-show="isUserLoggedIn" ng-click='logout()' href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-							</ul>
+							</ul> -->
 							<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a>
 						</div>
 					</div>
