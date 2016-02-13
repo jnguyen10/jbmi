@@ -3,22 +3,19 @@
 // and creates a model that we can then call upon in our controller
 var mongoose = require('mongoose');
 // create our friendSchema
-var BreakSchema = new mongoose.Schema({
-	product_type: String,
-	year: String,
-	brand: String,
-	img_url: String,
-	qty: String,
+var OrderSchema = new mongoose.Schema({
+	order_number: String,
+	order_items: Array,
+	name: { type: String, default: null },
+	email: { type: String, default: null },
 	price: Number,
-	description: String,
-	available: { type: String, default: 'Y'},
 	created_at: { type: Date, default: Date.now }
 })
 
 // use the schema to create the model
 // Note that creating a model creates the collection in the DB
 // (makes the collection plural)
-mongoose.model('Break', BreakSchema); 
+mongoose.model('Order', OrderSchema); 
 
 // Notice that we aren't exporting anything -- this is because
 // this file will be run when we require it using our config file

@@ -115,7 +115,7 @@
 			<td>
 				<!-- <a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a> -->
 
-				<ngcart-addtocart id="{{ product._id }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" data="item">Add to cart</ngcart-addtocart>
+				<ngcart-addtocart id="{{ product._id }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" quantity="1" data="product">Add to cart</ngcart-addtocart>
 
 			</td>
 		</tr>

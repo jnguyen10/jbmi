@@ -3,8 +3,9 @@ module.exports = function(app){
 	var blogs = require('./../controllers/blogs.js');
 	var breaks = require('./../controllers/breaks.js');
 	var products = require('./../controllers/products.js');
+	var orders = require('./../controllers/orders.js')
+	
 	// ########### USERS #############
-
 	// ADD A NEW USER
 	app.post('/users/register', function(req, res){
 		users.register(req, res);
@@ -25,31 +26,26 @@ module.exports = function(app){
 		users.getStatus(req, res);
 	})
 
-	// // GET ALL CUSTOMER NAMES
-	// app.get('/customers', function(req, res){
-	// 	customers.show(req, res);
-	// });
+	// ########### ORDERS #############
+	// GET ALL ORDERS
+	app.get('/orders', function(req, res){
+		orders.show(req, res);
+	});
 
-	// // ADD A NEW CUSTOMER
-	// app.post('/customers/add', function(req, res){
-	// 	customers.add(req, res);
-	// });
+	// ADD A NEW ORDER
+	app.post('/orders/add', function(req, res){
+		orders.add(req, res);
+	});
 
-	// // REMOVING A CUSTOMER
-	// app.post('/customers/remove', function(req, res){
-	// 	customers.remove(req, res);
-	// });
+	// SEARCH ALL ORDERS BY FILTER
+	app.post('/orders/search_all', function(req, res){
+		orders.search_all(req, res);
+	});
 
-	// // GET ALL ORDERS
-	// app.get('/orders', function(req, res){
-	// 	orders.show(req, res);
-	// });
-
-	// // ADD A NEW ORDER
-	// app.post('/orders/add', function(req, res){
-	// 	orders.add(req, res);
-	// });
-
+	// REMOVING AN ORDER
+	app.post('/orders/remove', function(req, res){
+		orders.remove(req, res);
+	});
 
 	// ########## PRODUCTS ##############
 	// GET ALL PRODUCTS
@@ -90,6 +86,11 @@ module.exports = function(app){
 	// UPDATE PROPERTIES OF A SINGLE PRODUCT
 	app.post('/products/update', function(req, res){
 		products.update(req, res);
+	});
+
+	// UPDATE PRODUCT AVAILABILITY AFTER ORDER IS PLACED
+	app.post('/products/update_avail', function(req, res){
+		products.update_avail(req, res);
 	});
 
 	// REMOVING A PRODUCT

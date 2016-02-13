@@ -3,7 +3,7 @@
 <div class="row" ng-controller="CheckoutConfirmationController">
 	<div class="col-xs-12">
 		<div class="alert alert-success" role="alert">
-			<p class="lead">Thank you for your order! Your order number: <b>{{ orderNumber }}</b>. You can e-mail us at <a href="mailto:jbmoderninserts@gmail.com?subject=JBMI Order Number: {{ orderNumber }}">jbmoderninserts@gmail.com</a> with any inquiries regarding your order.</p> 
+			<p class="lead">Thank you for your order! Your order number: <b>{{ order_summary[0].order_number }}</b>. You can e-mail us at <a href="mailto:jbmoderninserts@gmail.com?subject=JBMI Order Number: {{ order_summary[0].order_number }}">jbmoderninserts@gmail.com</a> with any inquiries regarding your order.  You will receive an emailed receipt from PayPal shortly.<br><br>NOTE: Please take note of your order number as a refresh of this page will redirect you to the home page</p> 
 		</div>
 	</div>
 	<div class="col-xs-12">
@@ -21,7 +21,7 @@
 							</tr> 
 						</thead>
 						<tbody> 
-							<tr ng-repeat="products in orderItems"> 
+							<tr ng-repeat="products in order_summary[0].order_items"> 
 								<td>{{products._name}}</td> 
 								<td>{{products._price | currency}}</td> 
 							</tr> 
@@ -43,7 +43,7 @@
 							</tr>  -->
 							<tr style="font-weight:bold"> 
 								<td>Order Total:</td> 
-								<td>{{total | currency}}</td> 
+								<td>{{order_summary[0].price | currency}}</td> 
 							</tr> 
 						</tbody>
 					</table>

@@ -124,6 +124,31 @@ module.exports = (function(){
 				}
 			})
 		},
+		update_avail: function (req, res){
+			console.log("order array:", req.body.order_items)
+			var items = req.body.order_items
+
+			for (var index in items) {
+				console.log("individual items:", items[index])
+				Product.update({_id: items[index]._id}, {available: 'N'}, function(err){
+					if (err){
+						console.log(err);
+					} else {
+						console.log("Successful Update on DB");
+					}
+				})
+			}
+
+			res.json();	
+			// Product.update({_id: req.body._id}, req.body, function(err){
+			// 	if (err){
+			// 		console.log(err);
+			// 	} else {
+			// 		console.log("Successful Update on DB");
+			// 		res.json();
+			// 	}
+			// })
+		},
 		remove: function (req, res){
 			
 			Product.remove({_id: req.body.product_id}, function(err){

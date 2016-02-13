@@ -67,6 +67,14 @@ jbmi_app.factory('ProductFactory', function($http){
 			});
 	};
 
+	factory.updateAvailability = function(order_items, callback){
+		
+		$http.post('/products/update_avail',order_items).success(function(){
+				console.log("UPDATE WAS SUCCESSFUL");
+				callback();
+			});
+	};
+
 	factory.removeProduct = function(product_id, callback){
 		$http.post('/products/remove', {product_id: product_id}).success(function(){
 			console.log("SUCCESSFULLY REMOVED PRODUCT");
