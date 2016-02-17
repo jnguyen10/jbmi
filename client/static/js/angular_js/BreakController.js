@@ -80,4 +80,18 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
     $scope.getNBABreaks();
     $scope.getNFLBreaks();
 
-});
+})
+.directive('breakDesc', function() {
+	return {
+		link: function(scope, element, attrs) {
+			element.append(attrs.breakDesc)
+			// #########################################
+			// USE BELOW to bind multiple jQuery actions
+			// #########################################
+			// element.bind('click', function() {
+			// 	console.log("attrs", attrs)
+			// 	element.html(attrs.breakDesc)
+			// })
+		}
+	}
+})
