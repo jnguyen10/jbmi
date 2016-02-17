@@ -6,12 +6,12 @@ var mongoose = require('mongoose');
 var BreakSchema = new mongoose.Schema({
 	product_type: String,
 	year: String,
-	brand: String,
+	title: String,
 	img_url: String,
-	qty: String,
+	qty: Number,
 	price: Number,
 	description: String,
-	available: { type: String, default: 'Y'},
+	available: { type: String, default: 'In Stock' },
 	created_at: { type: Date, default: Date.now }
 })
 

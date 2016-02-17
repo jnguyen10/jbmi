@@ -1,18 +1,27 @@
-jbmi_app.controller('CheckoutConfirmationController', function($location, $scope, $rootScope, $http, ngCart, ProductFactory, OrderFactory){
+jbmi_app.controller('CheckoutConfirmationController', function($location, $scope, $rootScope, $http, ngCart, ProductFactory, BreakFactory, OrderFactory){
 
     // $scope.orderNumber = $rootScope.payPalSettings.paypal.item_number
     if (ngCart.getItems()[0] != undefined) {
-    	$scope.orderItems = ngCart.getItems()
-	    $scope.total = ngCart.totalCost()
-		$scope.orderNumber = ngCart.getItems()[0]._id.slice(10)
+
+  //   	if (ngCart.getItems()[0]._id.length == 12) {
+  //   		var orderID = ngCart.getItems()[0]._id
+  //   	} else {
+  //   		var orderID = ngCart.getItems()[0]._id.slice(10)
+  //   	}
+
+		// $scope.orderItems = ngCart.getItems()
+		// $scope.total = ngCart.totalCost()
+		// $scope.orderNumber = orderID
 
 		$scope.order_summary = {
-			order_number: ngCart.getItems()[0]._id.slice(10),
+			order_number: ngCart.getItems()[0]._id,
 			order_items: ngCart.getItems(),
+			shipping: ngCart.getShipping(),
 			price: ngCart.totalCost()
 		}
     } else { // redirect to home page if page gets reloaded, as cart data is cleared
     	$location.path('/');
+    	$scope.order_summary = {}
     }
 
 	// console.log("confirm cartID", ngCart.getCartID())
@@ -39,12 +48,21 @@ jbmi_app.controller('CheckoutConfirmationController', function($location, $scope
 		console.log("Removing availablity of product (Client-Side Controller)", $scope.order_summary.order_items)
 		ProductFactory.updateAvailability({order_items: $scope.order_summary.order_items}, function(){
 			console.log("Update of Availablity Complete!");
-			// $scope.new_product = {};
 		})
 	}
 
 	$scope.updateAvailability();
-	
+
+	$scope.updateBreakQty = function(){
+		console.log("Update the break quantity of product (Client-Side Controller)", $scope.order_summary.order_items)
+		BreakFactory.updateBreakQty({order_items: $scope.order_summary.order_items}, function(){
+			console.log("Update of Break Qty Complete!");
+		})
+	}
+
+	$scope.updateBreakQty();
+
+
 	// 4) Provide a form for user to enter in email and have receipt sent to them of the order (save the order again with an email address) - ADD LATER
 	// 5) Clear the cart
 	ngCart.empty()

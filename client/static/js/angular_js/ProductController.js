@@ -1,7 +1,6 @@
 jbmi_app.controller('ProductController', function($scope, $location, ProductFactory){
 
 	$scope.products = [];
-	$scope.orders = [];
 	$scope.product_count = -9;
 
 	$scope.getProducts = function(){
@@ -54,24 +53,6 @@ jbmi_app.controller('ProductController', function($scope, $location, ProductFact
 		$scope.product_count -= 3;
 	};
 
-	// $scope.getCustomers = function(){
-	// 	CustomerFactory.getCustomers(function(data){
-	// 		console.log("Getting All Customers", data);
-	// 		$scope.customers = data;
-	// 	})
-	// };
-
-
-
-	// $scope.getOrders = function(){
-	// 	OrderFactory.getOrders(function(data){
-	// 		console.log("Getting All Orders", data);
-	// 		$scope.orders = data;
-	// 	})
-	// };
-
-	// $scope.getCustomers();
 	$scope.getProducts();
-	// $scope.getOrders();
 
 });

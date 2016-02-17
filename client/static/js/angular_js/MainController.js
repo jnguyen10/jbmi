@@ -1,15 +1,14 @@
-jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactory){
+jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactory, BreakFactory){
 
-	$scope.customers = [];
 	$scope.products = [];
-	$scope.orders = [];
+	$scope.breaks = [];
 	$scope.product_count = -3;
 
 	$scope.myInterval = 5000;
 	$scope.noWrapSlides = false;
-	var players = ['curry', 'cooper', 'posey', 'pavelski', 'media'];
-	var product_type = ['nba', 'nfl', 'mlb', 'nhl', 'media']
-	var names = ['Stephen Curry - NBA', 'Amari Cooper - NFL', 'Buster Posey - MLB', 'Joe Pavelski - NHL', 'Entertainment/Non-Sports Collectibles'];
+	var players = ['court_kings', 'anthony_davis', 'kat_russ'];
+	var product_type = ['nba/breaks', 'nba/breaks', 'nba/breaks']
+	var names = ['2015-2016 Panini Court Kings - 2 Box Break', 'Anthony Davis - Box Topper', 'On-Card Rookie Autographs'];
 
 	var slides = $scope.slides = [];
 
@@ -21,7 +20,7 @@ jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactor
 		});
 	}
 
-	for (var i=0; i<5; i++){
+	for (var i=0; i<names.length; i++){
 		$scope.addSlide(i);
 
 	}
@@ -40,6 +39,13 @@ jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactor
 		})
 	};
 
+	$scope.getBreaks = function(){
+		BreakFactory.getAllBreaks(function(data){
+			console.log("Getting All Products", data);
+			$scope.breaks = data;
+		})
+	}
+
 	// $scope.getOrders = function(){
 	// 	OrderFactory.getOrders(function(data){
 	// 		console.log("Getting All Orders", data);
@@ -53,6 +59,7 @@ jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactor
 
 	// $scope.getCustomers();
 	$scope.getProducts();
+	$scope.getBreaks();
 	// $scope.getOrders();
 
 });

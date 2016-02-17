@@ -1,0 +1,105 @@
+<div class='row' ng-controller='EditController'>
+	<div class='col-md-2'>
+		<p>Edit Product</p>
+		<form class='dashboard_form' name='breaks_form'>
+			<label>Product Type:</label><br>
+			<select name='product_type' ng-model='new_break.product_type' required>
+				<option value='nba'>NBA</option>
+				<option value='nfl'>NFL</option>
+				<option value='mlb'>MLB</option>
+				<option value='nhl'>NHL</option>
+				<option value='star_wars'>Star Wars</option>
+				<option value='doctor_who'>Doctor Who</option>
+			</select><br>
+			<label>Year:</label><br>
+			<select name='year' ng-model='new_break.year' required>
+				<option ng-repeat='n in range(1981,2016)'>{{ n-1 }}-{{ n }}</option>
+			</select><br>
+			<label>Title:</label><br>
+			<input type='text' name='title' ng-model='new_break.title' placeholder='Enter name' required><br>
+			<span style="color:red" ng-show="breaks_form.title.$dirty && breaks_form.title.$invalid">
+			<span ng-show="breaks_form.title.$error.required">Title is required</span>
+			</span>
+			<br>
+			<label>Image URL:</label><br>
+			<input type='url' name='img_url' ng-model='new_break.img_url' placeholder='Enter URL to image' required><br>
+			<span style="color:red" ng-show="breaks_form.img_url.$dirty && breaks_form.img_url.$invalid">
+			<span class="error" ng-show="products_form.img_url.$error.url">Not valid url!</span>
+			</span>
+			<br>
+			<label>Quantity:</label><br>
+			<input type='text' name='qty' ng-model='new_break.qty' placeholder='Enter card number or N/A' required><br>
+			<span style="color:red" ng-show="new_break.qty.$dirty && new_break.qty.$invalid">
+			<span ng-show="new_break.qty.$error.required">Please a quantity</span>
+			</span>
+			<br>
+			<label>Price:</label><br>
+			<input type='text' name='price' ng-model='new_break.price' placeholder='Enter in this format: ##.##' required><br>
+			<span style="color:red" ng-show="breaks_form.price.$dirty && breaks_form.price.$invalid">
+			<span ng-show="breaks_form.price.$error.required">Please enter a value.  If no value, enter 0.00</span>
+			</span>
+			<br>
+			<label>Available?:</label><br>
+			<input type='text' name='available' ng-model='new_product.available' placeholder="Mark as 'In Stock' or 'Sold Out!'" required><br>
+			<span style="color:red" ng-show="breaks_form.available.$dirty && breaks_form.available.$invalid">
+			<span ng-show="breaks_form.available.$error.required">Please enter 'In Stock' or 'Sold Out!'</span>
+			</span>
+			<br>
+			<label>Description:</label><br>
+			<textarea rows='5' cols='20' name='description' ng-model='new_break.description' placeholder='Enter description, including rookie cards, special parallels, additional players on multi-player cards, serial numbered limited print cards, etc.' required></textarea><br>
+			<span style="color:red" ng-show="breaks_form.description.$dirty && breaks_form.description.$invalid">
+			<span ng-show="breaks_form.description.$error.required">Description is required.</span>
+			</span>
+			<br>
+<!-- 			<label>Initial Quantity:</label><br>
+			<select name='qty' ng-model='new_product.qty' required>
+				<option ng-repeat='n in range(1,200)'>{{ n }}</option>
+			</select><br>
+			<br> -->
+			<input type='submit' value='Edit'class='btn btn-warning' ng-click='updateBreak()' >
+		</form>
+	</div>
+	<div class='col-md-10'>
+		<h3>EDIT PRODUCTS PAGE</h3>
+		<table class='table table-condensed'>
+			<tr>
+				<th>Categories:</th>
+				<th>Current Info:</td>
+			</tr>
+			<tr>
+				<td>Product Type:</td>
+				<td>{{item.product_type}}</td>
+			</tr>
+			<tr>
+				<td>Year:</td>
+				<td>{{item.year}}</td>
+			</tr>
+			<tr>
+				<td>Title:</td>
+				<td>{{item.title}}</td>
+			</tr>
+			<tr>
+				<td>Image URL:</td>
+				<td>{{item.img_url}}</td>
+			</tr>
+			<tr>
+				<td>Quantity:</td>
+				<td>{{item.qty}}</td>
+			</tr>
+			<tr>
+				<td>Price:</td>
+				<td>{{item.price | currency}}</td>
+			</tr>
+			<tr>
+				<td>Available?:</td>
+				<td>{{item.available}}</td>
+			</tr>
+			<tr>
+				<td>Description:</td>
+				<td>{{item.description}}</td>
+			</tr>
+		</table>
+		<img src="{{ item.img_url }}" alt='{{item.title}} image' width='360' height='450'>
+		<hr>
+	</div>
+</div>

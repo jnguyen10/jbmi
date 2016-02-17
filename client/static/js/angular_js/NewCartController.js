@@ -2,18 +2,10 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
 
     if (ngCart.getItems()[0] != undefined) {
 
-        // function customItemName() {
-        //     var anchor = ngCart.getItems()[0]._name
-        //     var additional = parseInt(ngCart.getTotalUniqueItems()) - 1
-
-        //     if (additional == 0) {
-        //         return anchor
-        //     } else {
-        //         return anchor + " & " + String(additional) + " additional item(s)"
-        //     }
-        // }
-
+        // Create custom item name and regex for "break"
         var custom_name = ""
+        var pattern = new RegExp("^.*JBMIBreak.*$")
+
         var anchor = ngCart.getItems()[0]._name
         var additional = parseInt(ngCart.getTotalUniqueItems()) - 1
 
@@ -21,6 +13,17 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
             custom_name = anchor
         } else {
             custom_name = anchor + " & " + String(additional) + " additional item(s)"
+        }
+
+        // After creation of corrected custom_name, check to see if the order contains a BREAK
+        var res_break = pattern.test(custom_name)
+
+        if (ngCart.getSubTotal() > 20 || res_break ) {
+            ngCart.setTaxRate(0.0);
+            ngCart.setShipping(0.00);
+        } else {
+            ngCart.setTaxRate(0.0);
+            ngCart.setShipping(2.00);
         }
 
 
@@ -45,8 +48,5 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
     // console.log("new cart cartID", ngCart.generateCartID())
     console.log(ngCart.getItems())
 
-
-    ngCart.setTaxRate(0.0);
-    ngCart.setShipping(0.00);
 
 });

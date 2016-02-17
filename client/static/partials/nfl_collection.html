@@ -12,7 +12,6 @@
 		<div class='modal-footer'>
 		<a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a>
 		</div>
-		</div>
 	</script>
 
 
@@ -34,7 +33,7 @@
 		
 	</div>
 	<hr>
-	<table class='table table-striped collection_table'>
+	<table class='table table-striped collection_table' infinite-scroll="more_products()" infinite-scroll-distance="0">
 		<tr>
 			<th>
 				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR 
@@ -103,7 +102,7 @@
 			</th>
 			<th style='color: #337AB7'>ACTION</th>
 		</tr>
-		<tr ng-repeat='product in nfl_products | orderBy: orderByField:reverseSort'>
+		<tr ng-repeat='product in nfl_products | orderBy: orderByField:reverseSort | limitTo: product_count'>
 			<td>{{ product.year }}</td>
 			<td>{{ product.brand }}</td>
 			<td>{{ product.card_num }}</td>
@@ -113,7 +112,12 @@
 			<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
 			<td><a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a></td>
 			<td>{{ product.price | currency }}</td>
-			<td><a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a></td>
+			<td>
+				<!-- <a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a> -->
+
+				<ngcart-addtocart id="{{ product.customID }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" quantity="1" data="product">Add to cart</ngcart-addtocart>
+				
+			</td>
 		</tr>
 	</table>
 </div>

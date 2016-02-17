@@ -129,25 +129,26 @@ module.exports = (function(){
 			var items = req.body.order_items
 
 			for (var index in items) {
-				console.log("individual items:", items[index])
-				Product.update({_id: items[index]._id}, {available: 'N'}, function(err){
-					if (err){
-						console.log(err);
-					} else {
-						console.log("Successful Update on DB");
-					}
-				})
+				console.log("individual items:", items[index]._data._id)
+
+				var pattern = new RegExp("^.*JBMIBreak.*$")
+				var res_break = pattern.test(items[index]._name)
+
+				console.log("##### Product Name #####", items[index]._name)
+				console.log("####### PRODUCTS res_break #######", res_break)
+
+				if (!res_break) {
+					Product.update({_id: items[index]._data._id}, {available: 'N'}, function(err){
+						if (err){
+							console.log(err);
+						} else {
+							console.log("Successful Update on DB");
+						}
+					})
+				}
 			}
 
 			res.json();	
-			// Product.update({_id: req.body._id}, req.body, function(err){
-			// 	if (err){
-			// 		console.log(err);
-			// 	} else {
-			// 		console.log("Successful Update on DB");
-			// 		res.json();
-			// 	}
-			// })
 		},
 		remove: function (req, res){
 			

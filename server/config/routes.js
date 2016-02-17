@@ -73,6 +73,11 @@ module.exports = function(app){
 		products.get_nfl(req, res);
 	});
 
+	// SEARCH NFL PRODUCTS BY FILTER
+	app.post('/products/search_nfl', function(req, res){
+		products.search_nfl(req, res);
+	});
+
 	// ADD A NEW PRODUCT
 	app.post('/products/add', function(req, res){
 		products.add(req, res);
@@ -97,6 +102,48 @@ module.exports = function(app){
 	app.post('/products/remove', function(req, res){
 		products.remove(req, res);
 	});
+
+	// ########## BREAKS ##############
+	// GET ALL BREAKS
+	app.get('/breaks', function(req, res){
+		breaks.show(req, res);
+	});
+
+	// GET ALL NBA BREAKS
+	app.get('/breaks/get_nba', function(req, res){
+		breaks.get_nba(req, res);
+	});
+
+	// GET ALL NFL BREAKS
+	app.get('/breaks/get_nfl', function(req, res){
+		breaks.get_nfl(req, res);
+	});
+
+	// ADD A NEW BREAK
+	app.post('/breaks/add', function(req, res){
+		breaks.add(req, res);
+	});
+
+	// GET A SINGLE BREAK
+	app.post('/breaks/single', function(req, res){
+		breaks.single(req, res);
+	});
+
+	// UPDATE PROPERTIES OF A SINGLE BREAK
+	app.post('/breaks/update', function(req, res){
+		breaks.update(req, res);
+	});
+
+	// UPDATE BREAK QUANTITY AFTER ORDER IS PLACED
+	app.post('/breaks/update_break_qty', function(req, res){
+		breaks.update_break_qty(req, res);
+	});
+
+	// REMOVING A BREAK
+	app.post('/breaks/remove', function(req, res){
+		breaks.remove(req, res);
+	});
+
 
 
 };

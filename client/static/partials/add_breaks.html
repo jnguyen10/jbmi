@@ -1,24 +1,169 @@
-<div class='row' ng-controller='DashboardController'>
+<div class='row' ng-controller='BreakController'>
 	<div class='col-md-12'>
 		<p>Add a New Break</p>
-		<form id='dashboard_form' name='breaks_form'>
-			<label>Break Embedded URL</label><br>
-			<input type='text' name='blog_title' ng-model='new_break.blog_title' placeholder='Enter the URL from the embedded link in Youtube'><br>
-			<br>
-			<input type='submit' value='Submit' class='btn btn-primary' ng-click='addBlog()' ng-disabled="blogs_form.blog_title.$invalid || blogs_form.blog_post.$invalid" >
+		<form class='dashboard_form' name='breaks_form'>
+			<div class='col-md-4'>
+				<label>Product Type:</label><br>
+				<select name='product_type' ng-model='new_break.product_type' required>
+					<option value='nba'>NBA</option>
+					<option value='nfl'>NFL</option>
+					<option value='mlb'>MLB</option>
+					<option value='nhl'>NHL</option>
+					<option value='star_wars'>Star Wars</option>
+					<option value='doctor_who'>Doctor Who</option>
+				</select>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Year:</label><br>
+				<select name='year' ng-model='new_break.year' required>
+					<option ng-repeat='n in range(1981,2016)'>{{ n-1 }}-{{ n }}</option>
+				</select>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Title:</label><br>
+				<input type='text' name='title' ng-model='new_break.title' placeholder='Enter title of break' required><br>
+				<span style="color:red" ng-show="breaks_form.title.$dirty && breaks_form.title.$invalid">
+					<span ng-show="products_form.name.$error.required">Break title is required.</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Image URL:</label><br>
+				<input type='url' name='img_url' ng-model='new_break.img_url' placeholder='Enter URL to image' required><br>
+				<span style="color:red" ng-show="breaks_form.img_url.$dirty && breaks_form.img_url.$invalid">
+					<span class="error" ng-show="breaks_form.img_url.$error.url">Not a valid url!</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Quantity:</label><br>
+				<input type='text' name='qty' ng-model='new_break.qty' placeholder='Enter the quantity of breaks available' required><br>
+				<span style="color:red" ng-show="breaks_form.qty.$dirty && breaks_form.qty.$invalid">
+					<span ng-show="breaks_form.qty.$error.required">Please enter at least a quantity of 1</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Price:</label><br>
+				<input type='text' name='price' ng-model='new_break.price' placeholder='Enter in this format: ##.##' required><br>
+				<span style="color:red" ng-show="breaks_form.price.$dirty && breaks_form.price.$invalid">
+				<span ng-show="breaks_form.price.$error.required">Please enter a value.<br>If no value, enter 0.00</span>
+				</span>
+				<br>
+			</div>
+			<div class='col-md-4'>
+				<label>Description:</label><br>
+				<textarea rows='8' cols='20' name='description' ng-model='new_break.description' placeholder='Enter description, including rookie cards, special parallels, additional players on multi-player cards, serial numbered limited print cards, etc.' required></textarea><br>
+				<span style="color:red" ng-show="breaks_form.description.$dirty && breaks_form.description.$invalid">
+					<span ng-show="breaks_form.description.$error.required">Description is required.</span>
+				</span>
+			</div>
+<!-- 			<label>Initial Quantity:</label><br>
+			<select name='qty' ng-model='new_product.qty' required>
+				<option ng-repeat='n in range(1,200)'>{{ n }}</option>
+			</select><br>
+			<br> -->
+			<div class='col-md-4'>
+				<input type='submit' value='Create'class='btn btn-primary' ng-click='addBreak()' ng-disabled="breaks_form.title.$invalid || breaks_form.img_url.$invalid ||  breaks_form.price.$invalid || breaks_form.brand.$invalid" >
+			</div>
 		</form>
 	</div>
 	<div class='col-md-12'>
-		<h1>JBMI Breaks</h1>
+		<h1>All JBMI Breaks</h1>
+<!-- 		<label>Search:</label>
+	<div class='search_bar'>
+		<form>
+			<select ng-model='all_search.field'>
+				<option value='product_type'>Product Type</option>
+				<option value='name'>Player Name</option>
+				<option value='brand'>Brand</option>
+				<option value='card_type'>Card Type</option>
+				<option value='year'>Year</option>
+			</select>
+			<input type='text' ng-model='all_search.text'>
+			<input class='btn btn-alert' type='submit' value='Search' ng-click='searchProducts()'> 
+			<button class='btn btn-alert' ng-click='getProducts()'>Reset</button>
+		</form>
+	</div> -->
 	<hr>
 	<table class='table table-striped collection_table'>
 		<tr>
-			<th>BREAK URL</th>
-			<th>DATE ADDED</th>
-			<th>ACTION</th>
+			<th>
+				<a href ng-click="orderByField='product_type'; reverseSort = !reverseSort">PRODUCT TYPE 
+					<span ng-show="orderByField == 'product_type'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR 
+					<span ng-show="orderByField == 'year'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='title'; reverseSort = !reverseSort">TITLE 
+					<span ng-show="orderByField == 'title'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='qty'; reverseSort = !reverseSort">QUANTITY
+					<span ng-show="orderByField == 'qty'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='price'; reverseSort = !reverseSort">PRICE 
+					<span ng-show="orderByField == 'price'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='description'; reverseSort = !reverseSort">DESCRIPTION 
+					<span ng-show="orderByField == 'description'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='available'; reverseSort = !reverseSort">AVAILABLE
+					<span ng-show="orderByField == 'available'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th>
+				<a href ng-click="orderByField='created_at'; reverseSort = !reverseSort">DATE ADDED
+					<span ng-show="orderByField == 'created_at'">
+						<span ng-show="!reverseSort">&#9650;</span>
+						<span ng-show='reverseSort'>&#9660;</span>
+					</span>
+				</a>
+			</th>
+			<th style='color: #337AB7'>ACTION</th>
 		</tr>
-		<tr ng-repeat="break in breaks | orderBy: orderBy: '-created_at'">
-			<td>{{ break.break_url }}</td>
+		<tr ng-repeat='break in all_breaks | orderBy: orderByField:reverseSort'>
+			<td>{{ break.product_type }}</td>
+			<td>{{ break.year }}</td>
+			<td>{{ break.title }}</td>
+			<td>{{ break.qty }}</td>
+			<td>{{ break.price | currency }}</td>
+			<td>{{ break.description }}</td>
+			<td>{{ break.available }}</td>
 			<td><span style='font-size: 9pt;'>{{ break.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="break.created_at"></time></td>
 			<td><button ng-click='editBreakPage(break._id)'>Edit</button><br><button ng-click='removeBreak(break._id)'>Remove</button></td>
 		</tr>

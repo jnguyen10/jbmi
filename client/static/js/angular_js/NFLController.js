@@ -1,28 +1,44 @@
 jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory){
 
-	// $scope.search_options = ['Player', 'Manufacture', 'Brand', 'Card Type', 'Year'];
 	$scope.nfl_products = [];
 	$scope.orderByField = 'year';
 	$scope.reverseSort = true;
 
-	// $scope.product_count = -3;
+	
+	function customID() {
+        var id = ""
+        var possible = "0123456789"
+
+        for (var i=0; i < 12; i++) {
+            id += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        return id
+    };
+
+    $scope.product_count = 3;
 
 	$scope.getNFLProducts = function(){
 		ProductFactory.getNFLProducts(function(data){
 			console.log("Getting All Products", data);
+			// SET NEW CUSTOM ID FOR EACH ORDER
+			for (each in data) {
+				data[each].customID = customID();
+			}
 			$scope.nfl_products = data;
+
 		})
 	};
 
 	$scope.searchNFLProducts = function(){
 
-		var key = $scope.nfl_search.field;
-		var value = $scope.nfl_search.text;
-
-		var new_filter = {};
-		new_filter[key] = value;
-		console.log(new_filter)
-		console.log('get products:',$scope.nfl_search);
+		// Pass in raw key and value as two separate key-value pairs
+		ProductFactory.searchNFLProducts($scope.nfl_search, function(data){
+			for (each in data) {
+				data[each].customID = customID();
+			}
+			$scope.nfl_products = data;
+		})
 		
 	};
 
@@ -55,9 +71,9 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 	// 	})
 	// };
 
-	// $scope.more_products = function(product_id){
-	// 	$scope.product_count -= 3;
-	// };
+	$scope.more_products = function(product_id){
+		$scope.product_count += 3;
+	};
 
 	// $scope.getCustomers();
 	$scope.getNFLProducts();

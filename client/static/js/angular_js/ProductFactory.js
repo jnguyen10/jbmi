@@ -34,6 +34,11 @@ jbmi_app.factory('ProductFactory', function($http){
 		})
 	};
 
+	factory.searchNFLProducts = function(data,callback){
+		$http.post('/products/search_nfl', data).success(function(nfl_output){
+			callback(nfl_output);
+		})
+	};
 
 	factory.addProduct = function(info, callback){
 		$http.post('/products/add', info).success(function(output){

@@ -5,13 +5,13 @@ var mongoose = require('mongoose'),
 module.exports = (function(){
 	return {
 		getStatus: function (req, res){
-			console.log("get status OK")
-			// console.log("########## REQ ###########", req, "############ END ################")
-			console.log("SESSIONID", req.sessionID)
-			console.log("req.user", req.user)
-			console.log("USER", req.session.passport.user)
-			console.log("req.session:", req.session)
-			console.log("req.session.passport:", req.session.passport)
+			// console.log("get status OK")
+			// // console.log("########## REQ ###########", req, "############ END ################")
+			// console.log("SESSIONID", req.sessionID)
+			// console.log("req.user", req.user)
+			// console.log("USER", req.session.passport.user)
+			// console.log("req.session:", req.session)
+			// console.log("req.session.passport:", req.session.passport)
 			return res.json(req.user)
 		},
 		register: function (req, res){

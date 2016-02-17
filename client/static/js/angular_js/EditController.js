@@ -1,10 +1,12 @@
-jbmi_app.controller('EditController', function($scope, $routeParams, $location, ProductFactory){
+jbmi_app.controller('EditController', function($scope, $routeParams, $location, ProductFactory, BreakFactory){
 
 	$scope.getOneProduct = function(){
 		console.log("route params:", $routeParams)
 		ProductFactory.getOneProduct($routeParams, function(data){
 			console.log('data', data)
-			$scope.item = data;
+			if (data) {
+				$scope.item = data;
+			}
 		})
 	};
 
@@ -15,10 +17,27 @@ jbmi_app.controller('EditController', function($scope, $routeParams, $location, 
 			$location.path('/admin/dashboard/add_products');
 			// $scope.new_product = {};
 		})
-
-		
 	};
 
+	$scope.getOneBreak = function(){
+		console.log("route params:", $routeParams)
+		BreakFactory.getOneBreak($routeParams, function(data){
+			console.log('data', data)
+			if (data) {
+				$scope.item = data;
+			}
+			
+		})
+	};
+
+	$scope.updateBreak = function(){
+		console.log($scope.new_break);
+
+		BreakFactory.updateBreak($routeParams, $scope.new_break, function(){
+			$location.path('/admin/dashboard/add_breaks');
+			// $scope.new_product = {};
+		})
+	};
 	// new method to create a range with two end points for the quantity
 	$scope.range = function(min, max, step){
 		step = step || 1;
@@ -31,5 +50,6 @@ jbmi_app.controller('EditController', function($scope, $routeParams, $location, 
 	};
 
 	$scope.getOneProduct();
+	$scope.getOneBreak();
 
 });

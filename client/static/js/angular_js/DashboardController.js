@@ -1,9 +1,11 @@
-jbmi_app.controller('DashboardController', function($scope, $location, ProductFactory){
+jbmi_app.controller('DashboardController', function($scope, $location, ProductFactory, BreakFactory){
 
 	$scope.products = [];
+	$scope.breaks = [];
 	$scope.orders = [];
 	$scope.product_count = -9;
 
+	// PRODUCTS
 	$scope.getProducts = function(){
 		ProductFactory.getProducts(function(data){
 			console.log("Getting All Products", data);
@@ -19,6 +21,24 @@ jbmi_app.controller('DashboardController', function($scope, $location, ProductFa
 	$scope.removeProduct = function(product_id){
 		ProductFactory.removeProduct(product_id, function(){
 			$scope.getProducts();
+		})
+	};
+
+	// BREAKS
+	$scope.getAllBreaks = function () {
+    	BreakFactory.getAllBreaks(function(data){
+			console.log("Getting All Breaks", data);
+			$scope.breaks = data;
+		})
+    };
+
+    $scope.editBreakPage = function(break_id){
+		$location.path('/break/edit/'+break_id);
+	};
+
+	$scope.removeBreak = function(break_id){
+		BreakFactory.removeBreak(break_id, function(){
+			$scope.getAllBreaks();
 		})
 	};
 
@@ -55,6 +75,7 @@ jbmi_app.controller('DashboardController', function($scope, $location, ProductFa
 
 	// $scope.getCustomers();
 	$scope.getProducts();
+	$scope.getAllBreaks();
 	// $scope.getOrders();
 
 });

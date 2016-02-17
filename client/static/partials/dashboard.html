@@ -1,7 +1,7 @@
 <div ng-controller='DashboardController'>
 	<!-- <h1><a class='admin_links' href="#/admin/dashboard">Dashboard</a></h1> -->
 	<h1><a class='admin_links' href='#/admin/dashboard/add_products'>Add Products</a></h1>
-	<h1><a class='admin_links' href="#/admin/dashboard/add_breaks">Add Links to Break Videos</a></h1>
+	<h1><a class='admin_links' href="#/admin/dashboard/add_breaks">Add Breaks</a></h1>
 	<h1><a class='admin_links' href="#/admin/dashboard/add_blogs">Add Blogs</a></h1>
 	<hr>
 	<div>
@@ -35,6 +35,34 @@
 				<td>{{ product.available }}</td>
 				<td><span style='font-size: 9pt;'>{{ product.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="product.created_at"></time></td>
 				<td><button ng-click='editProductPage(product._id)'>Edit</button><br><button ng-click='removeProduct(product._id)'>Remove</button></td>
+			</tr>
+		</table>
+	</div>
+		<div>
+		<h2 class='center_title'>Recently Added Breaks</h2>
+		<hr>
+		<table class='table table-striped collection_table'>
+			<tr>
+				<th>PRODUCT TYPE</th>
+				<th>YEAR</th>
+				<th>TITLE</th>
+				<th>QUANTITY REMANING</th>
+				<th>DESCRIPTION</th>
+				<th>PRICE</th>
+				<th>AVAILABLE</th>
+				<th>DATE ADDED</th>
+				<th>ACTION</th>
+			</tr>
+			<tr ng-repeat="break in breaks | orderBy: '-created_at' | limitTo: '3'">
+				<td>{{ break.product_type }}</td>
+				<td>{{ break.year }}</td>
+				<td>{{ break.title }}</td>
+				<td>{{ break.qty }}</td>
+				<td>{{ break.description }}</td>
+				<td>{{ break.price | currency }}</td>
+				<td>{{ break.available }}</td>
+				<td><span style='font-size: 9pt;'>{{ break.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="break.created_at"></time></td>
+				<td><button ng-click='editBreakPage(break._id)'>Edit</button><br><button ng-click='removeBreak(break._id)'>Remove</button></td>
 			</tr>
 		</table>
 	</div>

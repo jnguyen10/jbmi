@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var OrderSchema = new mongoose.Schema({
 	order_number: String,
 	order_items: Array,
+	shipping: Number,
 	name: { type: String, default: null },
 	email: { type: String, default: null },
 	price: Number,

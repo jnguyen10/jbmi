@@ -1,3 +1,21 @@
+<div ng-controller="BreakController">
+	<h1 class='text-center'>NFL Breaks</h1>
+	<hr>
+	<div class='row' ng-repeat='break in nfl_breaks | orderBy: created_at'>
+		<div class='col-md-4'>
+			<img src='{{ break.img_url }}' width="300" height="400" alt="{{ break.title }}">
+		</div>
+		<div class='col-md-8'>
+			<h2>{{ break.year }} - {{ break.title }}</h2>
+			<h3>{{ break.description }}</h3>
+			<h3 style="font-weight: bold">{{ break.available }}</h3>
+			<span style="color: black"><ngcart-addtocart id="{{ break.customID }}" name="{{break.year}} - {{break.title}} - JBMIBreak" price="{{ break.price }}" quantity="1" quantity-max="{{ break.qty }}" data="break">Add to cart</ngcart-addtocart><span>
+		</div>
+		<div class='col-md-12'><hr></div>
+	</div>
+</div>
 <div class='center_yt' ng-controller='NFLController'>
+	<h1 class='text-center'>NFL Break Videos</h1>
+	<hr>
 	<iframe width="640" height="390" src="https://www.youtube.com/embed/76P77iTU9qU" frameborder="0" allowfullscreen></iframe>
 </div>

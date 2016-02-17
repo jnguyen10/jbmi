@@ -17,12 +17,14 @@
 						<thead> 
 							<tr> 
 								<th>Product</th> 
+								<th>Quantity</th>
 								<th>Total</th> 
 							</tr> 
 						</thead>
 						<tbody> 
 							<tr ng-repeat="products in order_summary[0].order_items"> 
-								<td>{{products._name}}</td> 
+								<td>{{products._name}}</td>
+								<td>{{products._quantity}}</td>
 								<td>{{products._price | currency}}</td> 
 							</tr> 
 							<!-- 			    	<tr> 
@@ -41,8 +43,14 @@
 							<td>Tax:</td> 
 							<td>{{confirm.orderDetail.total_tax | currency}}</td> 
 							</tr>  -->
+							<tr>
+								<td>Shipping:</td>
+								<td></td>
+								<td>{{ order_summary[0].shipping | currency }}</td>
+							</tr>
 							<tr style="font-weight:bold"> 
-								<td>Order Total:</td> 
+								<td>Order Total:</td>
+								<td></td>
 								<td>{{order_summary[0].price | currency}}</td> 
 							</tr> 
 						</tbody>

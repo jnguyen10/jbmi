@@ -68,8 +68,18 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 			requirePermissions: 'admin'
 		}
 	})
+	.when('/break/edit/:break_id', {
+		templateUrl: 'partials/edit_break.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
+	})
 	.when('/break_rules', {
 		templateUrl: 'partials/break_rules.html'
+	})
+	.when('/live_breaks', {
+		templateUrl: 'partials/live_breaks.html'
 	})
 	.when('/nba', {
 		templateUrl: 'partials/nba_collection.html',
@@ -130,20 +140,20 @@ jbmi_app.run(function ($rootScope, $location, $route, AuthService) {
 		// 	console.log("$routeChangeStart data from AuthService.getUserStatus()", AuthService.getUserStatus())
 		// }
 
-		
-
-		var user_session = AuthService.getUserStatus()
-		if (user_session.$$state.user_data.username !== next.access.requirePermissions){
-			$location.path('/restricted');
-		}
 
 
-		if (next.access !== undefined) {
-			if (next.access.restricted && AuthService.isLoggedIn() === false) {
-				$location.path('/login');
-				$route.reload();
-			}
-		}
+		// var user_session = AuthService.getUserStatus()
+		// if (user_session.$$state.user_data.username !== next.access.requirePermissions){
+		// 	$location.path('/restricted');
+		// }
+
+
+		// if (next.access !== undefined) {
+		// 	if (next.access.restricted && AuthService.isLoggedIn() === false) {
+		// 		$location.path('/login');
+		// 		$route.reload();
+		// 	}
+		// }
 
 	});
 });
