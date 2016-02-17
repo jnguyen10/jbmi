@@ -15,6 +15,18 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
             custom_name = anchor + " & " + String(additional) + " additional item(s)"
         }
 
+        // Create a note with all the items being purchased
+        var new_note = ""
+        var item_count = 0
+        var items = ngCart.getItems()
+
+        for (each in items) {
+            item_count++
+            new_note += "(("+ item_count +")) " + items[each]._name + " QUANTITY: " + items[each]._quantity + " / PRICE: $" + items[each]._price + " each ### "
+        }
+
+        console.log("new_note string", new_note)
+
         // After creation of corrected custom_name, check to see if the order contains a BREAK
         var res_break = pattern.test(custom_name)
 
@@ -33,8 +45,9 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
             business: 'jbmoderninserts@gmail.com', 
             // item_name: anchor + " & " + String(parseInt(ngCart.getTotalUniqueItems()) - 1) + " additional item(s)",
             item_name: custom_name,
-            item_number: ngCart.getItems()[0]._id.slice(10),
-            currency_code: 'USD'
+            item_number: ngCart.getItems()[0]._id,
+            currency_code: 'USD',
+            no_note: new_note
             }
         };
     }

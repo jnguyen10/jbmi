@@ -62,4 +62,4 @@ jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactor
 	$scope.getBreaks();
 	// $scope.getOrders();
 
-});
+})

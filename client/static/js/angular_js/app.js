@@ -26,6 +26,9 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	.when('/confirmation', {
 		templateUrl: 'partials/checkout_confirmation.html'
 	})
+	.when('/about_us', {
+		templateUrl: 'partials/about_us.html'
+	})
 	.when('/admin', {
 		templateUrl: 'partials/admin.html',
 		access: {

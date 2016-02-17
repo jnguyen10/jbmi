@@ -84,6 +84,7 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 .directive('breakDesc', function() {
 	return {
 		link: function(scope, element, attrs) {
+			console.log(attrs)
 			element.append(attrs.breakDesc)
 			// #########################################
 			// USE BELOW to bind multiple jQuery actions
@@ -94,4 +95,4 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 			// })
 		}
 	}
-})
+});

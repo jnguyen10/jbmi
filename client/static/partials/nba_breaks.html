@@ -8,7 +8,8 @@
 		<div class='col-md-8'>
 			<h2>{{ break.year }} - {{ break.title }}</h2>
 			<h4><div break-desc="{{ break.description }}"></div></h4>
-			<h3 style="font-weight: bold">{{ break.available }}</h3>
+			<h3 style="font-weight: bold">{{ break.available }} - {{ break.qty }} slot(s) still available</h3>
+			<h4>{{ break.price | currency }} per slot</h4>
 			<span style="color: black"><ngcart-addtocart id="{{ break.customID }}" name="{{break.year}} - {{break.title}} - JBMIBreak" price="{{ break.price }}" quantity="1" quantity-max="{{ break.qty }}" data="break">Add to cart</ngcart-addtocart><span>
 		</div>
 		<div class='col-md-12'><hr></div>

@@ -3,10 +3,12 @@
 		<div class='featured_divs'>
 			<uib-carousel interval='myInterval' no-wrap='noWrapSlides'>
 				<uib-slide ng-repeat='slide in slides' active='slide.active'>
-					<img src='{{slide.image}}' style='margin:auto;'>
-					<div class='carousel-caption'>
-						<a href="#/{{slide.product_type}}"><h4 class='carousel_link'>{{slide.name}}</h4></a>
-					</div>
+					<a href="#/{{slide.product_type}}">
+						<img src='{{slide.image}}' style='margin:auto;'>
+						<div class='carousel-caption'>
+							<h4 class='carousel_link'>{{slide.name}}</h4>
+						</div>
+					</a>
 				</uib-slide>
 			</uib-carousel>
 		</div>
@@ -16,17 +18,15 @@
 				<div class='subcontent'>
 					<h3 class='subcontent_title'>Upcoming Breaks</h3>
 					<div ng-repeat="break in breaks | orderBy: '-created_at' | limitTo: 1" class='row subcontent_body'>
-						<div class='col-sm-2'>
-							<img class='subcontent_img' src="{{break.img_url}}" alt='{{break.title}}' width='40' height='60'>
-						</div>
-						<div class='col-sm-10'>
-							<p class='subcontent_text'>{{break.year}} - {{break.title}}</p>
-							<p class='subcontent_description'>{{break.description}}</p>
-							<div class='subcontent_footer'>
-								<time am-time-ago="product.created_at"></time><br>
-								<a href="#/{{break.product_type}}/breaks">See More <span style='text-transform: uppercase'>{{break.product_type}}</span> Breaks</a>
+						<a href="#/{{break.product_type}}/breaks">
+							<div class='col-sm-2'>
+								<img class='subcontent_img' src="{{break.img_url}}" alt='{{break.title}}' width='40' height='60'>
 							</div>
-						</div>
+							<div class='col-sm-10'>
+								<p class='subcontent_text'>{{break.year}} - {{break.title}}</p>
+								<p class='subcontent_description' break-desc="{{ break.description }}"></p>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
