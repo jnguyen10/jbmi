@@ -68,7 +68,7 @@ module.exports = (function(){
 		},
 		update_break_qty: function (req, res){
 
-			console.log("order array:", req.body.order_items);
+			console.log("#### update break QTY - order array: #####", req.body.order_items);
 			var items = req.body.order_items;
 
 			// Counter used to determine the index position once inside the .findOne query
@@ -88,7 +88,7 @@ module.exports = (function(){
 
 				} else if (new_qty == 0){
 					console.log(new_qty, "qty.  Break is now SOLD OUT!");
-					Break.update({_id: single._id}, {available: "Sold Out!"}, function(err){
+					Break.update({_id: single._id}, {qty: new_qty, available: "Sold Out!"}, function(err){
 						if (err){
 							console.log(err);
 						} else {

@@ -12,7 +12,7 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
         if (additional == 0) {
             custom_name = anchor
         } else {
-            custom_name = anchor + " & " + String(additional) + " additional item(s)"
+            custom_name = anchor + " & " + String(additional) + " additional item(s) -- TOTAL QTY:" + ngCart.getTotalItems()
         }
 
         // Create a note with all the items being purchased
@@ -22,7 +22,7 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
 
         for (each in items) {
             item_count++
-            new_note += "(("+ item_count +")) " + items[each]._name + " QUANTITY: " + items[each]._quantity + " / PRICE: $" + items[each]._price + " each ### "
+            new_note += "(("+ item_count +")) " + items[each]._name + " QUANTITY: " + items[each]._quantity + " / PRICE: $" + items[each]._price + " each ###"
         }
 
         console.log("new_note string", new_note)

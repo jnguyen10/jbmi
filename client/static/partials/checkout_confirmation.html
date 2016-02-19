@@ -1,9 +1,34 @@
 <!-- <div class="container container-checkout container-content" ng-show="confirm.orderDetail">  -->
 <!-- <div class="row" ng-show="confirm.orderDetail"> -->
-<div class="row" ng-controller="CheckoutConfirmationController">
+<div class="row" ng-controller="CheckoutController">
 	<div class="col-xs-12">
 		<div class="alert alert-success" role="alert">
-			<p class="lead">Thank you for your order! Your order number: <b>{{ order_summary[0].order_number }}</b>. You can e-mail us at <a href="mailto:jbmoderninserts@gmail.com?subject=JBMI Order Number: {{ order_summary[0].order_number }}">jbmoderninserts@gmail.com</a> with any inquiries regarding your order.  You will receive an emailed receipt from PayPal shortly.<br><br>NOTE: Please take note of your order number as a refresh of this page will redirect you to the home page</p> 
+			<p class="lead">Thank you for your order! Your order number: <b>{{ order_summary.order_number }}</b>. You can e-mail us at <a href="mailto:jbmoderninserts@gmail.com?subject=JBMI Order Number: {{ order_summary.order_number }}">jbmoderninserts@gmail.com</a> with any inquiries regarding your order.  You will receive an emailed receipt from PayPal shortly.  If you would like a detailed receipt of your order, please provide your name and email address below.
+			<br><br>
+			NOTE: Please take note of your order number as a refresh of this page will redirect you to the home page</p>
+			<br>
+			<form name='order_update_form'>
+				<label>Name:</label>
+				<input type='text' name='name' ng-model='order_update.name' required><br>
+				<span style="color:red" ng-show="order_update_form.name.$dirty && order_update_form.name.$invalid">
+				<span ng-show="order_update_form.name.$error.required">Name is required</span>
+				</span>
+				<br>
+				<label>Email:</label>
+				<input type='email' name='email' ng-model='order_update.email' required><br>
+				<span style="color:red" ng-show="order_update_form.email$dirty && order_update_form.email.$invalid">
+				<span class="error" ng-show="order_update_form.email.$error.url">Please enter a valid email address</span>
+				</span>
+				<br>
+				<label><input type='checkbox' ng-model='order_update.opt_in' ng-true-value="'Y'" ng-false-value="'N'"> Yes, I would like updates from JBMI!</label>
+				<br>
+				<input type='submit' value='Send' class='btn btn-warning' ng-click='sendEmail()' ng-disabled="order_update_form.name.$invalid || order_update_form.email.$invalid">
+			</form>
+			<br>
+			<div class="alert alert-warning" ng-show="email_sent">
+				<strong>Thank you!</strong>
+			</div>
+
 		</div>
 	</div>
 	<div class="col-xs-12">
@@ -22,10 +47,10 @@
 							</tr> 
 						</thead>
 						<tbody> 
-							<tr ng-repeat="products in order_summary[0].order_items"> 
-								<td>{{products._name}}</td>
-								<td>{{products._quantity}}</td>
-								<td>{{products._price | currency}}</td> 
+							<tr ng-repeat="product in order_summary.order_items"> 
+								<td>{{product._name}}</td>
+								<td>{{product._quantity}}</td>
+								<td>{{product._price | currency}}</td> 
 							</tr> 
 							<!-- 			    	<tr> 
 							<td>Cart Subtotal:</td> 
@@ -46,12 +71,12 @@
 							<tr>
 								<td>Shipping:</td>
 								<td></td>
-								<td>{{ order_summary[0].shipping | currency }}</td>
+								<td>{{ order_summary.shipping | currency }}</td>
 							</tr>
 							<tr style="font-weight:bold"> 
 								<td>Order Total:</td>
 								<td></td>
-								<td>{{order_summary[0].price | currency}}</td> 
+								<td>{{order_summary.price | currency}}</td> 
 							</tr> 
 						</tbody>
 					</table>

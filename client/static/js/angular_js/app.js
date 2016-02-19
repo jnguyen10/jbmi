@@ -64,6 +64,13 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 			requirePermissions: 'admin'
 		}
 	})
+	.when('/admin/dashboard/orders', {
+		templateUrl: 'partials/orders_placed.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
+	})
 	.when('/product/edit/:product_id', {
 		templateUrl: 'partials/edit_product.html',
 		access: {
@@ -86,20 +93,12 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	})
 	.when('/nba', {
 		templateUrl: 'partials/nba_collection.html',
-		access: {
-			restricted: true,
-			requirePermissions: 'test@test.com'
-		}
 	})
 	.when('/nba/breaks', {
 		templateUrl: 'partials/nba_breaks.html',
 	})
 	.when('/nfl', {
 		templateUrl: 'partials/nfl_collection.html',
-		access: {
-			restricted: true,
-			requirePermissions: 'test3@test.com'
-		}
 	})
 	.when('/nfl/breaks', {
 		templateUrl: 'partials/nfl_breaks.html'

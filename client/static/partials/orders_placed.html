@@ -1,0 +1,87 @@
+<div class='row' ng-controller='OrderController'>
+	<div class='col-md-12'>
+		<h1>All Orders Placed</h1>
+		<hr>
+		<table class='table table-striped collection_table'>
+			<tr>
+				<th>
+					<a href ng-click="orderByField='order_number'; reverseSort = !reverseSort">ORDER NUMBER
+						<span ng-show="orderByField == 'order_number'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th>
+					<a href ng-click="orderByField='order_items'; reverseSort = !reverseSort">ORDER ITEMS
+						<span ng-show="orderByField == 'order_items'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th>
+					<a href ng-click="orderByField='price'; reverseSort = !reverseSort">PRICE
+						<span ng-show="orderByField == 'price'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th>
+					<a href ng-click="orderByField='name'; reverseSort = !reverseSort">NAME
+						<span ng-show="orderByField == 'name'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th>
+					<a href ng-click="orderByField='email'; reverseSort = !reverseSort">EMAIL
+						<span ng-show="orderByField == 'email'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th>
+					<a href ng-click="orderByField='opt_in'; reverseSort = !reverseSort">OPT-IN
+						<span ng-show="orderByField == 'opt_in'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th>
+					<a href ng-click="orderByField='created_at'; reverseSort = !reverseSort">DATE ADDED
+						<span ng-show="orderByField == 'created_at'">
+							<span ng-show="!reverseSort">&#9650;</span>
+							<span ng-show='reverseSort'>&#9660;</span>
+						</span>
+					</a>
+				</th>
+				<th style='color: #337AB7'>ACTION</th>
+			</tr>
+			<tr ng-repeat='order in orders | orderBy: orderByField:reverseSort'>
+				<td>{{ order.order_number }}</td>
+				<td>
+					<ul ng-repeat='items in order.order_items'>
+						<li>{{ items._name }}<br>QTY: {{items._quantity}} / PRICE: {{items._price | currency}} each</li>
+					</ul>
+				</td>
+				<td>{{ order.price | currency }}</td>
+				<td>{{ order.name }}</td>
+				<td>{{ order.email }}</td>
+				<td>{{ order.opt_in }}</td>
+				<td><span style='font-size: 9pt;'>{{ order.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="order.created_at"></time></td>
+				<td><button ng-click='removeOrder(order._id)'>Remove</button></td>
+			</tr>
+		</table>
+<!-- 		<div class='products_list' ng-repeat='product in products | filter: filter_name | limitTo: product_count'>
+			<img height='150' width='150' src="{{ product.img_url }}"><br>
+			<a ng-href='#/{{ product.product_type}}/{{ product._id }}'>{{ product.name }}</a>
+			<p>({{ product.description }})</p>
+		</div>
+		<a href ng-model='show_more' ng-click='more_products()'>show more...</a> -->
+	</div>
+</div>

@@ -16,7 +16,7 @@
 				<option ng-repeat='n in range(1981,2016)'>{{ n-1 }}-{{ n }}</option>
 			</select><br>
 			<label>Title:</label><br>
-			<input type='text' name='title' ng-model='new_break.title' placeholder='Enter name' required><br>
+			<input type='text' name='title' ng-model='new_break.title' placeholder='Enter title' required><br>
 			<span style="color:red" ng-show="breaks_form.title.$dirty && breaks_form.title.$invalid">
 			<span ng-show="breaks_form.title.$error.required">Title is required</span>
 			</span>
@@ -24,7 +24,7 @@
 			<label>Image URL:</label><br>
 			<input type='url' name='img_url' ng-model='new_break.img_url' placeholder='Enter URL to image' required><br>
 			<span style="color:red" ng-show="breaks_form.img_url.$dirty && breaks_form.img_url.$invalid">
-			<span class="error" ng-show="products_form.img_url.$error.url">Not valid url!</span>
+			<span class="error" ng-show="breaks_form.img_url.$error.url">Not valid url!</span>
 			</span>
 			<br>
 			<label>Quantity:</label><br>

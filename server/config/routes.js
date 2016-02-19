@@ -37,6 +37,11 @@ module.exports = function(app){
 		orders.add(req, res);
 	});
 
+	// UPDATE PROPERTIES OF AN ORDER
+	app.post('/orders/update', function(req, res){
+		orders.update(req, res);
+	});
+
 	// SEARCH ALL ORDERS BY FILTER
 	app.post('/orders/search_all', function(req, res){
 		orders.search_all(req, res);
