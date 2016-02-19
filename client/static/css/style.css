@@ -78,6 +78,7 @@ i{
 }
 .sidebar-nav{
 	display: inline-block;
+	width: 150px;
 }
 .sidebar-menu{
 	padding-left: 60px;
