@@ -42,11 +42,10 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 		
 
 		console.log("name and email added to order_summary", $scope.order_summary)
-		$scope.email_sent = true
 		
 		// Order gets updated with name and email (and opt-in choice) and also initates sending the email
 		OrderFactory.updateOrder($scope.order_summary, function() {
-			$location.path('/');
+			$scope.email_sent = true
     		$scope.order_update = {}
     		$scope.order_summary = {}
 		})
