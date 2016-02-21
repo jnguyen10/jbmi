@@ -30,6 +30,7 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 	};
 
 	console.log("Checkout scope", $scope.order_summary)
+	console.log("Shipping!", ngCart.getShipping())
 
 	$scope.sendEmail = function() {
 		console.log("SEND EMAIL ORDER SUMMARY", $scope.order_summary)
@@ -47,7 +48,6 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 		OrderFactory.updateOrder($scope.order_summary, function() {
 			$scope.email_sent = true
     		$scope.order_update = {}
-    		$scope.order_summary = {}
 		})
 
 
