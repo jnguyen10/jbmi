@@ -40,7 +40,6 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
             console.log("shipping set to $2")
         }
 
-
         console.log("custom item name", custom_name)
 
         $rootScope.payPalSettings = { paypal: {

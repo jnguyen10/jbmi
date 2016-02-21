@@ -11,8 +11,11 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var debug = require('debug')('passport-mongo');
 var favicon = require('serve-favicon');
+var util = require('util');
+var braintree = require('braintree');
 
 var app = express();
+var jsonParser = bp.json();
 
 // Path for Static Content
 app.use(express.static(path.join(__dirname, './client/static')));
@@ -51,11 +54,28 @@ passport.deserializeUser(User.deserializeUser());
 //     })
 // });
 
+// ######## BRAINTREE ###########
+// var gateway = braintree.connect({
+// 	environment: braintree.Environment.Sandbox,
+// 	merchantId: 'tc73c3fgw3r4st69',
+// 	publicKey: 'byj532pfhpsb686q',
+// 	privateKey: '9cfe694a918df6554e11149dc0c962e4'
+// });
+
+/**
+ * Enable CORS (http://enable-cors.org/server_expressjs.html)
+ * to allow different clients to request data from your server
+ */
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 // this line requires and runs the code frokm our routes.js file
 // and passes it 'app' so that we can attach our routing rules
 // to our express application
-require('./server/config/routes.js')(app)
+require('./server/config/routes.js')(app, jsonParser)
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/client/favicon.ico'));

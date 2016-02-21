@@ -22,9 +22,9 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 		ProductFactory.getNFLProducts(function(data){
 			console.log("Getting All Products", data);
 			// SET NEW CUSTOM ID FOR EACH ORDER
-			for (each in data) {
-				data[each].customID = customID();
-			}
+			// for (each in data) {
+			// 	data[each].customID = customID();
+			// }
 			$scope.nfl_products = data;
 
 		})
@@ -34,9 +34,9 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 
 		// Pass in raw key and value as two separate key-value pairs
 		ProductFactory.searchNFLProducts($scope.nfl_search, function(data){
-			for (each in data) {
-				data[each].customID = customID();
-			}
+			// for (each in data) {
+			// 	data[each].customID = customID();
+			// }
 			$scope.nfl_products = data;
 		})
 		
