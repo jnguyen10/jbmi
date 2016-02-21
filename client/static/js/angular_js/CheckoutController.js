@@ -30,7 +30,6 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 	};
 
 	console.log("Checkout scope", $scope.order_summary)
-	console.log("Shipping!", ngCart.getShipping())
 
 	$scope.sendEmail = function() {
 		console.log("SEND EMAIL ORDER SUMMARY", $scope.order_summary)
@@ -62,8 +61,14 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 		console.log("Adding New Order (Client-Side Controller) as a JSON OBJECT", $scope.order_summary)
 
 		OrderFactory.addOrder($scope.order_summary, function(data){
+			if (data.shipping == null) {
+				data.shipping = 0;
+			};
+
 			$scope.order_summary = data;
 			console.log("callback returned as a single JSON OBJECT", $scope.order_summary)
+
+			ngCart.empty()
 		})
 	};
 	
