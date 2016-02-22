@@ -33,11 +33,11 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
         if (ngCart.getSubTotal() > 20 || res_break ) {
             ngCart.setTaxRate(0.0);
             ngCart.setShipping(0.00);
-            console.log("shipping set to zero")
+            console.log("shipping set to zero", ngCart.getShipping())
         } else {
             ngCart.setTaxRate(0.0);
             ngCart.setShipping(2.00);
-            console.log("shipping set to $2")
+            console.log("shipping set to $2", ngCart.getShipping())
         }
 
         console.log("custom item name", custom_name)

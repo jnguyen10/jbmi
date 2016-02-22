@@ -5,6 +5,25 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 
     if (ngCart.getItems()[0] != undefined) {
 
+    	var cart_name = ngCart.getItems()[0]._name
+    	var pattern = new RegExp("^.*JBMIBreak.*$")
+    	// After creation of corrected custom_name, check to see if the order contains a BREAK
+        var res_break = pattern.test(cart_name)
+
+
+    	if (ngCart.getSubTotal() > 20 || res_break ) {
+            ngCart.setTaxRate(0.0);
+            ngCart.setShipping(0.00);
+            console.log("shipping set to zero", ngCart.getShipping())
+        } else {
+            ngCart.setTaxRate(0.0);
+            ngCart.setShipping(2.00);
+            console.log("shipping set to $2", ngCart.getShipping())
+        }
+
+    	console.log("ngCart.getCart()", ngCart.getCart());
+    	console.log("ngCart.getShipping", ngCart.getShipping());
+
 		$scope.order_summary = {
 			order_number: ngCart.getItems()[0]._id,
 			order_items: ngCart.getItems(),
@@ -61,12 +80,10 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 		console.log("Adding New Order (Client-Side Controller) as a JSON OBJECT", $scope.order_summary)
 
 		OrderFactory.addOrder($scope.order_summary, function(data){
-			if (data.shipping == null) {
-				data.shipping = 0;
-			};
 
-			$scope.order_summary = data;
-			console.log("callback returned as a single JSON OBJECT", $scope.order_summary)
+			// $scope.order_summary = data;
+			console.log("callback returned as a single JSON OBJECT", data)
+			console.log("current scope.order_summary", $scope.order_summary)
 
 			ngCart.empty()
 		})
@@ -98,7 +115,7 @@ jbmi_app.controller('CheckoutController', function($location, $scope, $rootScope
 
 
 	// 4) Provide a form for user to enter in email and have receipt sent to them of the order (save the order again with an email address) - ADD LATER
-	// 5) Clear the cart
-	ngCart.empty()
+	// 5) Clear the cart -- MOVED TO ADD ORDER
+	// ngCart.empty()
 
 });
