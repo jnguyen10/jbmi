@@ -1,4 +1,5 @@
-jbmi_app.controller('NewCartController', function($scope, $location, $route, $rootScope, $http, ngCart){
+jbmi_app.controller('NewCartController', function($rootScope, $scope, $location, $route, $rootScope, $http, ngCart){
+    $rootScope.cart_updated = false;
 
     if (ngCart.getItems()[0] != undefined) {
 
@@ -63,4 +64,11 @@ jbmi_app.controller('NewCartController', function($scope, $location, $route, $ro
     console.log(ngCart.getItems())
 
 
-});
+})
+.run(['$rootScope', 'ngCart','ngCartItem', 'store', function ($rootScope, ngCart, ngCartItem, store) {
+
+    $rootScope.$on('ngCart:change', function(){
+        $rootScope.cart_updated = true;
+    });
+
+}]);
