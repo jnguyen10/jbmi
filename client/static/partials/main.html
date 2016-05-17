@@ -33,7 +33,21 @@
 			<div class='col-md-4'>
 				<div class='subcontent'>
 					<h3 class='subcontent_title'>Latest Breaks</h3>
-					<p>Post YouTube/Ustream videos of the latest break</p>
+					<div ng-repeat="break in breaks | orderBy: '-created_at' | limitTo: 1" class='row subcontent_body'>
+						<a href="#/nba/breaks">
+							<div class='col-sm-2'>
+								<img class='subcontent_img' src="https://lh3.googleusercontent.com/hB0w7sMJkIKcxUQ5bI2e3kdxZ4O4SCuGiJOWsCz8xzem94b8Ime-POD8-c8Zlhrtk9jX1RfQ6tFWiIiAqMbitiJoSoZfBtWOkRuFWZ8uF-LHssx0QdjiuSwtuC32LVhAO53gF2i7dIaSSNEv-fcBygOVwu1ALArZYZtez_6tCJRCPvkkj5uMsx5svsfZXo_vpVjUMqMoVk60pBppn795XeG1aFIX10pdlGZMw_7CgnrBskt5r9otWFt-PcL1Fp-S0cXPlV8YOQ4Apr1KKbHGN39OOUXiyyhpeV7yOqHIXQv0496gJv1i-s-LfpdFIPnZomdY3tNPcL4vfZ22qxPCfWKfY_rSDSk89shZw6KbrLGrakSaIHhCrRn9QnpgDSYNaL9utHMGxco1cKYcjeLRIA5azHxrz0aTgEWU_tS544yXbYIdXZKJuHCApzqNf_oZwow2YI0KdNVEkEmugG60iI3KkRF1QqCwzSTiNU0s1pO9guxw_P9JALbldouPIEYeIZgqaUrf8wkCzEwNDuvTx1xbSymhmX5h1FOWWIn9PefqaxgiKbslLm4v8uG816uVxrzwQzoyJjNW_QbgpPZFx60_KjzgciY=s1304-no" alt='3xBoxBreak' width='50' height='50'>
+							</div>
+							<div class='col-sm-10'>
+								<p class='subcontent_text'>3 x Box - Panini Basketball NBA Mixer Break</p>
+								<p class='subcontent_description'>
+									1 x 2014-15 Panini Gold Standard<br>
+									1 x 2015-16 Panini Court Kings<br>
+									1 x 2015-16 Panini Gold Standard
+								</p>
+							</div>
+						</a>
+					</div>
 					<!-- <div ng-repeat="break in breaks | orderBy: 'created_at' | limitTo: 1" class='row subcontent_body'>
 						<div class='col-sm-2'>
 							<img class='subcontent_img' src="{{break.img_url}}" alt='{{break.title}}' width='40' height='60'>
