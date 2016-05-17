@@ -4,16 +4,16 @@ module.exports = function(app, jsonParser){
 	var breaks = require('./../controllers/breaks.js');
 	var products = require('./../controllers/products.js');
 	var orders = require('./../controllers/orders.js')
-	
+
 	var util = require("util");
-	var braintree = require("braintree");
-	// ######## BRAINTREE ###########
-	var gateway = braintree.connect({
-		environment: braintree.Environment.Sandbox,
-		merchantId: 'tc73c3fgw3r4st69',
-		publicKey: 'byj532pfhpsb686q',
-		privateKey: '9cfe694a918df6554e11149dc0c962e4'
-	});
+	// var braintree = require("braintree");
+	// // ######## BRAINTREE ###########
+	// var gateway = braintree.connect({
+	// 	environment: braintree.Environment.Sandbox,
+	// 	merchantId: 'tc73c3fgw3r4st69',
+	// 	publicKey: 'byj532pfhpsb686q',
+	// 	privateKey: '9cfe694a918df6554e11149dc0c962e4'
+	// });
 
 	// ########### USERS #############
 	// ADD A NEW USER
@@ -38,26 +38,26 @@ module.exports = function(app, jsonParser){
 
 	// ########### BRAINTREE (PayPal) #############
 	// Generate a client ID
-	app.post('/api/client_token', function(req, res){
-		gateway.clientToken.generate({}, function (err, response) {
-			res.json({
-				"client_token": response.clientToken
-			});
-		});
-	});
+	// app.post('/api/client_token', function(req, res){
+	// 	gateway.clientToken.generate({}, function (err, response) {
+	// 		res.json({
+	// 			"client_token": response.clientToken
+	// 		});
+	// 	});
+	// });
 
 	// Route to process a sale transaction
-	app.post('/api/process_sale', function(req, res){
-		var transaction = req.body;
-		gateway.transaction.sale({
-			amount: '100',
-			paymentMethodNonce: transaction.payment_method_nonce
-		}, function (err, result) {
-			if (err) throw err;
-			console.log(util.inspect(result));
-			res.json(result)
-		})
-	})
+	// app.post('/api/process_sale', function(req, res){
+	// 	var transaction = req.body;
+	// 	gateway.transaction.sale({
+	// 		amount: '100',
+	// 		paymentMethodNonce: transaction.payment_method_nonce
+	// 	}, function (err, result) {
+	// 		if (err) throw err;
+	// 		console.log(util.inspect(result));
+	// 		res.json(result)
+	// 	})
+	// })
 
 	// LOGOUT USER
 	app.get('/users/logout', function(req, res){

@@ -28,7 +28,6 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 			// SET NEW CUSTOM ID FOR EACH ORDER
 			for (each in data) {
 				data[each].customID = customID();
-				console.log
 			}
 			$scope.nba_breaks = data;
 		})
@@ -40,7 +39,6 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 			// SET NEW CUSTOM ID FOR EACH ORDER
 			for (each in data) {
 				data[each].customID = customID();
-				console.log
 			}
 			$scope.nfl_breaks = data;
 		})

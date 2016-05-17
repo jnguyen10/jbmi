@@ -5,14 +5,14 @@ var cp = require('cookie-parser');
 var bp = require('body-parser');
 var expressSession = require('express-session');
 var mongoose = require('mongoose');
-var hash = require('bcrypt-nodejs');
+// var hash = require('bcrypt-nodejs');
 var path = require('path');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+// var passport = require('passport');
+// var LocalStrategy = require('passport-local').Strategy;
 var debug = require('debug')('passport-mongo');
 var favicon = require('serve-favicon');
 var util = require('util');
-var braintree = require('braintree');
+// var braintree = require('braintree');
 
 var app = express();
 var jsonParser = bp.json();
@@ -37,13 +37,14 @@ app.use(require('express-session')({
 	resave: false,
 	saveUninitialized: false
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 // PASSPORT CONFIGURATION
 var User = mongoose.model('User')
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 // ALTERNATE SERIALIZE/DESERIALIZE FUNCTIONS
 // passport.serializeUser(function(user, done){
 //     done(null, user.id)

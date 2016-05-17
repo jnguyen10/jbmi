@@ -25,7 +25,7 @@ body{
 	margin-right: 0;
 	margin-top: 15px;
 }
-.disabled{ 
+.disabled{
 	cursor: not-allowed;
 	pointer-events: none;
 	opacity: .5;
@@ -94,6 +94,9 @@ i{
 }
 .col-lg-10{
 	width: 85%;
+}
+.gold_links {
+	color: #FFD700;
 }
 .footer{
 	border-radius: 3px;
@@ -254,4 +257,3 @@ i{
 	padding-top: 300px;
 	padding-left: 30px;
 }
-

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-	passport = require('passport'),
+	// passport = require('passport'),
 	User = mongoose.model('User');
 
 module.exports = (function(){
@@ -51,4 +51,3 @@ module.exports = (function(){
 		}
 	}
 })();
-
