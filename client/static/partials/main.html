@@ -13,78 +13,14 @@
 			</uib-carousel>
 		</div>
 		<br>
-		<div class='row subcontent_div'>
-			<div class='col-md-4'>
-				<div class='subcontent'>
-					<h3 class='subcontent_title'>Upcoming Breaks</h3>
-					<div class="row subcontent_body">
-						<a href="#/nba/breaks">
-							<div class='col-sm-2'>
-								<img class='subcontent_img' src="https://lh3.googleusercontent.com/a1Oma_UuhEl_JDDDdwoplTSihl-WcungEWU9QeoJXOcppcFPzZOU46118mzRfF5owL-qfhcEje5ZPx7ML-NHKhA50AJ9qVGVTYOYEKp-nfgi-hhRBHyfpqKwUTarroq1wivtlwcUgkwOIQo2INH92gP2CmfGup5koqD5il_KJEsdqbDlFyySNg2PCVOv_I0CugZgP9QxiQouINBxiGa6DHdHXdIMMOkBr4P0P3ketwnPXaHjrheuFabw4ndexPaAspeqdqcnxWUg2z5lxLqmZY6uWZxj03DavCMQu3-kgI5a21kye--OBHnwxOZmJDhuJLF0NKBfkyCJOre01orSsCuzaX5eVqRcIGLrZk8aZQE7wniSmdrAKRh0C6RzaS69SYajOGcySsvH795LnlaUXunHV4J3cD29qNaoKLsTLfHnQ0q55cDFYiQCNnMB6jm-Mt25OidJe-ZN9zr5C49TsE__FqKYttR-aDBgo3J3_Y02VrkC16F_DW3JpOb76VZmyBfJXoqIAeURhQAcaGJScJ0S8Q_XSJUAuOEt1hngQTlOyr3RspUAGHfYe0JmkWZ8N3LR5yOrrmzgH1EEL9ZikbIAE82XkUc=s1298-no" alt='3xBoxBreak' width='50' height='50'>
-							</div>
-							<div class='col-sm-10'>
-								<p class='subcontent_text'>3 x Box - Panini Basketball NBA Mixer Break</p>
-								<p class='subcontent_description'>
-									1 x 2015-16 Panini National Treasures<br>
-									1 x 2015-16 Panini Gold Standard<br>
-									1 x 2014-15 Panini Gold Standard
-								</p>
-							</div>
-						</a>
-					</div>
-					<div ng-repeat="break in breaks | orderBy: '-created_at' | limitTo: 1" class='row subcontent_body'>
-						<a href="#/{{break.product_type}}/breaks">
-							<div class='col-sm-2'>
-								<img class='subcontent_img' src="{{break.img_url}}" alt='{{break.title}}' width='40' height='60'>
-							</div>
-							<div class='col-sm-10'>
-								<p class='subcontent_text'>{{break.year}} - {{break.title}}</p>
-								<p class='subcontent_description' break-desc="{{ break.description }}"></p>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class='col-md-4'>
-				<div class='subcontent'>
-					<h3 class='subcontent_title'>Latest Breaks</h3>
-					<p>Post YouTube/Ustream videos of the latest break</p>
-					<!-- <div ng-repeat="break in breaks | orderBy: 'created_at' | limitTo: 1" class='row subcontent_body'>
-						<div class='col-sm-2'>
-							<img class='subcontent_img' src="{{break.img_url}}" alt='{{break.title}}' width='40' height='60'>
-						</div>
-						<div class='col-sm-10'>
-							<p class='subcontent_text'>{{break.year}} - {{break.title}}</p>
-							<p class='subcontent_description'>{{break.description}}</p>
-							<div class='subcontent_footer'>
-								<time am-time-ago="product.created_at"></time><br>
-								<a href="#/{{break.product_type}}/breaks">See More <span style='text-transform: uppercase'>{{break.product_type}}</span> Breaks</a>
-							</div>
-						</div>
-					</div> -->
-				</div>
-			</div>
-			<div class='col-md-4'>
-				<div class='subcontent'>
-					<h3 class='subcontent_title'>Recently Added Products</h3>
-					<div ng-repeat="product in products | orderBy: '-created_at' | limitTo: 3" class='row subcontent_body'>
-						<div class='col-sm-2'>
-							<img class='subcontent_img' src="{{product.img_url_front}}" alt='{{product.name}}' width='40' height='60'>
-						</div>
-						<div class='col-sm-10'>
-							<p class='subcontent_text'>{{product.year}} {{product.brand}} - {{product.name}}</p>
-							<p class='subcontent_description'>{{product.description}}</p>
-							<div class='subcontent_footer'>
-								<time am-time-ago="product.created_at"></time><br>
-								<a href="#/{{product.product_type}}">See More <span style='text-transform: uppercase'>{{product.product_type}}</span></a>
-							</div>
-						</div>
-					</div>
+		<div class="link-card-group">
+			<div ng-repeat='card in card_names' class="card card-block card-width">
+				<div class="link-card link-card-{{ card }}">
+					<span class="link-buffer"></span>
+					<a href="#/{{ card | lowercase }}"><h2 class="link-title">{{ card }} Collection</h2></a>
 				</div>
 			</div>
 		</div>
-		<hr>
-		<!-- <div class='featured_divs' ng-repeat='i in [1,2,3,4,5]'> -->
 		<div class='featured_divs'>
 			<div class='blog_header'>
 				<h2>JBMI meets the World</h2>

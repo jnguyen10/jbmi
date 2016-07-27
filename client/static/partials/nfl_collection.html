@@ -6,8 +6,8 @@
 			<p>{{ item.brand }} - {{ item.description }} - #{{ item.card_num }} - {{ item.price | currency }}</p>
 		</div>
 		<div class='modal-body'>
-			<img src='{{item.img_url_front}}' alt='front' width='360' height='450'>
-			<img src='{{item.img_url_back}}' alt='back' width='360' height='450'>
+			<img src='{{item.img_url_front}}' alt='front' width='300' height='400'>
+			<img src='{{item.img_url_back}}' alt='back' width='300' height='400'>
 		</div>
 		<div class='modal-footer'>
 		<a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a>
@@ -15,8 +15,7 @@
 	</script>
 
 
-	<h1>NFL Collection</h1>
-	<hr>
+	<h1 class='collection-title'>NFL Collection</h1>
 	<div class='search_bar'>
 		<form>
 			<label style='color: white'>Search By:</label>
@@ -27,16 +26,38 @@
 				<option value='year'>Year</option>
 			</select>
 			<input type='text' ng-model='nfl_search.text'>
-			<input class='btn btn-primary' type='submit' value='Search' ng-click='searchNFLProducts()'> 
+			<input class='btn btn-primary' type='submit' value='Search' ng-click='searchNFLProducts()'>
 			<button class='btn btn-alert' ng-click='getNFLProducts()'>Reset</button>
 		</form>
-		
+		<button ng-show="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>Show Table</button>
+		<button ng-hide="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>Show Grid</button>
 	</div>
 	<hr>
-	<table class='table table-striped collection_table' infinite-scroll="more_products()" infinite-scroll-distance="0">
+	<!-- GRID FORMAT -->
+	<div ng-show="showGrid" class="collection-card-group" infinite-scroll="showMoreProducts()" infinite-scroll-distance="0">
+		<div ng-repeat='product in nfl_products | orderBy: orderByField:reverseSort | limitTo: product_count' class="card card-block collection-card-width">
+			<div class="collection-card">
+				<div class="collection-img">
+					<a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a>
+				</div>
+				<div class="collection-body">
+					<p>{{ product.year }} {{ product.brand }}</p>
+					<p>#{{ product.card_num }} {{ product.name }}</p>
+					<p>{{ product.description }}</p>
+					<p>{{ product.card_type }}</p>
+					<p>{{ product.price | currency }}</p>
+					<!-- <a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a> -->
+					<ngcart-addtocart id="{{ product._id }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" quantity="1" data="product">Add to cart</ngcart-addtocart>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- TABLE FORMAT -->
+	<table ng-hide="showGrid" class='table table-striped collection_table' infinite-scroll="showMoreProducts()" infinite-scroll-distance="0">
 		<tr>
 			<th>
-				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR 
+				<a href ng-click="orderByField='year'; reverseSort = !reverseSort">YEAR
 					<span ng-show="orderByField == 'year'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
@@ -44,7 +65,7 @@
 				</a>
 			</th>
 			<th>
-				<a href ng-click="orderByField='brand'; reverseSort = !reverseSort">BRAND 
+				<a href ng-click="orderByField='brand'; reverseSort = !reverseSort">BRAND
 					<span ng-show="orderByField == 'brand'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
@@ -52,7 +73,7 @@
 				</a>
 			</th>
 			<th>
-				<a href ng-click="orderByField='card_num'; reverseSort = !reverseSort">CARD NO. 
+				<a href ng-click="orderByField='card_num'; reverseSort = !reverseSort">CARD NO.
 					<span ng-show="orderByField == 'card_num'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
@@ -60,7 +81,7 @@
 				</a>
 			</th>
 			<th>
-				<a href ng-click="orderByField='name'; reverseSort = !reverseSort">PLAYER NAME 
+				<a href ng-click="orderByField='name'; reverseSort = !reverseSort">PLAYER NAME
 					<span ng-show="orderByField == 'name'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
@@ -68,7 +89,7 @@
 				</a>
 			</th>
 			<th>
-				<a href ng-click="orderByField='description'; reverseSort = !reverseSort">DESCRIPTION 
+				<a href ng-click="orderByField='description'; reverseSort = !reverseSort">DESCRIPTION
 					<span ng-show="orderByField == 'description'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
@@ -76,7 +97,7 @@
 				</a>
 			</th>
 			<th>
-				<a href ng-click="orderByField='card_type'; reverseSort = !reverseSort">CARD TYPE 
+				<a href ng-click="orderByField='card_type'; reverseSort = !reverseSort">CARD TYPE
 					<span ng-show="orderByField == 'card_type'">
 						<span ng-show="!reverseSort">&#9650;</span>
 						<span ng-show='reverseSort'>&#9660;</span>
@@ -116,7 +137,7 @@
 				<!-- <a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a> -->
 
 				<ngcart-addtocart id="{{ product._id }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" quantity="1" data="product">Add to cart</ngcart-addtocart>
-				
+
 			</td>
 		</tr>
 	</table>

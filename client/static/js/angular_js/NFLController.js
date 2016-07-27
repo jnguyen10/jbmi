@@ -4,7 +4,15 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 	$scope.orderByField = 'year';
 	$scope.reverseSort = true;
 
-	
+	$scope.displayGrid = function() {
+		if (!$scope.showGrid) {
+			$scope.showGrid = true;
+		} else {
+			$scope.showGrid = false;
+		}
+	}
+
+	// Create a custom ID for each order (deprecated)
 	function customID() {
         var id = ""
         var possible = "0123456789"
@@ -16,15 +24,9 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
         return id
     };
 
-    $scope.product_count = 3;
 
 	$scope.getNFLProducts = function(){
 		ProductFactory.getNFLProducts(function(data){
-			console.log("Getting All Products", data);
-			// SET NEW CUSTOM ID FOR EACH ORDER
-			// for (each in data) {
-			// 	data[each].customID = customID();
-			// }
 			$scope.nfl_products = data;
 
 		})
@@ -34,21 +36,16 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 
 		// Pass in raw key and value as two separate key-value pairs
 		ProductFactory.searchNFLProducts($scope.nfl_search, function(data){
-			// for (each in data) {
-			// 	data[each].customID = customID();
-			// }
 			$scope.nfl_products = data;
 		})
-		
+
 	};
 
 	$scope.open = function(product_id){
 
 		ProductFactory.getOneProduct({product_id: product_id}, function(data){
 
-			console.log('data', data)
 			$scope.item = data;
-			console.log('inside callback', $scope.item)
 
 			var modalInstance = $uibModal.open({
 				templateUrl: 'expandedPhoto.html',
@@ -64,19 +61,18 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 		})
 	};
 
-	// $scope.getOrders = function(){
-	// 	OrderFactory.getOrders(function(data){
-	// 		console.log("Getting All Orders", data);
-	// 		$scope.orders = data;
-	// 	})
-	// };
 
-	$scope.more_products = function(product_id){
-		$scope.product_count += 3;
+	$scope.product_count = 4;
+
+	function more_products() {
+		$scope.product_count += 4;
+	}
+
+	$scope.showMoreProducts = function(){
+		setTimeout(more_products, 500);
 	};
 
-	// $scope.getCustomers();
 	$scope.getNFLProducts();
-	// $scope.getOrders();
+	$scope.displayGrid();
 
 });

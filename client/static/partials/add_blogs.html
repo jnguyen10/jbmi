@@ -20,38 +20,27 @@
 			<span ng-show="blogs_form.blog_post.$error.required">Blog post is required.</span>
 			</span>
 			<br>
-<!-- 			<label>Initial Quantity:</label><br>
-			<select name='qty' ng-model='new_product.qty' required>
-				<option ng-repeat='n in range(1,200)'>{{ n }}</option>
-			</select><br>
-			<br> -->
 			<input type='submit' value='Submit' class='btn btn-primary' ng-click='addBlog()' ng-disabled="blogs_form.blog_title.$invalid || blogs_form.blog_post.$invalid" >
 		</form>
 	</div>
 	<div class='col-md-12'>
 		<h1>JBMI Blogs</h1>
-	<hr>
-	<table class='table table-striped collection_table'>
-		<tr>
-			<th>BLOG TITLE</th>
-			<th>BLOG AUTHOR</th>
-			<th>BLOG POST</th>
-			<th>DATE ADDED</th>
-			<th>ACTION</th>
-		</tr>
-		<tr ng-repeat="blog in blogs | orderBy: orderBy: '-created_at'">
-			<td>{{ blog.blog_title }}</td>
-			<td>{{ blog.blog_author }}</td>
-			<td>{{ blog.blog_post }}</td>
-			<td><span style='font-size: 9pt;'>{{ blog.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="blog.created_at"></time></td>
-			<td><button ng-click='editBlogPage(blog._id)'>Edit</button><br><button ng-click='removeBlog(blog._id)'>Remove</button></td>
-		</tr>
-	</table>
-<!-- 		<div class='products_list' ng-repeat='product in products | filter: filter_name | limitTo: product_count'>
-			<img height='150' width='150' src="{{ product.img_url }}"><br>
-			<a ng-href='#/{{ product.product_type}}/{{ product._id }}'>{{ product.name }}</a>
-			<p>({{ product.description }})</p>
-		</div>
-		<a href ng-model='show_more' ng-click='more_products()'>show more...</a> -->
+		<hr>
+		<table class='table table-striped collection_table'>
+			<tr>
+				<th>BLOG TITLE</th>
+				<th>BLOG AUTHOR</th>
+				<th>BLOG POST</th>
+				<th>DATE ADDED</th>
+				<th>ACTION</th>
+			</tr>
+			<tr ng-repeat="blog in blogs | orderBy: orderBy: '-created_at'">
+				<td>{{ blog.blog_title }}</td>
+				<td>{{ blog.blog_author }}</td>
+				<td>{{ blog.blog_post }}</td>
+				<td><span style='font-size: 9pt;'>{{ blog.created_at | date:'medium' }}</span><br><time style='font-size: 8pt; font-style: italic' am-time-ago="blog.created_at"></time></td>
+				<td><button ng-click='editBlogPage(blog._id)'>Edit</button><br><button ng-click='removeBlog(blog._id)'>Remove</button></td>
+			</tr>
+		</table>
 	</div>
 </div>

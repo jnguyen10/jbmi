@@ -16,8 +16,8 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 		controller: 'logoutController',
 		access: {restricted: true}
 	})
-	.when('/register', {
-		templateUrl: 'partials/register.html',
+	.when('/signup', {
+		templateUrl: 'partials/signup.html',
 		access: {restricted: false}
 	})
 	.when('/cart', {
@@ -59,6 +59,13 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	})
 	.when('/admin/dashboard/add_blogs', {
 		templateUrl: 'partials/add_blogs.html',
+		access: {
+			restricted: true,
+			requirePermissions: 'admin'
+		}
+	})
+	.when('/admin/dashboard/all_users', {
+		templateUrl: 'partials/all_users.html',
 		access: {
 			restricted: true,
 			requirePermissions: 'admin'
@@ -134,28 +141,10 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 
 });
 
+
 // Route Changes - check status
-jbmi_app.run(function ($rootScope, $location, $route, AuthService) {
-	$rootScope.$on('$routeChangeStart', function (event, next, current) {
-
-		// if (next.access !== undefined) {
-		// 	console.log("$routeChangeStart data from AuthService.getUserStatus()", AuthService.getUserStatus())
-		// }
-
-
-
-		// var user_session = AuthService.getUserStatus()
-		// if (user_session.$$state.user_data.username !== next.access.requirePermissions){
-		// 	$location.path('/restricted');
-		// }
-
-
-		// if (next.access !== undefined) {
-		// 	if (next.access.restricted && AuthService.isLoggedIn() === false) {
-		// 		$location.path('/login');
-		// 		$route.reload();
-		// 	}
-		// }
-
-	});
+jbmi_app.run(function ($rootScope, $location, $route) {
+	// $rootScope.$on('$routeChangeStart', function (event, next, current) {
+	//
+	// });
 });

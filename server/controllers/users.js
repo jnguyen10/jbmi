@@ -1,53 +1,86 @@
-var mongoose = require('mongoose'),
-	// passport = require('passport'),
-	User = mongoose.model('User');
+var jwt = require('jwt-simple');
+var User = require('../models/user');
+var config = require('../config/config');
 
-module.exports = (function(){
-	return {
-		getStatus: function (req, res){
-			// console.log("get status OK")
-			// // console.log("########## REQ ###########", req, "############ END ################")
-			// console.log("SESSIONID", req.sessionID)
-			// console.log("req.user", req.user)
-			// console.log("USER", req.session.passport.user)
-			// console.log("req.session:", req.session)
-			// console.log("req.session.passport:", req.session.passport)
-			return res.json(req.user)
-		},
-		register: function (req, res){
-			var user_name = new User({username: req.body.username, name: req.body.name});
-			var user_pw = req.body.password
+function tokenForUser(user) {
+  var timestamp = new Date().getTime();
+  // sub(ject) and i(ssue)a(t)t(ime)
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+}
 
-			// console.log("User to be added/updated to DB", req.body)
+exports.signup = function(req, res, next) {
+	var name = req.body.name;
+  var email = req.body.email;
+  var password = req.body.password;
 
-			User.register(user_name, user_pw, function(err, result){
-				if(err){
-					console.log(err)
-					return res.status(500).json({err: err})
-				}
-				passport.authenticate('local')(req, res, function(){
-					return res.status(200).json({status: 'Registration successful'})
-				});
-			});
-		},
-		login: function(req, res, next){
-			passport.authenticate('local', function(err, user, info){
-				if (err) { return next(err) }
-				if (!user) {
-					return res.status(401).json({err: info})
-				}
-				req.logIn(user, function(err){
-					if (err) {
-						return res.status(500).json({err: 'Could not log in user'})
-					}
-					res.status(200).json({status: 'Login successful'})
-				});
-			})(req, res, next);
-		},
-		logout: function(req, res){
-			console.log("###### logout ########", req.body)
-			req.logout();
-			res.status(200).json({status: 'Bye!'})
-		}
-	}
-})();
+  if (!email || !password) {
+    return res.status(422).send({ error: 'You must provide an email and password.'})
+  }
+
+  // See if a user with the given email exists
+  User.findOne({ email: email }, function(err, existingUser) {
+
+    if (err) {
+      return next(err);
+    }
+
+    // If a user with email does exist, return an error
+    if (existingUser) {
+      return res.status(422).send( { error: 'Email has already been created!'});
+    }
+
+    // If a user with email does not exist, create and save user record
+    var newUser = new User({
+			name: name,
+      email: email,
+      password: password
+    })
+
+    newUser.save(function(err) {
+      if (err) {
+        return next(err)
+      }
+
+      // Respond to request indicating user was created
+      res.json({ token: tokenForUser(newUser) });
+
+    });
+  })
+};
+
+exports.login = function(req, res, next) {
+  // User has already had their email and password auth'd
+  // We need to give user a token
+  res.send({ token: tokenForUser(req.user) });
+
+}
+
+exports.findOneUser = function(req, res, next) {
+  // User has already been authorized
+  var userToken = req.body.headers.authorization;
+
+  if (userToken) {
+    try {
+      var decodedToken = jwt.decode(userToken, config.secret);
+
+      // See if a user with the given email exists
+      User.findOne({ _id: decodedToken.sub }, function(err, existingUser) {
+        if (err) {
+          return next(err);
+        }
+        // Respond to request indicating user was created
+        res.json({ _id: existingUser._id, email: existingUser.email, created_at: existingUser.created_at });
+      });
+    } catch (err) {
+      return next();
+    }
+  } else {
+    next();
+  }
+}
+
+exports.allUsers = function(req, res, next) {
+  User.find({}, function(err, result) {
+    res.json(result)
+  })
+}

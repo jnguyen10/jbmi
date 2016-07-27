@@ -1,21 +1,50 @@
-var mongoose = require('mongoose')
-// var passportLocalMongoose = require('passport-local-mongoose')
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt-nodejs')
 
-var UserSchema = new mongoose.Schema({
-	name: String,
-	username: String,
-	password: String,
-	created_at: { type: Date, default: Date.now }
-})
+// Define our model
+var userSchema = new Schema({
+	'name': String,
+  'email': { type: String, unique: true, lowercase: true },
+  'password': String,
+  'created_at': { type: Date, default: Date.now }
+});
 
-// UserSchema.plugin(passportLocalMongoose)
+// On 'Save' Hook, encrypt password
+// Before saving model, run this function
+userSchema.pre('save', function(next) {
+  // instance of user model
+  var user = this;
 
-// use the schema to create the model
-// Note that creating a model creates the collection in the DB
-// (makes the collection plural)
-mongoose.model('User', UserSchema);
+  // generate a salt then run callback after salt has been created
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) {
+      return next(err);
+    }
+    // hash (encrypt) our password using the salt
+    // Once password has been hashed run callback function
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) {
+        return next(err);
+      }
+      // overwrite plain text password with encrypted password
+      user.password = hash;
+      next();
+    })
+  })
+});
 
-// Notice that we aren't exporting anything -- this is because
-// this file will be run when we require it using our config file
-// and then since the model is defined we'll be able to access it
-// from our controlller.
+// Add a new method to compare existing pw and candidate pw
+userSchema.methods.comparePW = function(candidatePW, callback) {
+  bcrypt.compare(candidatePW, this.password, function(err, isMatch) {
+    if (err) { return callback(err) };
+
+    callback(null, isMatch);
+  })
+}
+
+// Create the model class
+var userModelClass = mongoose.model('user', userSchema);
+
+// Export the model
+module.exports = userModelClass;

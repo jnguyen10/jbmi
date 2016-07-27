@@ -1,8 +1,7 @@
-// This is the friend.js file located at /server/models/friend.js
-// We want to create a file that has the schema for our friends
+// We want to create a file that has the schema for our orders
 // and creates a model that we can then call upon in our controller
 var mongoose = require('mongoose');
-// create our friendSchema
+
 var OrderSchema = new mongoose.Schema({
 	order_number: String,
 	order_items: Array,
@@ -17,7 +16,7 @@ var OrderSchema = new mongoose.Schema({
 // use the schema to create the model
 // Note that creating a model creates the collection in the DB
 // (makes the collection plural)
-mongoose.model('Order', OrderSchema); 
+mongoose.model('Order', OrderSchema);
 
 // Notice that we aren't exporting anything -- this is because
 // this file will be run when we require it using our config file

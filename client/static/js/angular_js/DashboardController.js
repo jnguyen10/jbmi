@@ -8,7 +8,6 @@ jbmi_app.controller('DashboardController', function($scope, $location, ProductFa
 	// PRODUCTS
 	$scope.getProducts = function(){
 		ProductFactory.getProducts(function(data){
-			console.log("Getting All Products", data);
 			$scope.products = data;
 		})
 
@@ -27,7 +26,6 @@ jbmi_app.controller('DashboardController', function($scope, $location, ProductFa
 	// BREAKS
 	$scope.getAllBreaks = function () {
     	BreakFactory.getAllBreaks(function(data){
-			console.log("Getting All Breaks", data);
 			$scope.breaks = data;
 		})
     };
@@ -57,25 +55,8 @@ jbmi_app.controller('DashboardController', function($scope, $location, ProductFa
 		$scope.product_count -= 3;
 	};
 
-	// $scope.getCustomers = function(){
-	// 	CustomerFactory.getCustomers(function(data){
-	// 		console.log("Getting All Customers", data);
-	// 		$scope.customers = data;
-	// 	})
-	// };
-
-
-
-	// $scope.getOrders = function(){
-	// 	OrderFactory.getOrders(function(data){
-	// 		console.log("Getting All Orders", data);
-	// 		$scope.orders = data;
-	// 	})
-	// };
-
-	// $scope.getCustomers();
 	$scope.getProducts();
 	$scope.getAllBreaks();
-	// $scope.getOrders();
+
 
 });

@@ -15,13 +15,11 @@ module.exports = (function(){
 		add: function (req, res){
 			var blog = new Blog(req.body);
 
-			console.log("Order to be added to DB", blog)
-
 			blog.save(function(err, result){
 				if(err){
 					console.log(err);
 				} else {
-					console.log("Order successfully added to DB:", result);
+					console.log("Blog successfully added to DB");
 					res.json(result);
 				}
 
@@ -29,4 +27,3 @@ module.exports = (function(){
 		}
 	}
 })();
-

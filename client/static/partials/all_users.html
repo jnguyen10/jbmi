@@ -1,0 +1,16 @@
+<div class="row" ng-controller='UserController'>
+  <div class="col-sm-12">
+    <table class='table table-bordered'>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Sign Up Date</th>
+      </tr>
+      <tr ng-repeat='user in users'>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.created_at | date:'medium' }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

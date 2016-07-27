@@ -2,20 +2,20 @@
 <html ng-app='jbmi_app'>
 	<head>
 		<meta charset='utf-8'>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<title>JB Modern Inserts - Sports and Entertainment Collections, Card Breaks and More!</title>
-		<link rel="icon" type="image/ico" href="img/jbmi.ico" />
+		<link rel="icon" type="image/ico" href="https://lh3.googleusercontent.com/hiRtmsq6xqcGehahR0Sx4hg7nxYVuWT1AEg05Jq8l5gxT5xfzK2JaCwMliKsg_WsEtUmhBy_5KBW5bMkItmFQ6SUMsqaPCw-cbgtHKmR8ndhpfYmifvc8nvFMEHRK6FZDNTIMWt3YFffuGy1c9bGqvFPZZ_2eAAoQoG6TgdBCKwKNXudMfUQvu1JD8dmDfnqfl08WGdx7o-NNjCRchxzs9AxDOZHMIJFl7dFkM73EZy3OlIKyRuatgHLrkl00SHHpzbs37AEq_2Jk48UQ6HM8mK9CaLeN6VuXZ0IdJMsB_RIylqeX0MrBo-zOq5NDuSza_Se3UsUDyNhEXGY8Y7OM1muvf862Q26liR5pCNKTZ1Fy22uoieHUUVVYAi68mcHqGVfeaLIaR3he6v4UQxcl3_I3U2ubZtYm0I5F3036jUuDcgove2z_9ENBzDys33gV_RA3j2h5z_rQgTcWitZCg6QgJA4u9hpIZw423f3b5Cr4ly5DLA7gGJEDTkGgT5GKgJOX-YimU359k5NJy0dRvpMRT2vbPUApabwaeGNRwXnqFH80iwME1FWlwSieg1cUbJRuOnXh1_L02pCdClvHQ_39MZv2fY=w1298-h1235-no" />
+		<meta name='description' content='Welcome to JBMI! Home to sports and entertainment collections, card breaks and personal blog posts.'>
 		<!-- ADD THIS TO REMOVE HASH FROM URL -->
 		<base href='/'>
 
-		<meta name='description' content='Home of sports and entertainment collections, along with frequent card breaks and personal blog posts.'>
 		<!-- ##### GOOGLE FONT API ##### -->
-		<link href='https://fonts.googleapis.com/css?family=Orbitron:700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Biryani:900' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 		<!-- ##### YOUTUBE API ##### -->
 		<script src="https://apis.google.com/js/platform.js"></script>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<!-- Custom CSS File -->
-		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<!-- jQuery for certain directives -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<!-- FOR PARTIALS, INCLUDE SOURCE FOR THE ANGULAR-ROUTE  -->
@@ -44,16 +44,12 @@
 		<script src='js/angular_js/OrderFactory.js'></script>
 		<script src='js/angular_js/ProductFactory.js'></script>
 		<script src='js/angular_js/UserFactory.js'></script>
-		<!-- Authentication Services - Passport -->
-		<script type="text/javascript" src='js/angular_js/services.js'></script>
 
 		<!-- ####### CONTROLLERS ######### -->
 		<script src='js/angular_js/BreakController.js'></script>
 		<script src='js/angular_js/CheckoutController.js'></script>
 		<script src='js/angular_js/DashboardController.js'></script>
 		<script src='js/angular_js/EditController.js'></script>
-		<script src='js/angular_js/LoginController.js'></script>
-		<script src='js/angular_js/LogoutController.js'></script>
 		<script src='js/angular_js/MainController.js'></script>
 		<script src='js/angular_js/ModalInstanceController.js'></script>
 		<script src='js/angular_js/NBAController.js'></script>
@@ -61,12 +57,26 @@
 		<script src='js/angular_js/NFLController.js'></script>
 		<script src='js/angular_js/OrderController.js'></script>
 		<script src='js/angular_js/ProductController.js'></script>
-		<script src='js/angular_js/RegisterController.js'></script>
 		<script src='js/angular_js/UserController.js'></script>
 
 
-		<!-- ###### CUSTOM ANGULAR ####### -->
-		<script>
+		<!-- ###### Custom jQuery ####### -->
+		<script type="text/javascript">
+			// Create jQuery action to attached classes to existing navbar if viewport width is larger than 500px
+			// navbar-fixed-top (from bootstrap) sets the fixed navbar properties
+			// navbar-scrolled (custom) resets the top margin to ZERO
+			// card_scroll_buffer (custom) adds 160px margin buffer when fixed navbar is set
+			if (window.innerWidth > 500) {
+				$(window).scroll(function() {
+					if($(this).scrollTop() > 20) {
+						$(".navbar").addClass("navbar-fixed-top navbar-scrolled");
+						$(".main-content").addClass("card-scroll-buffer")
+					} else {
+						$(".navbar").removeClass("navbar-fixed-top navbar-scrolled");
+						$(".main-content").removeClass("card-scroll-buffer");
+					}
+				})
+			}
 
 		</script>
 
@@ -79,58 +89,146 @@
 
 			ga('create', 'UA-74191740-1', 'auto');
 			ga('send', 'pageview');
+
+
 		</script>
+		<!-- Custom CSS File -->
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
 	<body>
-		<div id='wrapper'>
-			<hr>
-			<div id='header'>
-				<nav class="navbar">
-					<div class='container-fluid'>
-						<div class='navbar-header'>
-							<img id='header_logo' src="img/jbmi.jpg" alt='jbmi_logo'>
-							<a class='navbar-brand' href="#/">JB Modern Inserts</a>
-						</div>
-						<div class='nav navbar-nav navbar-right right_header_div'>
-							<!-- <ul ng-controller='LoginController' class="nav navbar-nav navbar-right">
-								#####################
-								USE NG-CLASS to add a "disabled" class to disable anchor tags
-								#####################
-								<li><a ng-class="{disabled: isUserLoggedIn}" href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-								<li><a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-								<li><a ng-show="isUserLoggedIn" ng-click='logout()' href="#/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-							</ul> -->
-							<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a>
-						</div>
+		<div class='container'>
+			<nav class="navbar navbar-default navbar-margin-top">
+				<div class='container-fluid header'>
+					<div class='navbar-header'>
+						<a id='header_logo' href="#/">
+							<img src="https://lh3.googleusercontent.com/QSCfuQEFmoxdn-wPBY02A_i_NY8rVKh2fo86zHRaZaxfJJryje7MQYz5RZP--er2VAc_WN36RuiZUqhnhRV-cDRAeiw9EJdq2vAUTdYJ4uOl9FRZUXCBvaPEbyTTdxaNukSmAsQhdV4nAKZx4LvuB1amAabBQNS1JN1UrjEKvZR2m1-HgwlTeYrjK5UK635S3WepIPLQRQw4c2hS7wL0hgU62M800XqtF1vwIEVpd5xnDnREbRxAd_4_td4aQL7TxqXapXVc0RA4FqR54W6Qukx4FpaEnplDHttrR3gnY3UOSi6UtX6rapErAinQehwfVzuVYoTqxtNN14kVIE40Rq8dlywmaQjqUSZETgmCFzYk-c-hHwbUvUC2r8psAGWiAtb0qM-FGiVVBbJvvwwdRLMTNfw2N7g42Xg6_6r5hXlIrYvmcciH9ky64yf2Ee4Wavb_d8-7FJTIgxKMSrqqSheqnmYCIhdbdW52FPaUAupM46Q_4roZFnoAL5iMOH2RYiHnENNg9xeHaXBJKFeJz9rvql1sdd9EPvXFF8ppE4FBtAjPLm02SM1OCyPRnrYRuusiPazOBNhJEpAehgvo2T8j0P3Psio=w1298-h1235-no" width="50" height="50" />
+						</a>
+						<h2 class='header-name'>JB Modern Inserts</h2>
 					</div>
-				</nav>
-			</div>
-			<hr>
-			<div id='body-content' class='row'>
-				<div class='col-lg-2 sidebar-nav' role="complementary">
-					<div class='list-group sidebar-nav'>
+					<ul ng-controller='UserController' class="nav navbar-nav navbar-right right_header_div mobile-hide">
+						<li><a ng-class="{disabled: isUserLoggedIn}" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li><a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						<li><a ng-show="isUserLoggedIn" ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						<li><a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a></li>
+					</ul>
+				</div>
+				<ul class='nav navbar-nav mobile-hide'>
+					<li uib-dropdown>
+						<a href="#" uib-dropdown-toggle>HOME</a>
+						<ul class="dropdown-menu">
+							<li><a href="#/">&#8226; Home</a></li>
+						</ul>
+					</li>
+					<li uib-dropdown>
+						<a href="#" uib-dropdown-toggle>COLLECTIONS</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#/nba">&#8226; NBA</a>
+							</li>
+							<li>
+								<a href="#/nfl">&#8226; NFL</a>
+							</li>
+							<li>
+								<a href="#/mlb">&#8226; <em>MLB<br>(Coming Soon!)</em></a>
+							</li>
+							<li>
+								<a href="#/nhl">&#8226; <em>NHL<br>(Coming Soon!)</em></a>
+							</li>
+							<li>
+								<a href="#/media">&#8226; <em>Non-Sports Collectibles<br>(Coming Soon!)</em></a>
+							</li>
+						</ul>
+					</li>
+					<li uib-dropdown>
+						<a href="#" uib-dropdown-toggle>BREAKS</a>
+						<ul class="dropdown-menu">
+							<li>
+								<span class='border-breaks'>********************</span>
+								<a href="#/live_breaks" style="font-weight: bold">&#8226; LIVE BREAKS</a>
+							</li>
+							<li>
+								<a href="#/break_rules" style="font-weight: bold">&#8226; BREAK RULES</a>
+								<span class='border-breaks'>********************</span>
+							</li>
+							<li>
+								<a href="#/nba/breaks">&#8226; NBA</a>
+							</li>
+							<li>
+								<a href="#/nfl/breaks">&#8226; NFL</a>
+							</li>
+							<li>
+								<a href="#/mlb/breaks">&#8226; <em>MLB<br>(Coming Soon!)</em></a>
+							</li>
+							<li>
+								<a href="#/nhl/breaks">&#8226; <em>NHL<br>(Coming Soon!)</em></a>
+							</li>
+							<li>
+								<a href="#/media/breaks">&#8226; <em>Non-Sports Collectibles<br>(Coming Soon!)</em></a>
+							</li>
+						</ul>
+					</li>
+					<li uib-dropdown>
+						<a href="#" uib-dropdown-toggle>CONNECT</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="mailto:jbmoderninserts@gmail.com">Email Us!</a>
+							</li>
+							<li>
+								<a href='' class='youtube-btn'>
+									<div class="g-ytsubscribe" data-channelid="UCYAXdoijV2VUP-rmB-M9cnw" data-layout="default" data-count="default"></div>
+								</a>
+							</li>
+							<li>
+								<a href="https://twitter.com/jbmoderninserts" class="twitter-follow-btn" data-show-count="false"><i></i> Follow </a>
+							</li>
+							<li>
+								<a href="https://www.instagram.com/jb_moderninserts/?ref=badge" class="ig-b- ig-b-24 ig-btn"><img class="ig-logo" src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /> Instagram </a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- ######## MOBILE MENU DISPLAY ONLY ########## -->
+				<uib-accordion class="mobile-display">
+					<uib-accordion-group heading="&#9776;" class="mobile-display-menu-btn">
 						<uib-accordion class='sidebar-menu'>
-							<uib-accordion-group heading='Home'><a href="#/">&#8226; Home</a>
+							<uib-accordion-group heading='Home'>
+								<div ng-controller='UserController'>
+									<div class="mobile-display-category-btn">
+										<a href="#/">Home</a>
+									</div>
+									<div class="mobile-display-category-btn">
+										<a ng-class="{disabled: isUserLoggedIn}" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a><br>
+									</div>
+									<div class="mobile-display-category-btn">
+										<a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a><br>
+									</div>
+									<div class="mobile-display-category-btn">
+										<a ng-show="isUserLoggedIn" ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a><br>
+									</div>
+									<div class="mobile-display-category-btn">
+										<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a><br>
+									</div>
+								</div>
 							</uib-accordion-group>
 							<uib-accordion-group heading='Collections'>
-								<a href="#/nba">&#8226; NBA</a><br>
-								<a href="#/nfl">&#8226; NFL</a><br>
-								<a href="#/mlb">&#8226; <em>MLB<br>(Coming Soon!)</em></a><br>
-								<a href="#/nhl">&#8226; <em>NHL<br>(Coming Soon!)</em></a><br>
-								<a href="#/media">&#8226; <em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
+								<a href="#/nba">NBA</a><br>
+								<a href="#/nfl">NFL</a><br>
+								<a href="#/mlb"><em>MLB<br>(Coming Soon!)</em></a><br>
+								<a href="#/nhl"><em>NHL<br>(Coming Soon!)</em></a><br>
+								<a href="#/media"><em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
 							</uib-accordion-group>
 							<uib-accordion-group heading='Breaks'>
 								*****************
 								<br>
-								<a href="#/live_breaks" style="font-weight: bold">&#8226; LIVE BREAKS</a><br>
-								<a href="#/break_rules" style="font-weight: bold">&#8226; BREAK RULES</a><br>
+								<a href="#/live_breaks" style="font-weight: bold">LIVE BREAKS</a><br>
+								<a href="#/break_rules" style="font-weight: bold">BREAK RULES</a><br>
 								*****************
 								<br>
-								<a href="#/nba/breaks">&#8226; NBA</a><br>
-								<a href="#/nfl/breaks">&#8226; NFL</a><br>
-								<a href="#/mlb/breaks">&#8226; <em>MLB<br>(Coming Soon!)</em></a><br>
-								<a href="#/nhl/breaks">&#8226; <em>NHL<br>(Coming Soon!)</em></a><br>
-								<a href="#/media/breaks">&#8226; <em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
+								<a href="#/nba/breaks">NBA</a><br>
+								<a href="#/nfl/breaks">NFL</a><br>
+								<a href="#/mlb/breaks"><em>MLB<br>(Coming Soon!)</em></a><br>
+								<a href="#/nhl/breaks"><em>NHL<br>(Coming Soon!)</em></a><br>
+								<a href="#/media/breaks"><em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
 
 							</uib-accordion-group>
 							<uib-accordion-group heading='Connect'>
@@ -139,12 +237,15 @@
 									<div class="g-ytsubscribe" data-channelid="UCYAXdoijV2VUP-rmB-M9cnw" data-layout="default" data-count="default"></div>
 								</a><br>
 								<a href="https://twitter.com/jbmoderninserts" class="twitter-follow-btn" data-show-count="false"><i></i> Follow </a><br>
-								<a href="https://www.instagram.com/jb_moderninserts/?ref=badge" class="ig-b- ig-b-24 ig-btn"><img src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /></a><br><br>
+								<a href="https://www.instagram.com/jb_moderninserts/?ref=badge" class="ig-b- ig-b-24 ig-btn"><img class="ig-logo" src="//badges.instagram.com/static/images/ig-badge-24.png" alt="Instagram" /> Instagram </a><br>
 							</uib-accordion-group>
 						</uib-accordion>
-					</div>
-				</div>
-				<div id='main-content' class='col-lg-10' role="main">
+					</uib-accordion-group>
+				</uib-accordion>
+				<!-- ######## END OF MOBILE MENU DISPLAY ########## -->
+			</nav>
+			<div class='row main-content'>
+				<div class='col-sm-12' role="main">
 					<div ng-view=''></div>
 				</div>
 			</div>
@@ -154,6 +255,5 @@
 					<p class='text-muted'>Copyright &copy; 2016 - JB Modern Inserts</p>
 				</div>
 			</footer>
-		</div>
 	</body>
 </html>

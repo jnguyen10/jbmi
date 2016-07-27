@@ -17,14 +17,12 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 
     $scope.getAllBreaks = function () {
     	BreakFactory.getAllBreaks(function(data){
-			console.log("Getting All Breaks", data);
 			$scope.all_breaks = data;
 		})
     };
 
     $scope.getNBABreaks = function () {
     	BreakFactory.getNBABreaks(function(data){
-			console.log("Getting NBA Breaks", data);
 			// SET NEW CUSTOM ID FOR EACH ORDER
 			for (each in data) {
 				data[each].customID = customID();
@@ -35,7 +33,6 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 
 	$scope.getNFLBreaks = function () {
     	BreakFactory.getNFLBreaks(function(data){
-			console.log("Getting NFL Breaks", data);
 			// SET NEW CUSTOM ID FOR EACH ORDER
 			for (each in data) {
 				data[each].customID = customID();
@@ -45,8 +42,6 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
     };
 
 	$scope.addBreak = function(){
-		console.log("Adding a new break (Client-Side Controller)", $scope.new_break)
-
 		BreakFactory.addBreak($scope.new_break, function(data){
 			$scope.getAllBreaks();
 			$scope.new_break = {};
@@ -70,7 +65,7 @@ jbmi_app.controller('BreakController', function($scope, $location, BreakFactory)
 		for (var i = min; i <= max; i += step){
 			input.push(i);
 		}
-		// console.log("RANGE:",input);
+
 		return input;
 	};
 

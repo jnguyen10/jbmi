@@ -34,17 +34,14 @@ jbmi_app.controller('NewCartController', function($rootScope, $scope, $location,
         if (ngCart.getSubTotal() > 20 || res_break ) {
             ngCart.setTaxRate(0.0);
             ngCart.setShipping(0.00);
-            console.log("shipping set to zero", ngCart.getShipping())
         } else {
             ngCart.setTaxRate(0.0);
             ngCart.setShipping(2.00);
-            console.log("shipping set to $2", ngCart.getShipping())
         }
 
-        console.log("custom item name", custom_name)
 
         $rootScope.payPalSettings = { paypal: {
-            business: 'jbmoderninserts@gmail.com', 
+            business: 'jbmoderninserts@gmail.com',
             // item_name: anchor + " & " + String(parseInt(ngCart.getTotalUniqueItems()) - 1) + " additional item(s)",
             item_name: custom_name,
             item_number: ngCart.getItems()[0]._id,
@@ -59,9 +56,7 @@ jbmi_app.controller('NewCartController', function($rootScope, $scope, $location,
     //     $location.path('/cart');
     //     $route.reload();
     // }
-    
-    // console.log("new cart cartID", ngCart.generateCartID())
-    console.log(ngCart.getItems())
+
 
 
 })

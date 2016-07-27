@@ -4,7 +4,6 @@ jbmi_app.controller('OrderController', function($location, $scope, $rootScope, $
 
     $scope.getOrders = function () {
     	OrderFactory.getOrders(function(data){
-			console.log("Getting All Breaks", data);
 			$scope.orders = data;
 		})
     };

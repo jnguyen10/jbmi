@@ -1,73 +1,30 @@
+var userAuthentication = require('./../controllers/users.js');
+var blogs = require('./../controllers/blogs.js');
+var breaks = require('./../controllers/breaks.js');
+var products = require('./../controllers/products.js');
+var orders = require('./../controllers/orders.js');
+var passportService = require('../config/passport');
+var passport = require('passport');
+
+var requireAuth = passport.authenticate('jwt', { session: false });
+var requireSignin = passport.authenticate('local', { session: false });
+
 module.exports = function(app, jsonParser){
-	var users = require('./../controllers/users.js');
-	var blogs = require('./../controllers/blogs.js');
-	var breaks = require('./../controllers/breaks.js');
-	var products = require('./../controllers/products.js');
-	var orders = require('./../controllers/orders.js')
-
-	var util = require("util");
-	// var braintree = require("braintree");
-	// // ######## BRAINTREE ###########
-	// var gateway = braintree.connect({
-	// 	environment: braintree.Environment.Sandbox,
-	// 	merchantId: 'tc73c3fgw3r4st69',
-	// 	publicKey: 'byj532pfhpsb686q',
-	// 	privateKey: '9cfe694a918df6554e11149dc0c962e4'
-	// });
-
 	// ########### USERS #############
 	// ADD A NEW USER
-	app.post('/users/register', function(req, res){
-		users.register(req, res);
-	})
+	app.post('/user/signup', userAuthentication.signup);
 
 	// LOGIN USER
-	app.post('/users/login', function(req, res){
-		users.login(req, res);
-	})
+	app.post('/user/login', requireSignin, userAuthentication.login);
 
-	// LOGOUT USER
-	app.get('/users/logout', function(req, res){
-		users.logout(req, res);
-	})
+	// FIND A SINGLE USER
+	app.get('/user/find_user', requireAuth, function(req, res) {
+    res.json({ userDataFromServer: req.user, message: 'hello from the server-side' })
+  });
 
-	// GET USER LOGIN STATUS
-	app.get('/users/auth/status', function(req, res){
-		users.getStatus(req, res);
-	})
+	// FIND ALL users
+	app.get('/user/all_users', userAuthentication.allUsers);
 
-	// ########### BRAINTREE (PayPal) #############
-	// Generate a client ID
-	// app.post('/api/client_token', function(req, res){
-	// 	gateway.clientToken.generate({}, function (err, response) {
-	// 		res.json({
-	// 			"client_token": response.clientToken
-	// 		});
-	// 	});
-	// });
-
-	// Route to process a sale transaction
-	// app.post('/api/process_sale', function(req, res){
-	// 	var transaction = req.body;
-	// 	gateway.transaction.sale({
-	// 		amount: '100',
-	// 		paymentMethodNonce: transaction.payment_method_nonce
-	// 	}, function (err, result) {
-	// 		if (err) throw err;
-	// 		console.log(util.inspect(result));
-	// 		res.json(result)
-	// 	})
-	// })
-
-	// LOGOUT USER
-	app.get('/users/logout', function(req, res){
-		users.logout(req, res);
-	})
-
-	// GET USER LOGIN STATUS
-	app.get('/users/auth/status', function(req, res){
-		users.getStatus(req, res);
-	})
 
 	// ########### ORDERS #############
 	// GET ALL ORDERS

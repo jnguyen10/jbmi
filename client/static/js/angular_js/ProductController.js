@@ -5,7 +5,6 @@ jbmi_app.controller('ProductController', function($scope, $location, ProductFact
 
 	$scope.getProducts = function(){
 		ProductFactory.getProducts(function(data){
-			console.log("Getting All Products", data);
 			$scope.products = data;
 		})
 
@@ -20,8 +19,6 @@ jbmi_app.controller('ProductController', function($scope, $location, ProductFact
 
 
 	$scope.addProduct = function(){
-		console.log("Updating New Product (Client-Side Controller)", $scope.new_product)
-
 		ProductFactory.addProduct($scope.new_product, function(data){
 			$scope.products = data;
 			$scope.new_product = {};

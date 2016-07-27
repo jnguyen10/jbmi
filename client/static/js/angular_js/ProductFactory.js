@@ -5,7 +5,6 @@ jbmi_app.factory('ProductFactory', function($http){
 	factory.getProducts = function(callback){
 		$http.get('/products').success(function(output){
 			products = output;
-			console.log("Received Data from Server-Side:", products);
 			callback(products);
 		})
 	};
@@ -42,18 +41,14 @@ jbmi_app.factory('ProductFactory', function($http){
 
 	factory.addProduct = function(info, callback){
 		$http.post('/products/add', info).success(function(output){
-			console.log("Received Data from Server-Side after Adding:", output);
 			products.push(output);
-			console.log("Pushed new data to orders array in factory:", products);
 			callback(products);
 		})
 	};
 
 	factory.getOneProduct = function(product_id, callback){
 		//make sure product_id is an object
-		console.log("PRODUCT ID FROM FACTORY", product_id)
 		$http.post('/products/single',product_id).success(function (single_entry){
-			console.log("Received single product entry:", single_entry);
 			callback(single_entry);
 		})
 
@@ -64,7 +59,7 @@ jbmi_app.factory('ProductFactory', function($http){
 		// create a new key ('_id') and pass the product_id into the content object to pass as ONE JSON parameter
 		var new_id = '_id'
 		content[new_id] = product_id.product_id;
-		
+
 
 		$http.post('/products/update',content).success(function(){
 				console.log("UPDATE WAS SUCCESSFUL");
@@ -73,7 +68,7 @@ jbmi_app.factory('ProductFactory', function($http){
 	};
 
 	factory.updateAvailability = function(order_items, callback){
-		
+
 		$http.post('/products/update_avail',order_items).success(function(){
 				console.log("UPDATE WAS SUCCESSFUL");
 				callback();
