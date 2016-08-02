@@ -3,10 +3,10 @@
 		<div class='featured_divs'>
 			<uib-carousel interval='myInterval' no-wrap='noWrapSlides'>
 				<uib-slide ng-repeat='slide in slides' active='slide.active'>
-					<a href="#/{{slide.product_type}}">
-						<img src='{{slide.image}}' style='margin:auto;'>
+					<a href="#/{{ slide.product_type }}">
+						<img src='{{ slide.image }}' style='margin:auto;'>
 						<div class='carousel-caption'>
-							<h4 class='carousel_link'>{{slide.name}}</h4>
+							<h4 class='carousel_link'>{{ slide.name }}</h4>
 						</div>
 					</a>
 				</uib-slide>

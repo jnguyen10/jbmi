@@ -10,28 +10,37 @@
 			<img src='{{item.img_url_back}}' alt='back' width='300' height='400'>
 		</div>
 		<div class='modal-footer'>
-		<a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add an additional cards you have interests in below.  Thanks!">Inquire</a>
+		<a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a>
 		</div>
 	</script>
 
 
 	<h1 class='collection-title'>NBA Collection</h1>
-	<div class='search_bar'>
-		<form>
-			<label style='color: white'>Search By:</label>
-			<select ng-model='nba_search.field'>
-				<option value='name'>Player Name</option>
-				<option value='brand'>Brand</option>
-				<option value='card_type'>Card Type</option>
-				<option value='year'>Year</option>
-			</select>
-			<input type='text' ng-model='nba_search.text'>
-			<input class='btn btn-primary' type='submit' value='Search' ng-click='searchNBAProducts()'>
-			<button class='btn btn-alert' ng-click='getNBAProducts()'>Reset</button>
-		</form>
-		<button ng-show="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>Show Table</button>
-		<button ng-hide="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>Show Grid</button>
-	</div>
+	<form class="navbar-form">
+		<label class="search_title">Categories: </label>
+		<select class="form-control" placeholder="Categories" ng-model='nba_search.field'>
+			<option value='name'>Player Name</option>
+			<option value='brand'>Brand</option>
+			<option value='card_type'>Card Type</option>
+			<option value='year'>Year</option>
+		</select>
+		<div class="input-group search_bar">
+			<input type='text' ng-model='nba_search.text' class='form-control' placeholder="Search">
+			<div class="input-group-btn">
+				<button class='btn' ng-click='searchNBAProducts()'>
+					<span class='glyphicon glyphicon-search'></span>
+				</button>
+			</div>
+		</div>
+		<button class='btn btn-warning reset-btn' ng-click='getNBAProducts()'>Reset</button>
+	</form>
+
+	<button ng-show="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>
+		<span class="glyphicon glyphicon-th-list"></span> | Show List
+	</button>
+	<button ng-hide="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>
+		Show Grid | <span class="glyphicon glyphicon-th-large"></span>
+	</button>
 	<hr>
 	<!-- GRID FORMAT -->
 	<div ng-show="showGrid" class="collection-card-group" infinite-scroll="showMoreProducts()" infinite-scroll-distance="0">
@@ -40,13 +49,17 @@
 				<div class="collection-img">
 					<a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a>
 				</div>
+				<div class="collection-header">
+					<h3>{{ product.year }} {{ product.brand }}</h3>
+					<h4>#{{ product.card_num }} {{ product.name }}</h4>
+				</div>
 				<div class="collection-body">
-					<p>{{ product.year }} {{ product.brand }}</p>
-					<p>#{{ product.card_num }} {{ product.name }}</p>
 					<p>{{ product.description }}</p>
 					<p>{{ product.card_type }}</p>
 					<p>{{ product.price | currency }}</p>
 					<!-- <a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a> -->
+				</div>
+				<div class="collection-addtocart">
 					<ngcart-addtocart id="{{ product._id }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" quantity="1" data="product">Add to cart</ngcart-addtocart>
 				</div>
 			</div>

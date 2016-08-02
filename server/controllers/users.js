@@ -53,7 +53,7 @@ exports.login = function(req, res, next) {
   // We need to give user a token
   res.send({ token: tokenForUser(req.user) });
 
-}
+};
 
 exports.findOneUser = function(req, res, next) {
   // User has already been authorized
@@ -69,7 +69,7 @@ exports.findOneUser = function(req, res, next) {
           return next(err);
         }
         // Respond to request indicating user was created
-        res.json({ _id: existingUser._id, email: existingUser.email, created_at: existingUser.created_at });
+        res.json({ _id: existingUser._id, name: existingUser.name, email: existingUser.email, created_at: existingUser.created_at });
       });
     } catch (err) {
       return next();
@@ -77,10 +77,35 @@ exports.findOneUser = function(req, res, next) {
   } else {
     next();
   }
+};
+
+exports.removeUser = function(req, res, next) {
+  // User has already been authorized
+  var userEmailToBeRemoved = req.params.user_email;
+
+  if (userEmailToBeRemoved) {
+    try {
+      User.remove({ email: userEmailToBeRemoved }, function(err) {
+        if (err) {
+          return next(err);
+        }
+        // Respond to request indicating user was created
+        res.send("Successfully removed");
+      });
+    } catch (err) {
+      return next();
+    }
+  } else {
+    next();
+  }
+};
+
+exports.updatePassword = function(req, res, next) {
+  
 }
 
 exports.allUsers = function(req, res, next) {
   User.find({}, function(err, result) {
     res.json(result)
   })
-}
+};

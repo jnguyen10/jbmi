@@ -1,4 +1,4 @@
-jbmi_app.controller('NBAController', function($scope, $uibModal, ProductFactory){
+jbmi_app.controller('NBAController', function($scope, $rootScope, $uibModal, ProductFactory){
 
 	$scope.nba_products = [];
 	$scope.orderByField = 'year';
@@ -26,7 +26,6 @@ jbmi_app.controller('NBAController', function($scope, $uibModal, ProductFactory)
 
 	$scope.getNBAProducts = function(){
 		ProductFactory.getNBAProducts(function(data){
-			console.log("Getting All Products", data);
 			$scope.nba_products = data;
 
 		})

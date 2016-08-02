@@ -1,0 +1,60 @@
+<div class="row" ng-controller='UserController'>
+  <div class="col-sm-12">
+    <h2>Welcome, {{ singleUser.name }}</h2>
+    <table class='table table-bordered'>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Sign Up Date</th>
+      </tr>
+      <tr>
+        <td>{{ singleUser.name }}</td>
+        <td>{{ singleUser.email }}</td>
+        <td>{{ singleUser.created_at | date:'medium' }}</td>
+      </tr>
+    </table>
+    <div class="myaccount-card-group">
+      <div class="card card-block myaccount-card">
+        <button type="button" class='btn custom-btn' ng-click="displayInfoButton()">Display Account Info</button>
+        <table ng-show='displayInfo' class="table myaccount-table">
+          <tr>
+            <th>NAME</th>
+            <td>{{ singleUser.name }}</td>
+          </tr>
+          <tr>
+            <th>EMAIL</th>
+            <td>{{ singleUser.email }}</td>
+          </tr>
+          <tr>
+            <th>SIGN UP DATE</th>
+            <td>{{ singleUser.created_at | date:'medium' }}</td>
+          </tr>
+          <tr>
+            <th>EDIT ACCOUNT</th>
+            <td ng-hide='changingPW'><button type="button" ng-click="resetPWBtn()" class="btn btn-info">Reset Password</button></td>
+            <td ng-show='changingPW'>
+              <form class="form" ng-submit="resetPW()">
+                  <input type="password" class="form-control" name="new_password" ng-model="resetPWForm.new_password" placeholder="New Password" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="confirm_pw" ng-model="resetPWForm.confirm_pw" placeholder="Confirm Password" required>
+                </div>
+                <div ng-show="error" class="alert-danger">{{errorMessage}}</div>
+                <div ng-show='success' class="alert-success">{{successMessage}}</div>
+                <div>
+                  <button type="submit" class="btn btn-default" ng-disabled="disabled">Reset</button>
+                </div>
+              </form>
+            </td>
+          </tr>
+        </table>
+        <button type="button" class="btn custom-btn">Orders</button>
+      </div>
+      <div class="card card-block myaccount-card">
+        <button type="button" class="btn custom-btn">FAQs</button>
+        <button type="button" class="btn custom-btn">Contact Us</button>
+        <button type="button" class='btn btn-danger' ng-click='removeUser(singleUser.email)'>Deactivate Account</button>
+      </div>
+    </div>
+  </div>
+</div>

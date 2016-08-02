@@ -12,6 +12,7 @@
 		<!-- ##### GOOGLE FONT API ##### -->
 		<link href='https://fonts.googleapis.com/css?family=Biryani:900' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Frijole|Teko:700|PT+Sans:700" rel="stylesheet">
 		<!-- ##### YOUTUBE API ##### -->
 		<script src="https://apis.google.com/js/platform.js"></script>
 		<!-- Latest compiled and minified CSS -->
@@ -106,7 +107,9 @@
 						<h2 class='header-name'>JB Modern Inserts</h2>
 					</div>
 					<ul ng-controller='UserController' class="nav navbar-nav navbar-right right_header_div mobile-hide">
-						<li><a ng-class="{disabled: isUserLoggedIn}" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<!-- <li><a ng-class="{disabled: isUserLoggedIn}" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+						<li><a ng-hide="isUserLoggedIn" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li><a ng-show="isUserLoggedIn" href="#/myaccount"><span class="glyphicon glyphicon-user"></span> Hi, {{ singleUser.name }}!</a></li>
 						<li><a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 						<li><a ng-show="isUserLoggedIn" ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 						<li><a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a></li>

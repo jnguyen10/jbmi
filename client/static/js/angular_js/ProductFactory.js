@@ -69,7 +69,7 @@ jbmi_app.factory('ProductFactory', function($http){
 
 	factory.updateAvailability = function(order_items, callback){
 
-		$http.post('/products/update_avail',order_items).success(function(){
+		$http.post('/products/update_avail', order_items).success(function(){
 				console.log("UPDATE WAS SUCCESSFUL");
 				callback();
 			});

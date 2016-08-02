@@ -22,8 +22,14 @@ module.exports = function(app, jsonParser){
     res.json({ userDataFromServer: req.user, message: 'hello from the server-side' })
   });
 
-	// FIND ALL users
+	// FIND ALL USERS
 	app.get('/user/all_users', userAuthentication.allUsers);
+
+	// DELETE A SINGLE USER
+	app.delete('/user/remove_user/:user_email', userAuthentication.removeUser);
+
+	// RESET USER password
+	app.post('/user/update_password', userAuthentication.updatePassword);
 
 
 	// ########### ORDERS #############

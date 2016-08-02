@@ -264,11 +264,11 @@ i{
   and (max-device-width: 1024px)
   and (-webkit-min-device-pixel-ratio: 2) {
 	.link-card-Blogs {
-		background-image: url(../img/nhl_burns.jpg);
+		background-image: url(../img/dwight.png);
 	}
 }
 .link-card-Blogs:hover {
-	background-image: url(../img/nhl_burns.jpg);
+	background-image: url(../img/dwight.png);
 }
 
 /* Link title in each card */
@@ -359,11 +359,23 @@ i{
 .collection-title {
 	color: white;
 }
-.search_bar{
-	color: black;
-}
 .modal-header {
 	color: black;
+}
+.search_title {
+	font-size: 20px;
+	font-weight: 100;
+	vertical-align: middle;
+}
+.search_bar {
+	color: black;
+	display: inline-flex;
+	width: 20%;
+}
+@media (max-width: 800px) {
+	.reset-btn {
+		display: block;
+	}
 }
 
 /* #############################
@@ -383,6 +395,8 @@ i{
 ############################ */
 .layout-btn {
 	background: radial-gradient(white,beige);
+	color: black;
+	padding: 2px 12px;
 }
 @media (max-width: 800px) {
 	.layout-btn {
@@ -400,11 +414,7 @@ i{
 	background: radial-gradient(#F1F1ED,#F5F4F0);
   border-radius: 10px;
   margin-top: 10px;
-  text-align: center;
-  height: 400px;
-}
-.collection-buffer {
-	line-height: 400px;
+  height: 500px;
 }
 .collection-card-width {
 	width: 24%;
@@ -413,11 +423,26 @@ i{
 }
 .collection-img {
 	margin-top: 10px;
+	text-align: center;
+}
+.collection-addtocart {
+	text-align: center;
+}
+.collection-header {
+  display: block;
+	text-align: center;
+  padding: 15px;
+	padding-bottom: 0;
+  color: black;
+	font-family: 'Teko', cursive;
 }
 .collection-body {
   display: inline-block;
-  padding: 10px;
+	text-align: left;
+  padding: 15px;
+	padding-bottom: 0;
   color: black;
+	font-family: 'PT Sans', sans-serif;
 }
 
 
@@ -441,14 +466,34 @@ i{
 	padding: 0 40px;
 }
 
-
-
+/* ########################
+##### MY ACCOUNT CARD #####
+######################## */
+.myaccount-card-group {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+.myaccount-card {
+	border: 2px solid #F5F4F0;
+	background: radial-gradient(#F1F1ED,#F5F4F0);
+	border-radius: 10px;
+	margin: 10px;
+	text-align: center;
+	width: 40%;
+	height: 400px;
+}
+.myaccount-table {
+	width: 80%;
+	margin: 10px auto;
+	color: black;
+}
 
 /* #######################################
 ######### 404 ERRORS & RESTRICT ##########
 ####################################### */
 .404_bkg{
-	background-image: url("../img/curry_404.jpg");
 	width: 1000px;
 	height: 744px;
 	margin-bottom: 40px;
@@ -461,6 +506,31 @@ i{
 }
 .error_text{
 	width: 550px;
-	padding-top: 300px;
 	padding-left: 30px;
+}
+
+
+/* ################################
+######### CUSTOM BUTTONS ##########
+################################ */
+.custom-btn {
+	color: white;
+	background-color: black;
+	margin: 10px auto;
+	display: block;
+}
+.custom-btn:hover {
+	color: white;
+	background-color: gray;
+}
+.checkout-btns {
+	margin: 10px;
+	margin-right: 30px;
+}
+.paypal-btn {
+	background-color: #012169;
+}
+.paypal-btn:hover {
+	color: white;
+	background-color: #003087;
 }

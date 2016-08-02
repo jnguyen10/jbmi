@@ -12,13 +12,18 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 		templateUrl: 'partials/login.html',
 		access: {restricted: false}
 	})
-	.when('/logout', {
-		controller: 'logoutController',
-		access: {restricted: true}
-	})
 	.when('/signup', {
 		templateUrl: 'partials/signup.html',
 		access: {restricted: false}
+	})
+	.when('/myaccount', {
+		templateUrl: 'partials/myaccount.html',
+		access: {restricted: true},
+		redirectTo: function() {
+			if(!localStorage.getItem("token")) {
+				return "/login";
+			};
+		}
 	})
 	.when('/cart', {
 		templateUrl: 'partials/shopping_cart.html'

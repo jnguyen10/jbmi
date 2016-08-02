@@ -1,8 +1,23 @@
-jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactory, BreakFactory){
+jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactory, BreakFactory, UserFactory){
 
 	$scope.products = [];
 	$scope.breaks = [];
 	$scope.product_count = -3;
+
+	// Always check to see if user is authenticated by checking to see if a token is present in localStorage
+	(function() {
+		if (localStorage.getItem('token')) {
+			var token = localStorage.getItem('token')
+			$rootScope.isUserLoggedIn = true;
+			UserFactory.findUser(token, function(userData){
+				$rootScope.singleUser = userData.userDataFromServer;
+			})
+		}
+		else {
+			$rootScope.singleUser = {};
+			$rootScope.isUserLoggedIn = false;
+		}
+	})();
 
 
 	// ############ Carousel ###############
@@ -37,14 +52,12 @@ jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactor
 
 	$scope.getProducts = function(){
 		ProductFactory.getProducts(function(data){
-			console.log("Getting All Products", data);
 			$scope.products = data;
 		})
 	};
 
 	$scope.getBreaks = function(){
 		BreakFactory.getAllBreaks(function(data){
-			console.log("Getting All Products", data);
 			$scope.breaks = data;
 		})
 	}

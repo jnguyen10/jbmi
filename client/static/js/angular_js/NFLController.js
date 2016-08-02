@@ -53,7 +53,6 @@ jbmi_app.controller('NFLController', function($scope, $uibModal, ProductFactory)
 				size: 'lg',
 				resolve: {
 					item: function(){
-						console.log('inside resolve', $scope.item)
 						return $scope.item;
 					}
 				}

@@ -51,11 +51,18 @@ jbmi_app.controller('NewCartController', function($rootScope, $scope, $location,
         };
     }
 
-    // $scope.refresh = function() {
-    //     console.log("REFRESH")
-    //     $location.path('/cart');
-    //     $route.reload();
-    // }
+    $scope.reloading = false;
+
+    $scope.refresh = function() {
+        console.log("REFRESH")
+        $scope.reloading = true;
+
+        setTimeout(function() {
+          $scope.reloading = false;
+          $location.path('/cart');
+          $route.reload();
+        }, 2000)
+    }
 
 
 

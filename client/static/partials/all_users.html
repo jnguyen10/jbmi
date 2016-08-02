@@ -5,11 +5,15 @@
         <th>Name</th>
         <th>Email</th>
         <th>Sign Up Date</th>
+        <th>Remove User</th>
       </tr>
       <tr ng-repeat='user in users'>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.created_at | date:'medium' }}</td>
+        <td>
+          <button type="button" class='btn btn-danger' ng-click='removeUser(user.email)'>Remove</button>
+        </td>
       </tr>
     </table>
   </div>

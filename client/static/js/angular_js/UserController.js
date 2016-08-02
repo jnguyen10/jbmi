@@ -1,4 +1,4 @@
-jbmi_app.controller('UserController', function($scope, $rootScope, $routeParams, $location, UserFactory){
+jbmi_app.controller('UserController', function($scope, $route, $rootScope, $routeParams, $location, UserFactory){
 
 	$scope.users = [];
 
@@ -7,11 +7,16 @@ jbmi_app.controller('UserController', function($scope, $rootScope, $routeParams,
 		if (localStorage.getItem('token')) {
 			var token = localStorage.getItem('token')
 			$rootScope.isUserLoggedIn = true;
-			UserFactory.findUser(token, function(){
-				console.log("YES CALLBACK WORKED!")
+			UserFactory.findUser(token, function(data){
+				if (data.userDataFromServer) {
+					$rootScope.singleUser = data.userDataFromServer;
+				} else {
+					$scope.logout();
+				}
 			})
 		}
 		else {
+			$rootScope.singleUser = {};
 			$rootScope.isUserLoggedIn = false;
 		}
 	})();
@@ -80,10 +85,66 @@ jbmi_app.controller('UserController', function($scope, $rootScope, $routeParams,
 
 	$scope.logout = function(){
 		$rootScope.isUserLoggedIn = false;
+		$rootScope.singleUser = {};
 		localStorage.removeItem('token');
 		$location.path('/login');
 	};
 
+	function proceedToRemove(email) {
+		UserFactory.removeUser(email, function() {
+			console.log("successfully removed user");
+			$location.path('/login');
+		})
+	}
+
+	$scope.removeUser = function(email) {
+		if (confirm("Are you sure you want to deactivate the account?") === true) {
+			proceedToRemove(email);
+		} else {
+			return
+		}
+	}
+
+	$scope.changingPW = false;
+
+	$scope.resetPWBtn = function() {
+		// Hide this button and bring up the form to reset the password
+		$scope.changingPW = true;
+
+		// initial values for the error/success messages
+		$scope.error = false;
+		$scope.success = false;
+	}
+
+	$scope.resetPW = function() {
+		if ($scope.resetPWForm.new_password === $scope.resetPWForm.confirm_pw){
+			var updateUser = {
+				name: $rootScope.singleUser.name,
+				email: $rootScope.singleUser.email,
+				password: $scope.resetPWForm.new_password
+			}
+			$scope.success = true;
+			$scope.error = false;
+			$scope.successMessage = "Password Successfully Updated"
+		} else {
+			$scope.success = false;
+			$scope.error = true;
+			$scope.errorMessage = "Passwords Do Not Match"
+		}
+
+	}
+
+	$scope.displayInfo = false;
+
+	$scope.displayInfoButton = function() {
+		if($scope.displayInfo) {
+			$scope.displayInfo = false;
+		} else {
+			$scope.displayInfo = true;
+		}
+	}
+
 	$scope.getAllUsers();
 
-});
+})
+;

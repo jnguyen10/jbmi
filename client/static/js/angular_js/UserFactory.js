@@ -32,21 +32,31 @@ jbmi_app.factory('UserFactory', function($http){
 			.success(function(data) {
 				callback(data);
 			})
-	}
+	};
 
 
 	factory.findUser = function(token, callback) {
 		// send a get request to retrieve the user information associated to the locally stored token
 		$http.get('/user/find_user', { headers: { authorization: token }})
 			.success(function(data) {
-				console.log("success data findUser", data)
-				callback()
+				callback(data);
 			})
 			.error(function(err) {
 				console.log("error data findUser", err)
+				callback(err);
 			})
-	}
+	};
 
-	return factory
+	factory.removeUser = function(email, callback) {
+		$http.delete('/user/remove_user/'+ email)
+			.success(function() {
+				callback();
+			})
+			.error(function(err) {
+				console.log("error data removeUser");
+			})
+	};
+
+	return factory;
 
 });
