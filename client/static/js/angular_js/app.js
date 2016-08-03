@@ -100,7 +100,7 @@ jbmi_app.config(function($routeProvider, $locationProvider){
 	.when('/break_rules', {
 		templateUrl: 'partials/break_rules.html'
 	})
-	.when('/live_breaks', {
+	.when('/breaks', {
 		templateUrl: 'partials/live_breaks.html'
 	})
 	.when('/nba', {
