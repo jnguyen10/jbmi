@@ -184,8 +184,10 @@ i{
 }
 .link-card-group {
 	display: flex;
+	display: -webkit-flex; /* Safari */
 	justify-content: space-around;
 	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap; /* Safari 6.1+ */
 }
 .link-card {
 	border: 2px solid grey;
@@ -200,7 +202,7 @@ i{
 	line-height: 400px;
 }
 .card-width {
-	width: 30%;
+	-webkit-flex: 0 0 300px;
 	min-width: 300px;
 	max-width: 500px;
 }
@@ -407,9 +409,11 @@ i{
 	}
 }
 .collection-card-group {
+	display: -webkit-flex; /* Safari */
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap; /* Safari 6.1+ */
 	margin-bottom: 10px;
 }
 .collection-card {
@@ -420,8 +424,8 @@ i{
   height: 500px;
 }
 .collection-card-width {
-	width: 24%;
-	min-width: 250px;
+	-webkit-flex: 0 0 275px;
+	min-width: 275px;
 	max-width: 400px;
 }
 .collection-img {
@@ -474,8 +478,10 @@ i{
 ######################## */
 .myaccount-card-group {
 	display: flex;
+	display: -webkit-flex; /* Safari */
 	justify-content: space-around;
 	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap; /* Safari 6.1+ */
 	margin-bottom: 10px;
 }
 .myaccount-card {
