@@ -6,7 +6,6 @@ var OrderSchema = new mongoose.Schema({
 	order_number: String,
 	order_items: Array,
 	shipping: Number,
-	opt_in: { type: String, default: 'N' },
 	name: { type: String, default: null },
 	email: { type: String, default: null },
 	price: Number,
