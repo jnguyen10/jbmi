@@ -2,8 +2,8 @@
 	<!-- Script that contains html template of the MODAL -->
 	<script type="text/ng-template" id='expandedPhoto.html'>
 		<div class='modal-header'>
-			<h3 class='modal-title'>{{ item.name }}</h3>
-			<p>{{ item.brand }} - {{ item.description }} - #{{ item.card_num }} - {{ item.price | currency }}</p>
+			<h3 class='modal-title'>{{ item.year }} {{ item.brand }} - #{{ item.card_num }} {{ item.name }}</h3>
+			<p>Description: {{ item.description }} // Card Type: {{ item.card_type }} // {{ item.price | currency }}</p>
 		</div>
 		<div class='modal-body'>
 			<img src='{{item.img_url_front}}' alt='front' width='300' height='400'>
@@ -49,13 +49,17 @@
 				<div class="collection-img">
 					<a href><img src='{{ product.img_url_front }}' width='120' height='150' alt='{{ product.name}}' ng-click='open(product._id)'></a>
 				</div>
+				<div class="collection-header">
+					<h3>{{ product.year }} {{ product.brand }}</h3>
+					<h4>#{{ product.card_num }} {{ product.name }}</h4>
+				</div>
 				<div class="collection-body">
-					<p>{{ product.year }} {{ product.brand }}</p>
-					<p>#{{ product.card_num }} {{ product.name }}</p>
 					<p>{{ product.description }}</p>
 					<p>{{ product.card_type }}</p>
 					<p>{{ product.price | currency }}</p>
 					<!-- <a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}}) - {{product.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a> -->
+				</div>
+				<div class="collection-addtocart">
 					<ngcart-addtocart id="{{ product._id }}" name="{{product.year}} - {{product.brand}} - {{product.name}} (Card No. {{product.card_num}})" price="{{ product.price }}" quantity="1" data="product">Add to cart</ngcart-addtocart>
 				</div>
 			</div>

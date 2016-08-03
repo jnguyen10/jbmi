@@ -362,6 +362,9 @@ i{
 .modal-header {
 	color: black;
 }
+.modal-title {
+	font-family: 'Teko', cursive;
+}
 .search_title {
 	font-size: 20px;
 	font-weight: 100;

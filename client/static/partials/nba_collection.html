@@ -2,8 +2,8 @@
 	<!-- Script that contains html template of the MODAL -->
 	<script type="text/ng-template" id='expandedPhoto.html'>
 		<div class='modal-header'>
-			<h3 class='modal-title'>{{ item.name }}</h3>
-			<p>{{ item.brand }} - {{ item.description }} - #{{ item.card_num }} - {{ item.price | currency }}</p>
+			<h3 class='modal-title'>{{ item.year }} {{ item.brand }} - #{{ item.card_num }} {{ item.name }}</h3>
+			<p>Description: {{ item.description }} // Card Type: {{ item.card_type }} // {{ item.price | currency }}</p>
 		</div>
 		<div class='modal-body'>
 			<img src='{{item.img_url_front}}' alt='front' width='300' height='400'>
