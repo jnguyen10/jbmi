@@ -41,7 +41,7 @@
 	<button ng-hide="showGrid" ng-click='displayGrid()' class='btn layout-btn pull-right'>
 		Show Grid | <span class="glyphicon glyphicon-th-large"></span>
 	</button>
-	<hr>
+	<hr class="layout-btn">
 	<!-- GRID FORMAT -->
 	<div ng-show="showGrid" class="collection-card-group" infinite-scroll="showMoreProducts()" infinite-scroll-distance="0">
 		<div ng-repeat='product in nba_products | orderBy: orderByField:reverseSort | limitTo: product_count' class="card card-block collection-card-width">

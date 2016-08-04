@@ -159,6 +159,15 @@ i{
 	display: inline-block;
 }
 
+@media (max-width: 450px) {
+	.ft_container{
+		padding: 5px 15px;
+	}
+	.ft_container .text-muted{
+		margin: 0;
+	}
+}
+
 /* ###########################
 ##############################
 ######### CAROUSEL  ##########
@@ -307,6 +316,11 @@ i{
 	margin: 0 auto;
 	margin-bottom: 20px;
 	color: white;
+}
+@media (max-width: 800px) {
+	.featured_divs {
+		width: 100%;
+	}
 }
 
 
@@ -532,20 +546,25 @@ i{
 /* #######################################
 ######### 404 ERRORS & RESTRICT ##########
 ####################################### */
-.404_bkg{
-	width: 1000px;
-	height: 744px;
-	margin-bottom: 40px;
-}
 .restricted_bkg{
 	background-image: url("../img/mutombo_block.jpg");
 	width: 1000px;
 	height: 562px;
 	margin-bottom: 40px;
 }
-.error_text{
-	width: 550px;
+.error_bkg{
+	width: auto;
 	padding-left: 30px;
+}
+blockquote {
+	display: flex;
+	flex-wrap: wrap;
+}
+@media (max-width: 580px) {
+	.error-img {
+		width: 240px;
+		height: 135px;
+	}
 }
 
 
