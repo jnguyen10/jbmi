@@ -382,7 +382,20 @@ i{
 .search_bar {
 	color: black;
 	display: inline-flex;
-	width: 20%;
+	width: 40%;
+}
+.search-btn {
+	color: white;
+	background-color: black;
+}
+@media (max-width: 800px) {
+	.search_categories {
+		width: 40%;
+	}
+	.search_bar {
+		width: 80%;
+		margin: 10px auto;
+	}
 }
 @media (max-width: 800px) {
 	.reset-btn {
@@ -393,7 +406,6 @@ i{
 /* #############################
 ###### COLLECTIONS TABLE #######
 ############################# */
-
 .collection_table{
 	background-color: white;
 	color: black;

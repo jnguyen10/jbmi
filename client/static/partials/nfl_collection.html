@@ -18,7 +18,7 @@
 	<h1 class='collection-title'>NFL Collection</h1>
 	<form class="navbar-form">
 		<label class="search_title">Categories: </label>
-		<select class="form-control" placeholder="Categories" ng-model='nfl_search.field'>
+		<select class="form-control search_categories" placeholder="Categories" ng-model='nfl_search.field'>
 			<option value='name'>Player Name</option>
 			<option value='brand'>Brand</option>
 			<option value='card_type'>Card Type</option>
@@ -27,7 +27,7 @@
 		<div class="input-group search_bar">
 			<input type='text' ng-model='nfl_search.text' class='form-control' placeholder="Search">
 			<div class="input-group-btn">
-				<button class='btn' ng-click='searchNFLProducts()'>
+				<button class='btn search-btn' ng-click='searchNFLProducts()'>
 					<span class='glyphicon glyphicon-search'></span>
 				</button>
 			</div>
