@@ -506,6 +506,17 @@ i{
 	color: black;
 }
 
+/* Display the my account sections in block form if on a small screen */
+@media (max-width: 700px) {
+	.myaccount-card-group {
+		display: block;
+	}
+	.myaccount-card {
+		width: 80%;
+		margin: 10px auto;
+	}
+}
+
 /* #######################################
 ######### 404 ERRORS & RESTRICT ##########
 ####################################### */

@@ -1,9 +1,21 @@
 jbmi_app.controller('UserController', function($scope, $route, $rootScope, $routeParams, $location, UserFactory){
 
 	$scope.users = [];
+	$scope.noLocalStorage = false;
 
 	// Always check to see if user is authenticated by checking to see if a token is present in localStorage
 	(function() {
+		// Check to see if localStorage is available in the browser
+		// If not, hide sign up and login buttons
+		if (typeof localStorage === 'object') {
+			try {
+				localStorage.setItem('local', 1);
+				localStorage.removeItem('local');
+			} catch (err) {
+				$scope.noLocalStorage = true;
+			}
+		}
+
 		if (localStorage.getItem('token')) {
 			var token = localStorage.getItem('token')
 			$rootScope.isUserLoggedIn = true;
@@ -28,7 +40,6 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 	}
 
 	$scope.signup = function(){
-
 		// initial values
 		$scope.error = false;
 		$scope.disabled = true;
@@ -69,6 +80,19 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 		UserFactory.login($scope.loginForm.email, $scope.loginForm.password, function(data) {
 			if (!data.error) {
 				$rootScope.isUserLoggedIn = true;
+
+				// Check to see if localStorage is available in the browser
+				// If not, redirect to home page
+				if (typeof localStorage === 'object') {
+					try {
+						localStorage.setItem('local', 1);
+						localStorage.removeItem('local');
+					} catch (err) {
+						alert("Oops, user login is not supported in private mode on Safari.");
+						$location.path('/');
+					}
+				}
+
 				localStorage.setItem('token', data.token)
 				$location.path('/');
 				$scope.disabled = false;
@@ -85,7 +109,7 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 
 	$scope.logout = function(){
 		$rootScope.isUserLoggedIn = false;
-		$rootScope.isAllOpen = !rootScope.isAllOpen;
+		$rootScope.isAllOpen = !$rootScope.isAllOpen;
 		$rootScope.singleUser = {};
 		localStorage.removeItem('token');
 		$location.path('/login');

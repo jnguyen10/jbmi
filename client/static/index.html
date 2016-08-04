@@ -109,9 +109,9 @@
 					</div>
 					<ul ng-controller='UserController' class="nav navbar-nav navbar-right right_header_div mobile-hide">
 						<!-- <li><a ng-class="{disabled: isUserLoggedIn}" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-						<li><a ng-hide="isUserLoggedIn" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li><a ng-hide="isUserLoggedIn || noLocalStorage" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 						<li><a ng-show="isUserLoggedIn" href="#/myaccount"><span class="glyphicon glyphicon-user"></span> Hi, {{ singleUser.name }}!</a></li>
-						<li><a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						<li><a ng-hide="isUserLoggedIn || noLocalStorage" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 						<li><a ng-show="isUserLoggedIn" ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 						<li><a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a></li>
 					</ul>
@@ -148,7 +148,7 @@
 						<ul class="dropdown-menu">
 							<li>
 								<span class='border-breaks'>********************</span>
-								<a href="#/live_breaks" style="font-weight: bold">&#8226; LIVE BREAKS</a>
+								<a href="#/breaks" style="font-weight: bold">&#8226; LIVE BREAKS</a>
 							</li>
 							<li>
 								<a href="#/break_rules" style="font-weight: bold">&#8226; BREAK RULES</a>
@@ -200,14 +200,17 @@
 									<div class="mobile-display-category-btn">
 										<a href="#/" ng-click='obj.isAllOpen = !obj.isAllOpen'>Home</a>
 									</div>
-									<div class="mobile-display-category-btn">
-										<a ng-class="{disabled: isUserLoggedIn}" href="#/signup" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-user"></span> Sign Up</a><br>
+									<div ng-hide="isUserLoggedIn || noLocalStorage" class="mobile-display-category-btn">
+										<a href="#/signup" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-user"></span> Sign Up</a><br>
 									</div>
-									<div class="mobile-display-category-btn">
-										<a ng-hide="isUserLoggedIn" ng-href="#/login" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-log-in"></span> Login</a><br>
+									<div ng-show="isUserLoggedIn" class="mobile-display-category-btn">
+										<a href="#/myaccount" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-user"></span> Hi, {{ singleUser.name }}!</a><br>
 									</div>
-									<div class="mobile-display-category-btn">
-										<a ng-show="isUserLoggedIn" ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a><br>
+									<div ng-hide="isUserLoggedIn || noLocalStorage" class="mobile-display-category-btn">
+										<a ng-href="#/login" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-log-in"></span> Login</a><br>
+									</div>
+									<div ng-show="isUserLoggedIn" class="mobile-display-category-btn">
+										<a ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a><br>
 									</div>
 									<div class="mobile-display-category-btn">
 										<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px" ng-click='obj.isAllOpen = !obj.isAllOpen'><ngcart-summary></ngcart-summary></a><br>
@@ -224,7 +227,7 @@
 							<uib-accordion-group heading='Breaks'>
 								*****************
 								<br>
-								<a href="#/live_breaks" style="font-weight: bold" ng-click='obj.isAllOpen = !obj.isAllOpen'>LIVE BREAKS</a><br>
+								<a href="#/breaks" style="font-weight: bold" ng-click='obj.isAllOpen = !obj.isAllOpen'>LIVE BREAKS</a><br>
 								<a href="#/break_rules" style="font-weight: bold" ng-click='obj.isAllOpen = !obj.isAllOpen'>BREAK RULES</a><br>
 								*****************
 								<br>
