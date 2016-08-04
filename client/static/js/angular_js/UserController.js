@@ -85,6 +85,7 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 
 	$scope.logout = function(){
 		$rootScope.isUserLoggedIn = false;
+		$rootScope.isAllOpen = !rootScope.isAllOpen;
 		$rootScope.singleUser = {};
 		localStorage.removeItem('token');
 		$location.path('/login');

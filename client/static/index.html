@@ -53,6 +53,7 @@
 		<script src='js/angular_js/EditController.js'></script>
 		<script src='js/angular_js/MainController.js'></script>
 		<script src='js/angular_js/ModalInstanceController.js'></script>
+		<script src='js/angular_js/MobileAccordionMenuController.js'></script>
 		<script src='js/angular_js/NBAController.js'></script>
 		<script src='js/angular_js/NewCartController.js'></script>
 		<script src='js/angular_js/NFLController.js'></script>
@@ -67,7 +68,7 @@
 			// navbar-fixed-top (from bootstrap) sets the fixed navbar properties
 			// navbar-scrolled (custom) resets the top margin to ZERO
 			// card_scroll_buffer (custom) adds 160px margin buffer when fixed navbar is set
-			if (window.innerWidth > 500) {
+			if (window.innerWidth > 800) {
 				$(window).scroll(function() {
 					if($(this).scrollTop() > 20) {
 						$(".navbar").addClass("navbar-fixed-top navbar-scrolled");
@@ -191,47 +192,47 @@
 					</li>
 				</ul>
 				<!-- ######## MOBILE MENU DISPLAY ONLY ########## -->
-				<uib-accordion class="mobile-display">
-					<uib-accordion-group heading="&#9776;" class="mobile-display-menu-btn">
+				<uib-accordion class="mobile-display" ng-controller="MobileAccordionMenuController">
+					<uib-accordion-group heading="&#9776;" class="mobile-display-menu-btn" is-open="obj.isAllOpen">
 						<uib-accordion class='sidebar-menu'>
 							<uib-accordion-group heading='Home'>
 								<div ng-controller='UserController'>
 									<div class="mobile-display-category-btn">
-										<a href="#/">Home</a>
+										<a href="#/" ng-click='obj.isAllOpen = !obj.isAllOpen'>Home</a>
 									</div>
 									<div class="mobile-display-category-btn">
-										<a ng-class="{disabled: isUserLoggedIn}" href="#/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a><br>
+										<a ng-class="{disabled: isUserLoggedIn}" href="#/signup" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-user"></span> Sign Up</a><br>
 									</div>
 									<div class="mobile-display-category-btn">
-										<a ng-hide="isUserLoggedIn" ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a><br>
+										<a ng-hide="isUserLoggedIn" ng-href="#/login" ng-click='obj.isAllOpen = !obj.isAllOpen'><span class="glyphicon glyphicon-log-in"></span> Login</a><br>
 									</div>
 									<div class="mobile-display-category-btn">
 										<a ng-show="isUserLoggedIn" ng-click='logout()' href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a><br>
 									</div>
 									<div class="mobile-display-category-btn">
-										<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px"><ngcart-summary></ngcart-summary></a><br>
+										<a href="#/cart" ui-sref="site.cart" style="padding: 5px 0 0 0; width:150px" ng-click='obj.isAllOpen = !obj.isAllOpen'><ngcart-summary></ngcart-summary></a><br>
 									</div>
 								</div>
 							</uib-accordion-group>
 							<uib-accordion-group heading='Collections'>
-								<a href="#/nba">NBA</a><br>
-								<a href="#/nfl">NFL</a><br>
-								<a href="#/mlb"><em>MLB<br>(Coming Soon!)</em></a><br>
-								<a href="#/nhl"><em>NHL<br>(Coming Soon!)</em></a><br>
-								<a href="#/media"><em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
+								<a href="#/nba" ng-click='obj.isAllOpen = !obj.isAllOpen'>NBA</a><br>
+								<a href="#/nfl" ng-click='obj.isAllOpen = !obj.isAllOpen'>NFL</a><br>
+								<a href="#/mlb" ng-click='obj.isAllOpen = !obj.isAllOpen'><em>MLB<br>(Coming Soon!)</em></a><br>
+								<a href="#/nhl" ng-click='obj.isAllOpen = !obj.isAllOpen'><em>NHL<br>(Coming Soon!)</em></a><br>
+								<a href="#/media" ng-click='obj.isAllOpen = !obj.isAllOpen'><em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
 							</uib-accordion-group>
 							<uib-accordion-group heading='Breaks'>
 								*****************
 								<br>
-								<a href="#/live_breaks" style="font-weight: bold">LIVE BREAKS</a><br>
-								<a href="#/break_rules" style="font-weight: bold">BREAK RULES</a><br>
+								<a href="#/live_breaks" style="font-weight: bold" ng-click='obj.isAllOpen = !obj.isAllOpen'>LIVE BREAKS</a><br>
+								<a href="#/break_rules" style="font-weight: bold" ng-click='obj.isAllOpen = !obj.isAllOpen'>BREAK RULES</a><br>
 								*****************
 								<br>
-								<a href="#/nba/breaks">NBA</a><br>
-								<a href="#/nfl/breaks">NFL</a><br>
-								<a href="#/mlb/breaks"><em>MLB<br>(Coming Soon!)</em></a><br>
-								<a href="#/nhl/breaks"><em>NHL<br>(Coming Soon!)</em></a><br>
-								<a href="#/media/breaks"><em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
+								<a href="#/nba/breaks" ng-click='obj.isAllOpen = !obj.isAllOpen'>NBA</a><br>
+								<a href="#/nfl/breaks" ng-click='obj.isAllOpen = !obj.isAllOpen'>NFL</a><br>
+								<a href="#/mlb/breaks" ng-click='obj.isAllOpen = !obj.isAllOpen'><em>MLB<br>(Coming Soon!)</em></a><br>
+								<a href="#/nhl/breaks" ng-click='obj.isAllOpen = !obj.isAllOpen'><em>NHL<br>(Coming Soon!)</em></a><br>
+								<a href="#/media/breaks" ng-click='obj.isAllOpen = !obj.isAllOpen'><em>Non-Sports Collectibles<br>(Coming Soon!)</em></a><br>
 
 							</uib-accordion-group>
 							<uib-accordion-group heading='Connect'>

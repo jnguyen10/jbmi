@@ -173,6 +173,13 @@ i{
 	color: white;
 	font-weight: bold;
 }
+@media (max-width: 768px) {
+	.carousel-control .glyphicon-chevron-left,
+	.carousel-control .glyphicon-chevron-right {
+		font-size: 12px;
+	}
+}
+
 
 /* ############################
 ###############################
