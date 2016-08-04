@@ -1,5 +1,7 @@
+var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var User = require('../models/user');
+var Order = mongoose.model('Order');
 var config = require('../config/config');
 
 function tokenForUser(user) {
@@ -56,27 +58,21 @@ exports.login = function(req, res, next) {
 };
 
 exports.findOneUser = function(req, res, next) {
-  // User has already been authorized
-  var userToken = req.body.headers.authorization;
-
-  if (userToken) {
-    try {
-      var decodedToken = jwt.decode(userToken, config.secret);
-
-      // See if a user with the given email exists
-      User.findOne({ _id: decodedToken.sub }, function(err, existingUser) {
-        if (err) {
-          return next(err);
-        }
-        // Respond to request indicating user was created
-        res.json({ _id: existingUser._id, name: existingUser.name, email: existingUser.email, created_at: existingUser.created_at });
-      });
-    } catch (err) {
-      return next();
+  var foundUser = {
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+    created_at: req.user.created_at
+  };
+  // Respond to request indicating user was created
+  Order.find({ email: foundUser.email }, function(err, foundUserOrders) {
+    if (err) {
+      return next(err);
     }
-  } else {
-    next();
-  }
+    foundUser.orders = foundUserOrders;
+
+    res.json(foundUser);
+  })
 };
 
 exports.removeUser = function(req, res, next) {
@@ -101,7 +97,7 @@ exports.removeUser = function(req, res, next) {
 };
 
 exports.updatePassword = function(req, res, next) {
-  
+
 }
 
 exports.allUsers = function(req, res, next) {

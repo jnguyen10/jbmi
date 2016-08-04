@@ -10,7 +10,7 @@ jbmi_app.controller('MainController', function($scope, $rootScope, ProductFactor
 			var token = localStorage.getItem('token')
 			$rootScope.isUserLoggedIn = true;
 			UserFactory.findUser(token, function(userData){
-				$rootScope.singleUser = userData.userDataFromServer;
+				$rootScope.singleUser = userData;
 			})
 		}
 		else {

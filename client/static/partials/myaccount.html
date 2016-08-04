@@ -48,7 +48,17 @@
             </td>
           </tr>
         </table>
-        <button type="button" class="btn custom-btn">Orders</button>
+        <button type="button" class="btn custom-btn" ng-click="displayOrdersButton()">Orders</button>
+        <table ng-show='displayOrders' class="table myaccount-table">
+          <tr>
+            <th>Order No.</th>
+            <th>Date Order Placed</th>
+          </tr>
+          <tr ng-repeat="order in singleUser.orders">
+            <th>{{ order.order_number }}</th>
+            <td>{{ order.created_at | date: 'medium' }}</td>
+          </tr>
+        </table>
       </div>
       <div class="card card-block myaccount-card">
         <button type="button" class="btn custom-btn">FAQs</button>

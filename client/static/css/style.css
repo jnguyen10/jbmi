@@ -181,6 +181,10 @@ i{
 .carousel_link{
 	color: white;
 	font-weight: bold;
+	padding: 4px 0px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-image: url("../img/greywood.jpg");
 }
 @media (max-width: 768px) {
 	.carousel-control .glyphicon-chevron-left,
@@ -382,12 +386,6 @@ i{
 .collection-title {
 	color: white;
 }
-.modal-header {
-	color: black;
-}
-.modal-title {
-	font-family: 'Teko', cursive;
-}
 .search_title {
 	font-size: 20px;
 	font-weight: 100;
@@ -415,6 +413,20 @@ i{
 	.reset-btn {
 		display: block;
 	}
+}
+/* MODAL STYLES */
+.modal-header {
+	color: black;
+}
+.modal-title {
+	font-family: 'Teko', cursive;
+}
+.close-btn {
+	background: rgba(255,0,0,0.25);
+}
+.close-btn:hover {
+	background: rgba(255,0,0,0.5);
+	color: white;
 }
 
 /* #############################

@@ -32,7 +32,6 @@ jbmi_app.factory('BreakFactory', function($http){
 	factory.getOneBreak = function(break_id, callback){
 		//make sure product_id is an object
 		$http.post('/breaks/single',break_id).success(function (single_entry){
-			console.log("Received single product entry:", single_entry);
 			callback(single_entry);
 		})
 

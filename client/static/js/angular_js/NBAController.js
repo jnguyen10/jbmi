@@ -38,6 +38,7 @@ jbmi_app.controller('NBAController', function($scope, $rootScope, $uibModal, Pro
 		})
 	};
 
+	// ##### BEGIN MODAL FUNCTIONS ######
 	$scope.open = function(product_id){
 
 		ProductFactory.getOneProduct({product_id: product_id}, function(data){
@@ -56,6 +57,11 @@ jbmi_app.controller('NBAController', function($scope, $rootScope, $uibModal, Pro
 			})
 		})
 	};
+
+	$scope.close = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+	// ##### END MODAL FUNCTIONS ######
 
 
 	$scope.product_count = 4;

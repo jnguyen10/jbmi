@@ -4,13 +4,14 @@
 		<div class='modal-header'>
 			<h3 class='modal-title'>{{ item.year }} {{ item.brand }} - #{{ item.card_num }} {{ item.name }}</h3>
 			<p>Description: {{ item.description }} // Card Type: {{ item.card_type }} // {{ item.price | currency }}</p>
+			<a class="pull-right" href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a>
 		</div>
 		<div class='modal-body'>
 			<img src='{{item.img_url_front}}' alt='front' width='300' height='400'>
 			<img src='{{item.img_url_back}}' alt='back' width='300' height='400'>
 		</div>
 		<div class='modal-footer'>
-		<a href="mailto:jbmoderninserts@gmail.com?subject=Request: {{item.year}} - {{item.brand}} - {{item.name}} (Card No. {{item.card_num}}) - {{item.price | currency }}&body=Please add any additional cards you are intersted in down below.  Thanks!">Inquire</a>
+			<button class="btn close-btn" type="button" ng-click="close()">Close</button>
 		</div>
 	</script>
 

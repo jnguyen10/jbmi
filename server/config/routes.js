@@ -18,9 +18,7 @@ module.exports = function(app, jsonParser){
 	app.post('/user/login', requireSignin, userAuthentication.login);
 
 	// FIND A SINGLE USER
-	app.get('/user/find_user', requireAuth, function(req, res) {
-    res.json({ userDataFromServer: req.user, message: 'hello from the server-side' })
-  });
+	app.get('/user/find_user', requireAuth, userAuthentication.findOneUser);
 
 	// FIND ALL USERS
 	app.get('/user/all_users', userAuthentication.allUsers);

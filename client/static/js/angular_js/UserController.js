@@ -20,8 +20,8 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 			var token = localStorage.getItem('token')
 			$rootScope.isUserLoggedIn = true;
 			UserFactory.findUser(token, function(data){
-				if (data.userDataFromServer) {
-					$rootScope.singleUser = data.userDataFromServer;
+				if (data) {
+					$rootScope.singleUser = data;
 				} else {
 					$scope.logout();
 				}
@@ -40,6 +40,21 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 	}
 
 	$scope.signup = function(){
+
+		// Check to see if localStorage is available in the browser
+		// If not, hide sign up and login buttons
+		if (typeof localStorage === 'object') {
+			try {
+				localStorage.setItem('local', 1);
+				localStorage.removeItem('local');
+			} catch (err) {
+				$scope.noLocalStorage = true;
+				alert("Oops, sign up is unavailable on private mode in Safari!")
+				$location.path('/')
+				return
+			}
+		}
+
 		// initial values
 		$scope.error = false;
 		$scope.disabled = true;
@@ -162,11 +177,15 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 	$scope.displayInfo = false;
 
 	$scope.displayInfoButton = function() {
-		if($scope.displayInfo) {
-			$scope.displayInfo = false;
-		} else {
-			$scope.displayInfo = true;
-		}
+		$scope.displayInfo = !$scope.displayInfo;
+		$scope.displayOrders = false;
+	}
+
+	$scope.displayOrders = false;
+
+	$scope.displayOrdersButton = function() {
+		$scope.displayOrders = !$scope.displayOrders;
+		$scope.displayInfo = false;
 	}
 
 	$scope.getAllUsers();
