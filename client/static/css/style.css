@@ -184,7 +184,7 @@ i{
 	padding: 4px 0px;
 	border: 1px solid black;
 	border-radius: 10px;
-	background-image: url("../img/greywood.jpg");
+	background: rgba(0, 0, 0, 0.5);
 }
 @media (max-width: 768px) {
 	.carousel-control .glyphicon-chevron-left,
