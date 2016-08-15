@@ -2,6 +2,7 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 
 	$scope.users = [];
 	$scope.noLocalStorage = false;
+	$scope.emailRegEx = "/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/";
 
 	// Always check to see if user is authenticated by checking to see if a token is present in localStorage
 	(function() {
@@ -20,7 +21,7 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 			var token = localStorage.getItem('token')
 			$rootScope.isUserLoggedIn = true;
 			UserFactory.findUser(token, function(data){
-				if (data) {
+				if (data !== 'Unauthorized') {
 					$rootScope.singleUser = data;
 				} else {
 					$scope.logout();
@@ -71,7 +72,7 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 				} else {
 					$rootScope.isUserLoggedIn = false;
 					$scope.error = true;
-					$scope.errorMessage = "Invalid username and/or password";
+					$scope.errorMessage = data.error.signupError;
 					$scope.disabled = false;
 					$scope.new_user = {};
 				}
@@ -90,9 +91,10 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 		$scope.error = false;
 		$scope.disabled = true;
 
+		var lowercaseEmail = $scope.loginForm.email.toLowerCase();
 
 		// call login from service
-		UserFactory.login($scope.loginForm.email, $scope.loginForm.password, function(data) {
+		UserFactory.login(lowercaseEmail, $scope.loginForm.password, function(data) {
 			if (!data.error) {
 				$rootScope.isUserLoggedIn = true;
 
@@ -133,16 +135,21 @@ jbmi_app.controller('UserController', function($scope, $route, $rootScope, $rout
 	function proceedToRemove(email) {
 		UserFactory.removeUser(email, function() {
 			console.log("successfully removed user");
+			localStorage.removeItem('token');
 			$location.path('/login');
 		})
 	}
 
 	$scope.removeUser = function(email) {
-		if (confirm("Are you sure you want to deactivate the account?") === true) {
+		var success = function() {
 			proceedToRemove(email);
-		} else {
+			alertify.error("Successfully Deactivated Account")
+		};
+		var fail = function() {
 			return
-		}
+		};
+
+		alertify.confirm("Deactivating Account", "Are you sure you want to deactivate the account (" + email +")?", success, fail);
 	}
 
 	$scope.changingPW = false;

@@ -379,6 +379,9 @@ i{
 	margin: 15px auto;
 	color: white;
 }
+.email-error {
+	color: red;
+}
 
 /* #############################
 ###### COLLECTIONS PAGE #######
